@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -11,30 +10,7 @@ import "moment/locale/ko";
 
 moment.locale("ko");
 
-const formatDate = (date: string) => {
-	return moment(date).format("YYYY-MM-DD");
-};
-
-const fetchHolidays = async () => {
-	const response = await fetch("https://date.nager.at/api/v3/PublicHolidays/2024/KR");
-	const data = await response.json();
-
-	return data.map((holiday: any, index: number) => ({
-		id: index,
-		title: holiday.localName,
-		start: formatDate(holiday.date),
-		resourceId: index + 1,
-	}));
-};
-
-export default function MainCalendar() {
-	const [events, setEvents] = useState([]);
-	useEffect(() => {
-		fetchHolidays().then(holidays => {
-			setEvents(holidays);
-			console.log(holidays);
-		});
-	}, []);
+export default function MainCalendar({ events }) {
 	return (
 		<>
 			<div className="calendar-container">
