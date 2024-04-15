@@ -5,10 +5,13 @@ import interactionPlugin from "@fullcalendar/interaction";
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import koLocale from "@fullcalendar/core/locales/ko";
-import moment from "moment";
-import "moment/locale/ko";
+import { ko } from "date-fns/locale";
+import { format } from "date-fns";
 
-moment.locale("ko");
+// import moment from "moment";
+// import "moment/locale/ko";
+
+// moment.locale("ko");
 
 export default function MainCalendar({ events }) {
 	return (
@@ -27,7 +30,7 @@ export default function MainCalendar({ events }) {
 						dayGridMonth: "Month", // 월 버튼 텍스트 영어로 설정
 						timeGridWeek: "Week", // 주 버튼 텍스트 영어로 설정
 					}}
-					locale={koLocale}
+					locale={ko}
 					initialView="dayGridMonth"
 					nowIndicator={true}
 					editable={true}

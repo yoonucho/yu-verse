@@ -1,18 +1,16 @@
-import moment from "moment";
-import "moment/locale/ko";
+import { format, getYear } from "date-fns";
+import { ko } from "date-fns/locale";
 import { API_URL } from "../constants";
 
-moment.locale("ko");
-
 export const formatDate = (date: string) => {
-	return moment(date).format("YYYY-MM-DD");
+	return format(new Date(date), "yyyy-MM-dd", { locale: ko });
 };
 
-const getYear = moment().format("YYYY");
+const currentYear = getYear(new Date());
 
 export default async function getFetchHolidays() {
 	// await new Promise(resolve => setTimeout(resolve, 10000));
-	const response = await fetch(`${API_URL}/${getYear}/KR`);
+	const response = await fetch(`${API_URL}/${currentYear}/KR`);
 	const data = await response.json();
 	return data.map((holiday: any, index: number) => ({
 		id: index,
