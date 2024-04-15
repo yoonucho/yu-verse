@@ -1,0 +1,167 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+:root {
+	/* colors */
+
+	/* Primary color */
+	--primary-blue: #0057ff;
+	--primary-point: #ff619a;
+	--primary-yellow: #ffcf00;
+	--primary-green: #7ada00;
+	--primary-purple: #b586f8;
+
+	/* Sub color */
+	--sub-pink: #ff8eb7;
+	--sub-blue1: #5f95ff;
+	--sub-light-blue: #c5eaff;
+	--sub-light-pink: #ffdbe8;
+	--sub-light-yellow: #ffeb96;
+	--sub-light-green: #d3f5a7;
+	--sub-light-purple: #ebddff;
+
+	/* Gray color */
+	--light-gray1: #eff4ea;
+	--light-gray2: #f9fcf6;
+	--light-gray3: #f5f8f2;
+
+	--primary-gray1: #5c5c5c;
+	--primary-gray2: #b9b9b9;
+	--primary-gray3: #d9d9d9;
+
+	/* B&W */
+	--primary-white: #ffffff;
+	--primary-black: #000000;
+
+	/* Font Style */
+	--primary-font: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+		"Noto Color Emoji", sans-serif;
+
+	--min-font-size: 14px;
+
+	/* Box Shadow */
+	--shadow1: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+	/* Transition */
+	--transition-1: all 0.3s linear;
+}
+
+p,
+span,
+h1,
+h2,
+h3 {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	overflow-x: auto;
+	overflow-y: auto;
+	font-family: var(--primary-font);
+	min-height: 100%;
+	font-size: 1.4rem;
+	font-weight: 600;
+}
+
+dl,
+ul,
+ol,
+menu,
+li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Responsive img, video */
+img,
+video {
+	display: block;
+	overflow: hidden;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover;
+}
+
+a {
+	color: var(--primary-black);
+	text-decoration: none;
+}
+
+button {
+	border: 0;
+	cursor: pointer;
+}
+
+a,
+button {
+	transition: all ease 0.5s;
+	-webkit-transition: all ease 0.5s;
+	-moz-transition: all ease 0.5s;
+	-ms-transition: all ease 0.5s;
+	-o-transition: all ease 0.5s;
+}
+
+a,
+button,
+span {
+	letter-spacing: 0;
+}
+
+h1,
+h2 {
+	color: var(--primary-point);
+}
+
+h1 {
+	font-family: var(--primary-title-font);
+	margin-bottom: 28px;
+	font-size: min(5vw, 60px);
+}
+
+h2 {
+	margin-bottom: 6px;
+	font-size: min(3vw, 40px);
+}
+
+textarea::placeholder {
+	color: #a8a8a8;
+}
+
+/* 모바일 기기 (화면 너비가 768px 미만일 때) */
+@media only screen and (max-width: 768px) {
+	body {
+		overflow-y: auto; /* 모바일에서는 스크롤 허용 */
+	}
+}
+
+/* 데스크탑 및 더 큰 화면 */
+@media only screen and (min-height: 1080px) {
+	body {
+		overflow: hidden; /* 데스크탑에서는 스크롤 방지 */
+	}
+}
+
+/* @media (max-width: 1200px) {
+  html {
+    font-size: 50%;
+  }
+} */
