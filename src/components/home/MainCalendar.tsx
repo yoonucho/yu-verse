@@ -4,7 +4,6 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import koLocale from "@fullcalendar/core/locales/ko";
 import { ko } from "date-fns/locale";
 import { format } from "date-fns";
 
