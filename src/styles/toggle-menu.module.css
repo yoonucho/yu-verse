@@ -1,0 +1,18 @@
+.toggleBtn {
+	position: fixed;
+	top: 14px;
+	left: 12px;
+	z-index: 3;
+	padding: 10px;
+	font-size: 2em;
+	background-color: transparent;
+}
+
+.toggleBtn > svg {
+	color: var(--sub-blue);
+}
+
+.toggleBtnClose {
+	/* top: 4px; */
+	left: 0;
+}

@@ -1,3 +1,8 @@
 .container {
-	/* padding-top: 100px; */
+	transition: margin-left 0.3s ease;
+	padding: 20px;
+}
+.show {
+	position: relative;
+	left: 328px;
 }

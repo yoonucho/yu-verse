@@ -1,5 +1,9 @@
 /* fullCalendar custom */
+.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:first-child {
+	margin-left: 60px;
+}
 .fc-toolbar-title {
+	font-size: 1.5rem;
 	color: var(--sub-dark-blue);
 }
 
@@ -8,9 +12,6 @@
 	font-weight: 700;
 	background-color: var(--sub-light-blue);
 	border: 0;
-}
-
-.fc .fc-button-group {
 }
 
 .fc .fc-button-group > .fc-button.fc-button-active {
@@ -37,12 +38,51 @@
 }
 
 /* day-picker custom */
+.rdp {
+	font-family: var(--primary-font);
+	padding: 20px;
+	background-color: var(--primary-white);
+	box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 24px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+}
+
+.rdp:not([dir="rtl"]) .rdp-day_range_start:not(.rdp-day_range_end) {
+	border-radius: 100% !important;
+	-webkit-border-radius: 100% !important;
+	-moz-border-radius: 100% !important;
+	-ms-border-radius: 100% !important;
+	-o-border-radius: 100% !important;
+}
+
+.rdp:not([dir="rtl"]) .rdp-day_range_end:not(.rdp-day_range_start) {
+	border-radius: 100% !important;
+	-webkit-border-radius: 100% !important;
+	-moz-border-radius: 100% !important;
+	-ms-border-radius: 100% !important;
+	-o-border-radius: 100% !important;
+}
+
+.rdp-day_range_middle {
+	border-radius: 100% !important;
+	-webkit-border-radius: 100% !important;
+	-moz-border-radius: 100% !important;
+	-ms-border-radius: 100% !important;
+	-o-border-radius: 100% !important;
+}
+
 .rdp-tfoot {
-	font-family: inherit;
 	position: absolute;
-	top: -45px;
+	top: 13px;
+	left: 50%;
+	min-width: 215px;
 	color: var(--primary-gray1);
+	font-size: 1.5rem;
 	font-weight: 500;
+	transform: translateX(-50%);
 }
 
 .rdp-day_selected {

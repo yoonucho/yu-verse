@@ -4,8 +4,9 @@ import { DateRange } from "react-day-picker";
 import { useRouter } from "next/navigation";
 import { formatISO } from "date-fns";
 import DayPickerTool from "./DayPickerTool";
+import styles from "@/styles/search-event-day.module.css";
 
-export default function SearchEventDay() {
+export default function SearchEventDay({ isOpen }) {
 	const [range, setRange] = useState<DateRange | undefined>();
 	const router = useRouter();
 
@@ -19,7 +20,7 @@ export default function SearchEventDay() {
 	};
 
 	return (
-		<div>
+		<div className={`${styles.container} ${isOpen ? styles.show : ""}`}>
 			<DayPickerTool range={range} setRange={setRange} onSearch={handleDaySearch} />
 		</div>
 	);

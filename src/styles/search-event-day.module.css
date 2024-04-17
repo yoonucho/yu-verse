@@ -1,0 +1,22 @@
+.container {
+	overflow-y: auto;
+	display: block;
+	position: fixed;
+	z-index: 2;
+	min-width: 328px;
+	height: 100%;
+	padding: 10px;
+	background-color: var(--sub-light-blue);
+	box-shadow: rgba(0, 0, 0, 0.21) 0px 4px 12px 0px;
+	transform: translateX(-100%);
+	transition: transform 0.3s ease;
+}
+
+.show {
+	transform: translateX(0);
+}
+
+.container > div {
+	position: relative;
+	top: 60px;
+}
