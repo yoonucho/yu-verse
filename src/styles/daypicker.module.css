@@ -36,6 +36,22 @@
 	-o-transform: translateY(-50%);
 }
 
+.resetBtn {
+	font-family: inherit;
+	position: absolute;
+	top: 50%;
+	right: 140px;
+	min-width: 80px;
+	padding: 10px;
+	font-weight: 500;
+	border-radius: 5px;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+}
+
 .popupBar {
 	font-family: inherit;
 	display: flex;

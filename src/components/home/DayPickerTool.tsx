@@ -7,34 +7,7 @@ import { usePopper } from "react-popper";
 import "react-day-picker/dist/style.css";
 import styles from "@/styles/daypicker.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faXmark } from "@fortawesome/free-solid-svg-icons";
-
-const seasonEmoji: Record<string, string> = {
-	winter: "⛄️",
-	spring: "🌸",
-	summer: "🌻",
-	autumn: "🍂",
-};
-
-const getSeason = (month: Date): string => {
-	const monthNumber = month.getMonth();
-	if (monthNumber >= 0 && monthNumber < 3) return "winter";
-	if (monthNumber >= 3 && monthNumber < 6) return "spring";
-	if (monthNumber >= 6 && monthNumber < 9) return "summer";
-	else return "autumn";
-};
-
-const formatCaption: DateFormatter = (month, options) => {
-	const season = getSeason(month);
-	return (
-		<>
-			<span role="img" aria-label={season} className={styles.icon}>
-				{seasonEmoji[season]}
-			</span>{" "}
-			{format(month, "LLLL", { locale: options?.locale })}
-		</>
-	);
-};
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 
 export default function DayPickerTool({ range, setRange, onSearch }) {
 	const defaultSelected: DateRange = {
@@ -82,6 +55,10 @@ export default function DayPickerTool({ range, setRange, onSearch }) {
 		}
 	};
 
+	const handleReset = () => {
+		setRange(undefined);
+	};
+
 	return (
 		<>
 			<div ref={popperRef}>
@@ -89,7 +66,10 @@ export default function DayPickerTool({ range, setRange, onSearch }) {
 					<div className={styles.inputBar}>
 						<input ref={inputRef} readOnly onClick={handleInputClick} className={styles.popupBar} placeholder={placeholderText} style={{ cursor: "pointer" }} />
 						<button className={styles.searchBtn} onClick={handleDaySearch}>
-							날짜검색하기
+							날짜 검색하기
+						</button>
+						<button className={styles.resetBtn} onClick={handleReset}>
+							날짜 초기화하기
 						</button>
 					</div>
 					{isPopperOpen && (
@@ -99,7 +79,6 @@ export default function DayPickerTool({ range, setRange, onSearch }) {
 								mode="range"
 								fromYear={2023}
 								toYear={2025}
-								formatters={{ formatCaption }}
 								selected={selectedRange}
 								footer={footerText}
 								onSelect={newRange => {
@@ -114,9 +93,6 @@ export default function DayPickerTool({ range, setRange, onSearch }) {
 					)}
 				</div>
 			</div>
-			{/* <div className="fa-3x">
-				<FontAwesomeIcon icon={faCalendar} />
-			</div> */}
 		</>
 	);
 }
