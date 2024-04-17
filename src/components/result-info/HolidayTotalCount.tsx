@@ -4,11 +4,16 @@ export default function HolidayTotalCount({ count, onShowDetails }) {
 	return (
 		<div className={styles.container}>
 			<p className={styles.text}>
-				공휴일 개수는 <code>총 {count}일</code> 입니다.
+				공휴일 개수는 &nbsp;
+				{count > 0 ? (
+					<button className={styles.countBtn} onClick={onShowDetails}>
+						총 {count}일
+					</button>
+				) : (
+					<code className={styles.code}>총 {count}일</code>
+				)}
+				&nbsp; 입니다.
 			</p>
-			<button className={styles.showDetailBtn} onClick={onShowDetails}>
-				자세히 보기
-			</button>
 		</div>
 	);
 }

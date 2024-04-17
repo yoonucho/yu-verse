@@ -1,0 +1,39 @@
+.container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80px;
+	width: 100%;
+	background-color: var(--sub-light-blue);
+	box-shadow: rgba(16, 26, 46, 0.21) 0px 4px 12px;
+}
+
+.btnContainer {
+	/* font-family: var(--primary-font); */
+	position: relative;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	padding: 10px 20px;
+}
+
+.goBackBtn {
+	font-family: var(--primary-font);
+	background-color: transparent;
+}
+
+.goBackBtn > svg {
+	color: var(--sub-dark-blue);
+}
+
+.goBackBtn + span {
+	margin-left: 10px;
+	color: var(--sub-dark-blue);
+	font-size: 2rem;
+}

@@ -1,9 +1,23 @@
 .text {
+	margin-bottom: 40px;
 	font-size: 3rem;
+}
+.countBtn {
+	font-family: inherit;
+	padding: 10px;
+	color: var(--primary-blue);
+	font-size: 4rem;
+	font-weight: 700;
+	background-color: var(--sub-light-blue);
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
 }
 .text code {
 	font-family: inherit;
-	padding: 20px;
+	padding: 10px;
 	color: var(--primary-blue);
 	font-weight: 700;
 	background-color: var(--sub-light-blue);
@@ -15,14 +29,20 @@
 }
 
 .showDetailBtn {
-	background-color: #f1f1f1;
-	border: none;
-	color: black;
+	font-family: inherit;
 	padding: 10px 20px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	font-size: 16px;
-	margin: 4px 2px;
+	font-size: 1.6rem;
+	color: var(--primary-blue);
+	font-weight: 700;
+	border: 1px solid var(--primary-blue);
+	background-color: var(--primary-white);
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
 	cursor: pointer;
 }

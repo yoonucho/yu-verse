@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { parseISO, isWithinInterval, getYear } from "date-fns";
 import Loading from "@/components/icons/LoadingIcon";
 import getFetchHolidays from "@/app/api/holidayAPI";
+import GoBack from "@/components/GoBack";
 import HolidayTotalCount from "@/components/result-info/HolidayTotalCount";
 import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
 import styles from "@/styles/result-info.module.css";
@@ -59,6 +60,7 @@ export default function ResultInfo() {
 
 	return (
 		<div className={styles.container}>
+			<GoBack />
 			<div className={styles.inner}>
 				<h1>공휴일 결과 페이지</h1>
 				{isLoading ? (
