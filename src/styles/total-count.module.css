@@ -1,0 +1,22 @@
+.text {
+	font-size: 3rem;
+}
+.text code {
+	font-family: inherit;
+	color: var(--primary-blue);
+	font-weight: 700;
+	background-color: var(--sub-light-blue);
+}
+
+.showDetailBtn {
+	background-color: #f1f1f1;
+	border: none;
+	color: black;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}

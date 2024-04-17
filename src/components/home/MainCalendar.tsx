@@ -8,7 +8,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import { ko } from "date-fns/locale";
 import styles from "@/styles/main-calendar.module.css";
 import getFetchHolidays from "@/app/api/holidayAPI";
-import Loading from "@/components/LoadingIcon";
+import Loading from "@/components/icons/LoadingIcon";
 
 export default function MainCalendar() {
 	const [events, setEvents] = useState([]);
