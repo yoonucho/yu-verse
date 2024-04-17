@@ -78,9 +78,9 @@ html {
 }
 
 body {
+	font-family: var(--primary-font);
 	overflow-x: auto;
 	overflow-y: auto;
-	font-family: var(--primary-font);
 	min-height: 100%;
 	font-size: 1.4rem;
 	font-weight: 600;
