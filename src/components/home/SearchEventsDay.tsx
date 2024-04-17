@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import DayPickerToolTest from "./DayPickerTool";
+import DayPickerTool from "./DayPickerTool";
 import { DateRange } from "react-day-picker";
 import { useRouter } from "next/navigation";
 import { formatISO } from "date-fns";
@@ -20,13 +20,7 @@ export default function SearchEventDay() {
 
 	return (
 		<div>
-			<DayPickerToolTest
-				range={range}
-				setRange={(newRange: any) => {
-					setRange(newRange);
-					handleDaySearch(newRange);
-				}}
-			/>
+			<DayPickerTool range={range} setRange={setRange} onSearch={handleDaySearch} />
 		</div>
 	);
 }

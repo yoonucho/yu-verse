@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { parseISO, isWithinInterval, getYear } from "date-fns";
-import Loading from "@/app/loading";
+import Loading from "@/components/LoadingIcon";
 import getFetchHolidays from "@/app/api/holidayAPI";
 
 interface Holiday {

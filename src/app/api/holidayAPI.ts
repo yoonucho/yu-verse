@@ -9,7 +9,7 @@ export const formatDate = (date: string) => {
 // const currentYear = getYear(new Date());
 
 export default async function getFetchHolidays(year = getYear(new Date())) {
-	// await new Promise(resolve => setTimeout(resolve, 10000));
+	// await new Promise(resolve => setTimeout(resolve, 100000));
 	const response = await fetch(`${API_URL}/${year}/KR`);
 	const data = await response.json();
 	return data.map((holiday: any, index: number) => ({

@@ -10,6 +10,11 @@
   },
   "dependencies": {
     "@date-io/date-fns": "^3.0.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@fullcalendar/core": "^6.1.11",
     "@fullcalendar/daygrid": "^6.1.11",
     "@fullcalendar/interaction": "^6.1.11",
@@ -17,13 +22,15 @@
     "@fullcalendar/resource": "^6.1.11",
     "@fullcalendar/resource-timeline": "^6.1.11",
     "@fullcalendar/timegrid": "^6.1.11",
+    "@popperjs/core": "^2.11.8",
     "babel-plugin-styled-components": "^2.1.4",
     "date-fns": "^3.6.0",
     "next": "14.2.1",
     "react": "^18",
     "react-day-picker": "^8.10.0",
     "react-dom": "^18",
-    "styled-components": "^6.1.8"
+    "react-popper": "^2.3.0",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@types/node": "^20",
