@@ -1,0 +1,50 @@
+/* fullCalendar custom */
+.fc-toolbar-title {
+	color: var(--sub-dark-blue);
+}
+
+.fc .fc-button-primary {
+	color: var(--sub-blue);
+	font-weight: 700;
+	background-color: var(--sub-light-blue);
+	border: 0;
+}
+
+.fc .fc-button-group {
+}
+
+.fc .fc-button-group > .fc-button.fc-button-active {
+	color: var(--primary-white);
+	background-color: var(--sub-blue);
+}
+
+.fc .fc-button-primary:hover {
+	color: var(--sub-blue);
+	background-color: var(--sub-light-blue);
+}
+
+.fc-h-event {
+	background-color: var(--sub-blue);
+}
+
+.fc .fc-button-primary:disabled {
+	color: var(--primary-white);
+	background-color: var(--primary-gray2);
+}
+
+.fc .fc-daygrid-day-number {
+	color: var(--primary-font-color);
+}
+
+/* day-picker custom */
+.rdp-tfoot {
+	font-family: inherit;
+	position: absolute;
+	top: -45px;
+	color: var(--primary-gray1);
+	font-weight: 500;
+}
+
+.rdp-day_selected {
+	background-color: var(--sub-blue) !important;
+}

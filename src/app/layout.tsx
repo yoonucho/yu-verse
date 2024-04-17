@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "../styles/globals.css";
+import "../styles/custom.css";
 
 export const notoSansKR = Noto_Sans_KR({
 	subsets: ["latin"], // 사용하고 싶은 폰트 서브셋을 배열 형태로 지정
