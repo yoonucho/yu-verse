@@ -138,7 +138,7 @@ h2 {
 
 h1 {
 	font-family: var(--primary-title-font);
-	margin-bottom: 28px;
+	margin-bottom: 0;
 	font-size: min(5vw, 60px);
 }
 

@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - 70px);
+}
+
+.inner {
+	width: 100%;
+	min-height: 200px;
+	text-align: center;
+}
+
+.inner h1 {
+	margin-bottom: 30px;
+}

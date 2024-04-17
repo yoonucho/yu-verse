@@ -5,7 +5,7 @@ import Loading from "@/components/icons/LoadingIcon";
 import getFetchHolidays from "@/app/api/holidayAPI";
 import HolidayTotalCount from "@/components/result-info/HolidayTotalCount";
 import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
-// import styles from "@/styles/result-info.module.css";
+import styles from "@/styles/result-info.module.css";
 
 interface Holiday {
 	id?: number;
@@ -58,21 +58,23 @@ export default function ResultInfo() {
 	}, [from, to]);
 
 	return (
-		<div>
-			<h1>공휴일 결과 페이지</h1>
-			{isLoading ? (
-				<Loading />
-			) : (
-				<>
-					{!showDetails ? (
-						<HolidayTotalCount count={holidays.length} onShowDetails={() => setShowDetails(true)} />
-					) : message ? (
-						<p>{message}</p>
-					) : (
-						<HolidayShowDetails holidays={holidays} message={message} />
-					)}
-				</>
-			)}
+		<div className={styles.container}>
+			<div className={styles.inner}>
+				<h1>공휴일 결과 페이지</h1>
+				{isLoading ? (
+					<Loading />
+				) : (
+					<>
+						{!showDetails ? (
+							<HolidayTotalCount count={holidays.length} onShowDetails={() => setShowDetails(true)} />
+						) : message ? (
+							<p>{message}</p>
+						) : (
+							<HolidayShowDetails holidays={holidays} message={message} />
+						)}
+					</>
+				)}
+			</div>
 		</div>
 	);
 }

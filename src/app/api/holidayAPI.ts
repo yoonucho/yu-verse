@@ -18,8 +18,5 @@ export default async function getFetchHolidays(year = getYear(new Date())) {
 		start: formatDate(holiday.date),
 		resourceId: index + 1,
 		dayOfWeek: format(parseISO(holiday.date), "EEEE", { locale: ko }),
-		// localName: holiday.localName,
-		// date: formatDate(holiday.date),
-		// dayOfWeek: string,
 	}));
 }

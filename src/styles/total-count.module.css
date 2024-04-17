@@ -3,9 +3,15 @@
 }
 .text code {
 	font-family: inherit;
+	padding: 20px;
 	color: var(--primary-blue);
 	font-weight: 700;
 	background-color: var(--sub-light-blue);
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
 }
 
 .showDetailBtn {
