@@ -1,8 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { parseISO, isWithinInterval, getYear } from "date-fns";
-import Loading from "@/components/LoadingIcon";
+import Loading from "@/components/icons/LoadingIcon";
 import getFetchHolidays from "@/app/api/holidayAPI";
+import HolidayTotalCount from "@/components/result-info/HolidayTotalCount";
+import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
+// import styles from "@/styles/result-info.module.css";
 
 interface Holiday {
 	id?: number;
@@ -21,6 +24,7 @@ const useQueryParams = () => {
 export default function ResultInfo() {
 	const [holidays, setHolidays] = useState<Holiday[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [showDetails, setShowDetails] = useState(false);
 	const [message, setMessage] = useState("");
 	const queryParams = useQueryParams();
 	const from = queryParams.get("from");
@@ -44,6 +48,7 @@ export default function ResultInfo() {
 				}
 			} catch (error) {
 				console.error("Failed to fetch holidays:", error);
+				setMessage("데이터를 가져오는 데 실패했습니다.");
 				setHolidays([]);
 			}
 			setIsLoading(false);
@@ -54,19 +59,19 @@ export default function ResultInfo() {
 
 	return (
 		<div>
-			<h1>Holiday List</h1>
+			<h1>공휴일 결과 페이지</h1>
 			{isLoading ? (
 				<Loading />
-			) : message ? (
-				<p>{message}</p>
 			) : (
-				<ul>
-					{holidays.map(holiday => (
-						<li key={holiday.id}>
-							{holiday.title} on {holiday.start} {holiday.dayOfWeek}
-						</li>
-					))}
-				</ul>
+				<>
+					{!showDetails ? (
+						<HolidayTotalCount count={holidays.length} onShowDetails={() => setShowDetails(true)} />
+					) : message ? (
+						<p>{message}</p>
+					) : (
+						<HolidayShowDetails holidays={holidays} message={message} />
+					)}
+				</>
 			)}
 		</div>
 	);
