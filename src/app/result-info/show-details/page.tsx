@@ -1,23 +1,39 @@
 "use client";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Loading from "@/components/icons/LoadingIcon";
 import useFetchHolidays from "@/hooks/useFetchHolidays";
 import GoBack from "@/components/GoBack";
 import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
 import styles from "@/styles/result-info.module.css";
 
+interface Holiday {
+	id?: number;
+	title?: string;
+	start?: string;
+	dayOfWeek?: string;
+}
+
 const useQueryParams = () => {
 	if (typeof window !== "undefined") {
-		console.log("window.location.search", window.location.search);
 		return new URLSearchParams(window.location.search);
 	}
 	return new URLSearchParams();
 };
 
 export default function ShowDetails({}) {
+	const router = useRouter();
+	const [year, setYear] = useState("");
 	const queryParams = useQueryParams();
 	const from = queryParams.get("from");
 	const to = queryParams.get("to");
+
 	const { holidays, isLoading, error } = useFetchHolidays(from, to);
+
+	useEffect(() => {
+		const yearParam = new URLSearchParams(window.location.search).get("year");
+		setYear(yearParam);
+	}, []);
 
 	if (isLoading) return <Loading />; // 로딩 중 처리
 	if (error) return <p>{"문제가 발생하였습니다."}</p>; // 에러 처리

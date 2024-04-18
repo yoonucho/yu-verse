@@ -15,7 +15,6 @@ export default function SearchEventDay({ isOpen }) {
 			const from = formatISO(newRange.from, { representation: "date" });
 			const to = formatISO(newRange.to, { representation: "date" });
 			router.push(`/result-info?from=${from}&to=${to}`);
-			console.log(from, to);
 		}
 	};
 

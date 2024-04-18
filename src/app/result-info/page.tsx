@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/icons/LoadingIcon";
 import useFetchHolidays from "@/hooks/useFetchHolidays";
@@ -15,7 +15,6 @@ interface Holiday {
 }
 const useQueryParams = () => {
 	if (typeof window !== "undefined") {
-		console.log("window.location.search", window.location.search);
 		return new URLSearchParams(window.location.search);
 	}
 	return new URLSearchParams();
@@ -23,6 +22,7 @@ const useQueryParams = () => {
 
 export default function ResultInfo() {
 	const router = useRouter();
+	const [year, setYear] = useState("");
 	const queryParams = useQueryParams();
 	const from = queryParams.get("from");
 	const to = queryParams.get("to");
@@ -30,6 +30,11 @@ export default function ResultInfo() {
 	const handleShowDetails = () => {
 		router.push(`/result-info/show-details/?from=${from}&to=${to}`);
 	};
+
+	useEffect(() => {
+		const yearParam = new URLSearchParams(window.location.search).get("year");
+		setYear(yearParam);
+	}, []);
 
 	const { holidays, isLoading, error } = useFetchHolidays(from, to);
 	if (isLoading) return <Loading />; // 로딩 중 처리
