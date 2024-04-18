@@ -51,11 +51,6 @@ export default function MainCalendar({ isOpen }) {
 						editable={true}
 						selectable={true}
 						selectMirror={true}
-						resources={[
-							{ id: "a", title: "Auditorium A" },
-							{ id: "b", title: "Auditorium B", eventColor: "green" },
-							{ id: "c", title: "Auditorium C", eventColor: "orange" },
-						]}
 						events={events}
 					/>
 				</div>
