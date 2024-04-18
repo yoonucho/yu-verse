@@ -36,7 +36,6 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		// console.log(notoSansKR),
 		<html lang="ko">
 			<body className={notoSansKR.className}>{children}</body>
 		</html>

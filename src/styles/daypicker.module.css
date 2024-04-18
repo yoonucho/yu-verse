@@ -29,7 +29,6 @@
 }
 
 .btnContainer {
-	/* font-family: var(--primary-font); */
 	position: relative;
 	display: flex;
 	flex-direction: column;
