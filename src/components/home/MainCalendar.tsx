@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
+// import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { ko } from "date-fns/locale";
 import styles from "@/styles/main-calendar.module.css";
@@ -34,11 +34,11 @@ export default function MainCalendar({ isOpen }) {
 			<div className={`${styles.container} ${isOpen ? styles.show : ""}`}>
 				<div className="calendar-container">
 					<FullCalendar
-						plugins={[resourceTimelinePlugin, dayGridPlugin, interactionPlugin, timeGridPlugin]}
+						plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
 						headerToolbar={{
 							left: "prev,next today",
 							center: "title",
-							right: "resourceTimelineWeek,dayGridMonth,timeGridWeek",
+							right: "dayGridMonth,timeGridWeek",
 						}}
 						buttonText={{
 							today: "Today", // 오늘 버튼 텍스트 영어로 설정
