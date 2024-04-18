@@ -1,7 +1,8 @@
 # 💇‍♀️[페이히어] 프론트엔드 엔지니어 과제 전형💇‍♂️
 
-![시연영상](https://gist.github.com/assets/2981954/ba634d0c-bfdc-4237-9d3a-8ebdaa38c442)
-                                                       
+![preview](https://github.com/yoonucho/salon-scheduler/assets/2981954/7385cdf5-8b15-430e-a945-d3a49c6ad984)
+
+                                                  
 ## 개발 환경
 
 * **Framewrok** : Node.js(>=18.18.0), Next.js 14
