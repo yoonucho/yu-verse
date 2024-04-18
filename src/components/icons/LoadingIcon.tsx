@@ -1,7 +1,7 @@
-import styles from "@/styles/loading.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import styles from "@/styles/loading.module.css";
 
 export default function Loading() {
 	return (

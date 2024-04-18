@@ -1,10 +1,10 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { formatISO } from "date-fns";
 import { DateRange, DayPicker } from "react-day-picker";
 import { ko } from "date-fns/locale";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import "react-day-picker/dist/style.css";
 import styles from "@/styles/daypicker.module.css";
 

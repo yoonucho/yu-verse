@@ -1,9 +1,6 @@
 import styles from "@/styles/show-detail.module.css";
 
-export default function HolidayShowDetails({ holidays, message }) {
-	if (message) {
-		return <p>{message}</p>;
-	}
+export default function HolidayShowDetails({ holidays }) {
 	return (
 		<div className={styles.container}>
 			{holidays.map((holiday: any, index: number) => (
