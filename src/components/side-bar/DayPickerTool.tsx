@@ -58,10 +58,6 @@ export default function DayPickerTool({ range, setRange, onSearch }) {
 							}}
 							locale={ko}
 						/>
-
-						{/* <button className={styles.closeIcon} onClick={closePopper}>
-								<FontAwesomeIcon icon={faXmark} />
-							</button> */}
 					</div>
 					<div className={styles.btnContainer}>
 						<button className={isRangeAllSelected ? styles.btnActive : styles.searchBtn} onClick={handleDaySearch}>

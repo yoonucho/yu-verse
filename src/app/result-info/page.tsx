@@ -1,11 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { parseISO, isWithinInterval, getYear } from "date-fns";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import Loading from "@/components/icons/LoadingIcon";
-import getFetchHolidays from "@/app/api/holidayAPI";
+import useFetchHolidays from "@/hooks/useFetchHolidays";
 import GoBack from "@/components/GoBack";
 import HolidayTotalCount from "@/components/result-info/HolidayTotalCount";
-import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
 import styles from "@/styles/result-info.module.css";
 
 interface Holiday {
@@ -23,41 +22,18 @@ const useQueryParams = () => {
 };
 
 export default function ResultInfo() {
-	const [holidays, setHolidays] = useState<Holiday[]>([]);
-	const [isLoading, setIsLoading] = useState(false);
-	const [showDetails, setShowDetails] = useState(false);
-	const [message, setMessage] = useState("");
+	const router = useRouter();
 	const queryParams = useQueryParams();
 	const from = queryParams.get("from");
 	const to = queryParams.get("to");
 
-	useEffect(() => {
-		const executeFetch = async () => {
-			setIsLoading(true);
-			try {
-				const year = from ? getYear(parseISO(from)) : getYear(new Date());
-				const fetchedHolidays: Holiday[] = await getFetchHolidays(year);
-				const filtered = fetchedHolidays.filter(holiday => {
-					return from && to && isWithinInterval(parseISO(holiday.start), { start: parseISO(from as string), end: parseISO(to as string) });
-				});
-				if (filtered.length > 0) {
-					console.log("filtered", filtered);
-					setHolidays(filtered);
-					setMessage("");
-				} else {
-					setMessage("공휴일이 없어요!");
-				}
-			} catch (error) {
-				console.error("Failed to fetch holidays:", error);
-				setMessage("데이터를 가져오는 데 실패했습니다.");
-				setHolidays([]);
-			}
-			setIsLoading(false);
-		};
+	const handleShowDetails = () => {
+		router.push(`/result-info/show-details/?from=${from}&to=${to}`);
+	};
 
-		executeFetch();
-	}, [from, to]);
-
+	const { holidays, isLoading, error } = useFetchHolidays(from, to);
+	if (isLoading) return <Loading />; // 로딩 중 처리
+	if (error) return <p>{"문제가 발생하였습니다."}</p>;
 	return (
 		<div className={styles.container}>
 			<GoBack />
@@ -66,15 +42,9 @@ export default function ResultInfo() {
 				{isLoading ? (
 					<Loading />
 				) : (
-					<>
-						{!showDetails ? (
-							<HolidayTotalCount count={holidays.length} onShowDetails={() => setShowDetails(true)} />
-						) : message ? (
-							<p>{message}</p>
-						) : (
-							<HolidayShowDetails holidays={holidays} message={message} />
-						)}
-					</>
+					<div>
+						<HolidayTotalCount count={holidays.length} onShowDetails={handleShowDetails} />
+					</div>
 				)}
 			</div>
 		</div>
