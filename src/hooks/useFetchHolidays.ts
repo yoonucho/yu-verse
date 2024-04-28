@@ -25,17 +25,17 @@ const useFetchHolidays = (from, to) => {
 	useEffect(() => {
 		const fetchHolidays = async () => {
 			setIsLoading(true);
-			const fromDate = from ? parseISO(from) : new Date();
-			const toDate = to ? parseISO(to) : new Date();
 			const fromYear = getYear(parseISO(from));
 			const toYear = getYear(parseISO(to));
 			try {
-				let allHolidays = [];
+				let promises = [];
 
 				for (let year = fromYear; year <= toYear; year++) {
-					const yearlyHolidays = await getFetchHolidays(year);
-					allHolidays = allHolidays.concat(yearlyHolidays);
+					promises.push(getFetchHolidays(year));
 				}
+
+				let results = await Promise.all(promises);
+				let allHolidays = [].concat(...results);
 
 				const filteredHolidays = allHolidays.filter(holiday => isWithinInterval(parseISO(holiday.start), { start: parseISO(from), end: parseISO(to) }));
 
