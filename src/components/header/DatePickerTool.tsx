@@ -1,18 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { formatISO } from "date-fns";
-import { DateRange, DayPicker } from "react-day-picker";
+import DatePicker from "react-datepicker";
 import { ko } from "date-fns/locale";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import "react-day-picker/dist/style.css";
-import styles from "@/styles/daypicker.module.css";
+import "react-datepicker/dist/react-datepicker.css";
+import styles from "@/styles/datepicker.module.css";
 
-export default function DayPickerTool({ range, setRange, onSearch }) {
-	const defaultSelected: DateRange = {
-		from: undefined,
-		to: undefined,
-	};
+export default function DatePickerTool({ range, setRange, onSearch }) {
+	const defaultSelected = { from: undefined, to: undefined };
 	const selectedRange = range || defaultSelected;
 	const isRangeAllSelected = selectedRange.from && selectedRange.to;
 	const isRangeSelected = selectedRange.from || selectedRange.to;
@@ -46,14 +43,13 @@ export default function DayPickerTool({ range, setRange, onSearch }) {
 						<FontAwesomeIcon icon={faCalendar} />
 					</div>
 					<div className={styles.container}>
-						<DayPicker
-							captionLayout="dropdown-buttons"
+						<DatePicker
 							mode="range"
 							fromYear={2023}
 							toYear={2025}
 							selected={selectedRange}
 							footer={footerText}
-							onSelect={newRange => {
+							onChange={newRange => {
 								setRange(newRange);
 							}}
 							locale={ko}

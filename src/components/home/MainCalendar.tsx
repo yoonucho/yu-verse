@@ -9,7 +9,7 @@ import styles from "@/styles/main-calendar.module.css";
 import getFetchHolidays from "@/app/api/holidayAPI";
 import Loading from "@/components/icons/LoadingIcon";
 
-export default function MainCalendar({ isOpen }) {
+export default function MainCalendar({}) {
 	const [events, setEvents] = useState([]);
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
@@ -30,7 +30,7 @@ export default function MainCalendar({ isOpen }) {
 	}
 	return (
 		<>
-			<div className={`${styles.container} ${isOpen ? styles.show : ""}`}>
+			<div className={styles.container}>
 				<div className="calendar-container">
 					<FullCalendar
 						plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}

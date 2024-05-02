@@ -1,7 +1,7 @@
 .toggleBtn {
 	position: fixed;
 	top: 14px;
-	left: 12px;
+	right: 150px;
 	z-index: 5;
 	padding: 10px;
 	font-size: 2em;
@@ -13,5 +13,5 @@
 }
 
 .toggleBtnClose {
-	left: 0;
+	/* left: 0; */
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SideBar from "../side-bar/SideBar";
+import Header from "../header/Header";
 
 interface SideBarLayoutProps {
 	children: React.ReactNode;
@@ -13,7 +13,7 @@ export default function SideBarLayout({ children }: SideBarLayoutProps): JSX.Ele
 
 	return (
 		<>
-			<SideBar toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+			<Header toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
 			<div style={{ marginLeft: isMenuOpen ? "328px" : "0", transition: "margin-left 0.3s ease" }}>{children}</div>
 		</>
 	);

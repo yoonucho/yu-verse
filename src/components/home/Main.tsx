@@ -1,14 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import SideBar from "../side-bar/SideBar";
+import Header from "../header/Header";
 import MainCalendar from "./MainCalendar";
 
 export default function Main() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 	return (
 		<>
-			<SideBar isMenuOpen={isMenuOpen} toggleMenu={() => setIsMenuOpen(!isMenuOpen)} />
-			<MainCalendar isOpen={isMenuOpen} />
+			<Header isMenuOpen={isMenuOpen} toggleMenu={() => setIsMenuOpen(!isMenuOpen)} />
+			<MainCalendar />
 		</>
 	);
 }

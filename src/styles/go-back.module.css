@@ -1,14 +1,32 @@
 .container {
+	opacity: 0;
 	position: fixed;
 	top: 0;
 	left: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 80px;
+	min-height: 80px;
 	width: 100%;
 	background-color: var(--sub-light-blue);
-	box-shadow: rgba(16, 26, 46, 0.21) 0px 4px 12px;
+	/* box-shadow: rgba(16, 26, 46, 0.21) 0px 4px 12px; */
+	box-shadow: rgba(0, 0, 0, 0.21) 0px 4px 12px 0px;
+	transition: transform 0.3s ease-in-out;
+	transform: translateX(-100%);
+	-webkit-transform: translateX(-100%);
+	-moz-transform: translateX(-100%);
+	-ms-transform: translateX(-100%);
+	-o-transform: translateX(-100%);
+}
+
+.show {
+	opacity: 1;
+	z-index: 2;
+	transform: translateX(0);
+	-webkit-transform: translateX(0);
+	-moz-transform: translateX(0);
+	-ms-transform: translateX(0);
+	-o-transform: translateX(0);
 }
 
 .btnContainer {
