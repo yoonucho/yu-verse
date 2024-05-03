@@ -1,8 +1,9 @@
 .container {
 	font-family: var(--primary-font);
+	position: relative;
+	display: flex;
 	z-index: 2;
-	right: 50%;
-	margin-top: -10px;
+	width: calc(100% - 200px);
 }
 
 .inputBar {
@@ -11,14 +12,17 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	gap: 10px;
 	width: 100%;
-	height: 60px;
-	margin-bottom: 20px;
 	padding: 5px 20px;
 	font-weight: 700;
 	border: 1px solid var(--sub-blue);
 	background-color: var(--primary-white);
 	border-radius: 5px;
+}
+
+.inputBar > div:first-child {
+	flex-basis: 100%;
 }
 
 .inputBar > svg {
@@ -31,7 +35,6 @@
 .btnContainer {
 	position: relative;
 	display: flex;
-	flex-direction: column;
 	gap: 10px;
 	width: 100%;
 	height: 100%;

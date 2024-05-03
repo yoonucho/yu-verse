@@ -1,6 +1,5 @@
 import { Suspense, lazy } from "react";
 import Loading from "@/components/icons/LoadingIcon";
-import HairIcon from "@/components/icons/HairIcon";
 
 export const metadata = {
 	title: "Home",
@@ -13,7 +12,6 @@ export default async function HomePage() {
 		<>
 			<Suspense fallback={<Loading />}>
 				<Main />
-				{/* <HairIcon /> */}
 			</Suspense>
 		</>
 	);

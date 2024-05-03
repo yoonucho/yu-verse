@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { formatISO } from "date-fns";
 import DatePickerBar from "@/components/header/DatePickerBar";
 import useSetDateStore from "@/stores/useSetDateStore";
-import styles from "@/styles/search-event-day.module.css";
 
 export default function SearchEventDay() {
 	const { startDate, endDate, setStartDate, setEndDate } = useSetDateStore();
@@ -16,7 +15,7 @@ export default function SearchEventDay() {
 			alert("날짜를 선택하세요!");
 			return;
 		}
-		console.log("handleDaySearch");
+
 		const startFormatDate = formatISO(startDate, { representation: "date" });
 		const endFormatDate = formatISO(endDate, { representation: "date" });
 		if (startFormatDate && endFormatDate) {
@@ -27,9 +26,5 @@ export default function SearchEventDay() {
 		}
 	};
 
-	return (
-		<div className={styles.container}>
-			<DatePickerBar startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} onSearch={handleDaySearch} />
-		</div>
-	);
+	return <DatePickerBar startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} onSearch={handleDaySearch} />;
 }

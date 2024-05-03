@@ -38,6 +38,24 @@
 }
 
 /* datepicker custom */
+.react-datepicker-wrapper:first-child {
+	margin-right: 10px;
+}
+.react-datepicker__input-container {
+	display: flex !important;
+	flex-direction: row-reverse;
+	align-items: center;
+}
+
+.react-datepicker__tab-loop {
+	position: absolute;
+	top: 0;
+}
+
+.react-datepicker__triangle {
+	display: none !important;
+}
+
 .rdp {
 	font-family: var(--primary-font);
 	padding: 20px;
