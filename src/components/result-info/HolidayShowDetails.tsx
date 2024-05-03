@@ -4,7 +4,7 @@ export default function HolidayShowDetails({ holidays }) {
 	return (
 		<div className={styles.container}>
 			{holidays.map((holiday: any, index: number) => (
-				<div key={holiday.id} className={styles.eventItem}>
+				<div key={`${holiday.title}-${holiday.start}`} className={styles.eventItem}>
 					<div className={styles.holidayNumber}>
 						<span>{index + 1}</span>
 					</div>
