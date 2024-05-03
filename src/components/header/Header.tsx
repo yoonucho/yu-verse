@@ -1,5 +1,5 @@
 import ToggleMenu from "./ToggleMenu";
-import GoBack from "../GoBack";
+import GoBack from "./GoBack";
 
 export default function Header({ toggleMenu, isMenuOpen }) {
 	return (

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "../styles/not-found.module.css";
-import GoBack from "@/components/GoBack";
+import GoBack from "@/components/header/GoBack";
 
 export default function NotFound() {
 	return (
