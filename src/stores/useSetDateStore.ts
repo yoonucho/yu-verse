@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
-interface DataState {
+interface DateState {
 	startDate: Date | null;
 	endDate: Date | null;
 	setStartDate: (date: Date) => void;
 	setEndDate: (date: Date) => void;
 }
 
-const useSetDateStore = create<DataState>(set => ({
+const useSetDateStore = create<DateState>(set => ({
 	startDate: null,
 	endDate: null,
 	setStartDate: (date: Date) => set({ startDate: date }),
