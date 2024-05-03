@@ -5,7 +5,7 @@ export default function Header({ toggleMenu, isMenuOpen }) {
 	return (
 		<div>
 			<ToggleMenu onClick={toggleMenu} isOpen={isMenuOpen} />
-			<GoBack isOpen={isMenuOpen} />
+			<GoBack onClick={toggleMenu} isOpen={isMenuOpen} />
 		</div>
 	);
 }

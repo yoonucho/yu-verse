@@ -8,12 +8,12 @@ function handleClick() {
 	alert("뒤로가기 버튼 클릭");
 }
 
-export default function GoBack({ isOpen }) {
+export default function GoBack({ isOpen, onClick }) {
 	return (
 		<div className={`${styles.container} ${isOpen ? styles.show : ""}`}>
 			<div className={styles.btnContainer}>
 				<div>
-					<button type="button" className={`${styles.goBackBtn} fa-2x`} onClick={handleClick}>
+					<button type="button" className={`${styles.goBackBtn} fa-2x`} onClick={onClick}>
 						<FontAwesomeIcon icon={faArrowLeft} />
 					</button>
 					&nbsp; <span>이전으로</span>

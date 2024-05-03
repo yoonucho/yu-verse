@@ -49,6 +49,7 @@ export default function DatePickerBar({ startDate, endDate, setStartDate, setEnd
 						showIcon
 						toggleCalendarOnIconClick
 						showYearDropdown
+						placeholderText="시작일"
 						dateFormatCalendar="MMMM"
 						scrollableYearDropdown
 						yearDropdownItemNumber={15}
@@ -64,27 +65,33 @@ export default function DatePickerBar({ startDate, endDate, setStartDate, setEnd
 						locale={ko}
 						renderCustomHeader={({ date, changeYear, decreaseMonth, increaseMonth, prevMonthButtonDisabled, nextMonthButtonDisabled }) => (
 							<div className={styles.customHeader}>
-								<button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-									<FontAwesomeIcon icon={faChevronLeft} />
-								</button>
-								<select value={getYear(date)} onChange={({ target: { value } }) => changeYear(+value)}>
-									{years.map(option => (
-										<option key={option} value={option}>
-											{option}
-										</option>
-									))}
-								</select>
-								<span>{getMonth(date) + 1}월</span>
-								<button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-									<FontAwesomeIcon icon={faChevronRight} />
-								</button>
+								<div>
+									<select className={styles.selectYear} value={getYear(date)} onChange={({ target: { value } }) => changeYear(+value)}>
+										{years.map(option => (
+											<option key={option} value={option}>
+												{option}
+											</option>
+										))}
+									</select>
+									<span>{getMonth(date) + 1}월</span>
+								</div>
+								<div>
+									<button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+										<FontAwesomeIcon icon={faChevronLeft} />
+									</button>
+									<button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+										<FontAwesomeIcon icon={faChevronRight} />
+									</button>
+								</div>
 							</div>
 						)}
 					/>
+					<span className={styles.dash}> - </span>
 					<DatePicker
 						showIcon
 						toggleCalendarOnIconClick
 						showYearDropdown
+						placeholderText="종료일"
 						dateFormatCalendar="MMMM"
 						scrollableYearDropdown
 						yearDropdownItemNumber={15}
@@ -101,20 +108,24 @@ export default function DatePickerBar({ startDate, endDate, setStartDate, setEnd
 						locale={ko}
 						renderCustomHeader={({ date, changeYear, decreaseMonth, increaseMonth, prevMonthButtonDisabled, nextMonthButtonDisabled }) => (
 							<div className={styles.customHeader}>
-								<button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-									<FontAwesomeIcon icon={faChevronLeft} />
-								</button>
-								<select value={getYear(date)} onChange={({ target: { value } }) => changeYear(+value)}>
-									{years.map(option => (
-										<option key={option} value={option}>
-											{option}
-										</option>
-									))}
-								</select>
-								<span>{getMonth(date) + 1}월</span>
-								<button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-									<FontAwesomeIcon icon={faChevronRight} />
-								</button>
+								<div>
+									<select className={styles.selectYear} value={getYear(date)} onChange={({ target: { value } }) => changeYear(+value)}>
+										{years.map(option => (
+											<option key={option} value={option}>
+												{option}
+											</option>
+										))}
+									</select>
+									<span>{getMonth(date) + 1}월</span>
+								</div>
+								<div>
+									<button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+										<FontAwesomeIcon icon={faChevronLeft} />
+									</button>
+									<button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+										<FontAwesomeIcon icon={faChevronRight} />
+									</button>
+								</div>
 							</div>
 						)}
 					/>
