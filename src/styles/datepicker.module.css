@@ -78,7 +78,7 @@
 }
 
 .customHeader button:hover {
-	background-color: var(--sub-light-blue);
+	background-color: var(--sub-light-color);
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;

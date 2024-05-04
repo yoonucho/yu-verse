@@ -11,35 +11,17 @@ html {
 }
 
 :root {
-	/* colors */
-
-	/* Primary color */
+	/* Main colors */
 	--primary-color: #8d80b0;
 	--accent-color: #8397c4;
 	--hover-color: #d1ccdf;
 	--result-hover-color: #e6eaf3;
+	--error-color: #ff619a;
 
-	--primary-blue: rgb(61, 88, 193);
-	--primary-pink: #ff619a;
-	--primary-yellow: #ffcf00;
-	--primary-green: #7ada00;
-	--primary-purple: #b586f8;
+	/* Sub colors */
+	--sub-light-color: rgb(241, 243, 253);
 
-	/* Sub color */
-	--sub-blue: rgb(9, 125, 233);
-	--sub-pink: #fbd8e0;
-	--sub-light-blue: rgb(241, 243, 253);
-	--sub-light-pink: #ffdbe8;
-	--sub-light-yellow: #ffeb96;
-	--sub-light-green: #d3f5a7;
-	--sub-light-purple: #ebddff;
-	--sub-dark-blue: rgb(28, 38, 56);
-
-	/* Gray color */
-	--light-gray1: #eff4ea;
-	--light-gray2: #f9fcf6;
-	--light-gray3: #f5f8f2;
-
+	/* Gray */
 	--primary-gray1: #5c5c5c;
 	--primary-gray2: #b9b9b9;
 	--primary-gray3: #d9d9d9;
@@ -48,7 +30,7 @@ html {
 	--primary-white: #ffffff;
 	--primary-black: #0e0e0e;
 
-	--primary-border: rgb(0, 0, 238);
+	/* Font */
 	--primary-title-color: #62597b;
 	--primary-font-color: #2a2634;
 

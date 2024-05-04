@@ -1,8 +1,13 @@
 /* fullCalendar custom */
+.fc .fc-toolbar.fc-header-toolbar {
+	min-width: 600px;
+}
+
 .fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:first-child {
 	margin-left: 100px;
 }
 .fc-toolbar-title {
+	min-width: 150px;
 	font-size: 1.5rem;
 	color: var(--primary-font-color);
 }
@@ -10,8 +15,26 @@
 .fc .fc-button-primary {
 	color: var(--primary-color);
 	font-weight: 700;
-	background-color: var(--sub-light-blue);
+	background-color: var(--sub-light-color);
 	border: 0;
+}
+
+.fc-searchButton-button {
+	width: 40px;
+	height: 40px;
+	padding: 10px !important;
+	font-size: 2em !important;
+	background-color: transparent !important;
+	background-image: url("/assets/images/magnifying-glass-solid.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 25px 25px;
+	border: none;
+	cursor: pointer;
+}
+
+.fc-searchButton-button > svg {
+	color: var(--primary-color);
 }
 
 .fc .fc-button-group > .fc-button.fc-button-active {
@@ -21,12 +44,14 @@
 
 .fc .fc-button-primary:hover {
 	color: var(--primary-color);
-	background-color: var(--sub-light-blue);
+	background-color: var(--sub-light-color);
 }
 
 .fc-h-event {
+	height: 30px;
 	background-color: var(--primary-color);
 	border: 1px solid var(--primary-color);
+	line-height: 30px;
 }
 
 .fc .fc-button-primary:disabled {
@@ -38,11 +63,15 @@
 	color: var(--primary-font-color);
 }
 
+.fc .fc-daygrid-day.fc-day-today {
+	background-color: var(--sub-light-color);
+}
+
 .fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
 	color: var(--primary-white);
 	background-color: var(--primary-color);
 	border-radius: 50%;
-	padding: 10px;
+	padding: 5px;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 	-ms-border-radius: 50%;
