@@ -1,10 +1,9 @@
-import ToggleMenu from "./ToggleMenu";
+// import ToggleMenu from "./ToggleMenu";
 import GoBack from "./GoBack";
 
-export default function Header({ toggleMenu, isMenuOpen }) {
+export default function Header({ isMenuOpen, toggleMenu }) {
 	return (
 		<div>
-			<ToggleMenu onClick={toggleMenu} isOpen={isMenuOpen} />
 			<GoBack onClick={toggleMenu} isOpen={isMenuOpen} />
 		</div>
 	);

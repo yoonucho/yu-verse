@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import useMenuStore from "@/stores/useMenuStore";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -10,8 +11,11 @@ import getFetchHolidays from "@/app/api/holidayAPI";
 import Loading from "@/components/icons/LoadingIcon";
 
 export default function MainCalendar({}) {
+	const toggleMenu = useMenuStore(state => state.toggleMenu);
+
 	const [events, setEvents] = useState([]);
 	const [loading, setLoading] = useState(true);
+
 	useEffect(() => {
 		async function fetchEvents() {
 			const data = await getFetchHolidays();
@@ -37,7 +41,13 @@ export default function MainCalendar({}) {
 						headerToolbar={{
 							left: "prev,next today",
 							center: "title",
-							right: "dayGridMonth,timeGridWeek",
+							right: "searchButton dayGridMonth,timeGridWeek",
+						}}
+						customButtons={{
+							searchButton: {
+								text: "",
+								click: toggleMenu,
+							},
 						}}
 						buttonText={{
 							today: "Today", // 오늘 버튼 텍스트 영어로 설정

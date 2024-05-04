@@ -5,10 +5,14 @@ import { formatISO } from "date-fns";
 import DatePickerBar from "@/components/header/DatePickerBar";
 import useSetDateStore from "@/stores/useSetDateStore";
 
-export default function SearchEventDay() {
+export default function SearchEventDay({ isClose }) {
 	const { startDate, endDate, setStartDate, setEndDate } = useSetDateStore();
 
 	const router = useRouter();
+
+	if (isClose) {
+		return null;
+	}
 
 	const handleDaySearch = () => {
 		if (!startDate || !endDate) {

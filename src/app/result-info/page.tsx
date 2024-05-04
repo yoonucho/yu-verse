@@ -6,12 +6,14 @@ import useFetchHolidays from "@/hooks/useFetchHolidays";
 import HolidayTotalCount from "@/components/result-info/HolidayTotalCount";
 import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
 import useSetDateStore from "@/stores/useSetDateStore";
+import useMenuStore from "@/stores/useMenuStore";
 import { formatISO } from "date-fns";
 import styles from "@/styles/result-info.module.css";
 
 export default function ResultInfo(isMenuOpen) {
 	const router = useRouter();
 	const { startDate, endDate } = useSetDateStore();
+	const { closeMenu } = useMenuStore();
 	const { holidays, isLoading, error } = useFetchHolidays();
 
 	const handleShowDetails = () => {
@@ -23,6 +25,7 @@ export default function ResultInfo(isMenuOpen) {
 
 	const handleClick = () => {
 		router.back();
+		closeMenu();
 	};
 
 	if (isLoading) return <Loading />; // 로딩 중 처리
