@@ -1,30 +1,16 @@
 .text {
+	color: var(--primary-black);
 	font-size: 3rem;
+	font-weight: 400;
 }
-.countBtn {
-	font-family: inherit;
-	padding: 10px;
-	color: var(--primary-blue);
-	font-size: 4rem;
-	font-weight: 700;
-	background-color: var(--sub-light-blue);
-	border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	-ms-border-radius: 10px;
-	-o-border-radius: 10px;
-}
+
 .text code {
 	font-family: inherit;
 	padding: 10px;
-	color: var(--primary-blue);
+	color: var(--primary-color);
 	font-weight: 700;
-	background-color: var(--sub-light-blue);
-	border-radius: 10px;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	-ms-border-radius: 10px;
-	-o-border-radius: 10px;
+	border-bottom: 0.0625em solid var(--primary-color);
+	box-shadow: 0 -0.4em 0 inset var(--primary-color);
 }
 
 .showDetailBtn {
@@ -34,9 +20,9 @@
 	text-decoration: none;
 	display: inline-block;
 	font-size: 1.6rem;
-	color: var(--primary-blue);
+	color: var(--primary-color);
 	font-weight: 700;
-	border: 1px solid var(--primary-blue);
+	border: 1px solid var(--primary-color);
 	background-color: var(--primary-white);
 	border-radius: 5px;
 	-webkit-border-radius: 5px;

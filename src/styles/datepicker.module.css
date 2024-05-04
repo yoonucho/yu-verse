@@ -22,20 +22,21 @@
 	min-width: 800px;
 	padding: 5px 20px;
 	font-weight: 700;
-	border: 1px solid var(--sub-blue);
+	border: 1px solid var(--accent-color);
 	background-color: var(--primary-white);
 	border-radius: 5px;
 }
 
 .inputBar > div:first-child {
 	flex-basis: 100%;
+	margin-top: -7px;
 }
 
 .inputBar > svg {
 	position: absolute;
 	right: 20px;
 	font-size: 2em;
-	color: var(--sub-blue);
+	color: var(--accent-color);
 }
 
 .inputBar .dash {
@@ -49,18 +50,31 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 10px;
+	padding: 10px 20px;
 	font-size: 25px;
+	color: var(--primary-font-color);
 }
 
 .customHeader select {
 	font-size: inherit;
 	outline: none;
+	color: inherit;
+}
+
+.customHeader select + span {
+	font-weight: 500;
+}
+
+.customHeader select option {
+	font-size: 20px;
 }
 
 .customHeader button {
 	padding: 10px;
 	font-size: 2rem;
+}
+.customHeader button:not(:disabled) > svg {
+	color: var(--primary-color);
 }
 
 .customHeader button:hover {
@@ -111,9 +125,13 @@
 	color: var(--primary-white);
 	font-weight: 700;
 	border-radius: 5px;
-	background: linear-gradient(290.64deg, rgb(22, 59, 216) 6.63%, rgb(61, 167, 255) 107.33%);
+	background-color: #8397c4;
 	box-shadow: rgba(16, 26, 46, 0.21) 0px 4px 12px;
 	cursor: pointer;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
 }
 
 .closeIcon {

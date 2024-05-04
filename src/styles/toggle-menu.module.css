@@ -1,5 +1,5 @@
 .toggleBtn {
-	position: fixed;
+	position: absolute;
 	top: 14px;
 	right: 150px;
 	z-index: 5;
@@ -9,7 +9,7 @@
 }
 
 .toggleBtn > svg {
-	color: var(--sub-blue);
+	color: var(--primary-color);
 }
 
 .toggleBtnClose {

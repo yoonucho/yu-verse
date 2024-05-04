@@ -7,14 +7,16 @@
 	align-items: center;
 	height: 60px;
 	margin-top: -1px;
+	color: var(--primary-black);
 	font-size: 1.6rem;
+	font-weight: 400;
 	line-height: 21px;
 	border-top: 1px solid var(--primary-gray3);
 	border-bottom: 1px solid var(--primary-gray3);
 }
 
 .eventItem:hover {
-	background-color: var(--sub-light-blue);
+	background-color: var(--result-hover-color);
 }
 
 .holidayNumber {
@@ -27,6 +29,8 @@
 	flex: 0 0 10.2%;
 	min-width: 200px;
 	padding: 0 0 0 12px;
+	color: var(--primary-title-color);
+	font-weight: 700;
 	font-size: 1.6rem;
 	box-sizing: border-box;
 }
@@ -53,8 +57,8 @@
 	margin: 0 auto;
 	border-radius: 2px;
 	background-size: 6px 6px;
-	border: 1px solid var(--primary-blue);
-	background-color: var(--primary-blue);
+	border: 1px solid var(--primary-color);
+	background-color: var(--primary-color);
 	box-sizing: border-box;
 }
 
@@ -63,6 +67,7 @@
 	overflow: hidden;
 	display: block;
 	min-width: 300px;
+	font-weight: 700;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
