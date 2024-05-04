@@ -195,3 +195,37 @@
 .react-datepicker__day--outside-month {
 	color: var(--primary-gray2) !important;
 }
+
+@media (max-width: 568px) {
+	.fc .fc-toolbar.fc-header-toolbar {
+		flex-direction: column;
+		width: 100%;
+		min-width: unset;
+	}
+
+	.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:first-child {
+		margin-left: 0;
+	}
+
+	.fc-toolbar-title {
+		min-width: 100%;
+		font-size: 1.2rem;
+	}
+
+	.fc-searchButton-button {
+		width: 30px;
+		height: 30px;
+		padding: 5px !important;
+		font-size: 1.5em !important;
+		background-size: 20px 20px;
+	}
+
+	.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number {
+		padding: 3px;
+	}
+
+	.react-datepicker__input-container .react-datepicker__calendar-icon {
+		width: 30px;
+		height: 30px;
+	}
+}
