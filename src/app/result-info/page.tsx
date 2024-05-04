@@ -4,6 +4,7 @@ import Loading from "@/components/icons/LoadingIcon";
 import GoBack from "@/components/header/GoBack";
 import useFetchHolidays from "@/hooks/useFetchHolidays";
 import HolidayTotalCount from "@/components/result-info/HolidayTotalCount";
+import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
 import useSetDateStore from "@/stores/useSetDateStore";
 import { formatISO } from "date-fns";
 import styles from "@/styles/result-info.module.css";
@@ -33,7 +34,8 @@ export default function ResultInfo(isMenuOpen) {
 				<div className={styles.inner}>
 					<h1>공휴일 결과 페이지</h1>
 					<div>
-						<HolidayTotalCount count={holidays.length} onShowDetails={handleShowDetails} />
+						<HolidayTotalCount count={holidays.length} />
+						<HolidayShowDetails holidays={holidays} />
 					</div>
 				</div>
 			</div>
