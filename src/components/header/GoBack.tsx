@@ -4,7 +4,13 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import SearchEventDay from "./SearchEventsDay";
 import styles from "@/styles/go-back.module.css";
 
-export default function GoBack({ isOpen, onClick, isClose }) {
+interface GoBackProps {
+	isOpen: boolean;
+	onClick: () => void;
+	isClose?: boolean;
+}
+
+export default function GoBack({ isOpen, onClick, isClose = false }: GoBackProps) {
 	return (
 		<div className={`${styles.container} ${isOpen ? styles.show : ""}`}>
 			<div className={styles.btnContainer}>
@@ -14,7 +20,7 @@ export default function GoBack({ isOpen, onClick, isClose }) {
 					</button>
 					&nbsp; <span>이전으로</span>
 				</div>
-				{!isClose && <SearchEventDay />}
+				<SearchEventDay isClose={isClose} />
 			</div>
 		</div>
 	);
