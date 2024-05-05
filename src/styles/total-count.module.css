@@ -31,3 +31,10 @@
 	-o-border-radius: 5px;
 	cursor: pointer;
 }
+
+@media (max-width: 375px) {
+	.text {
+		padding: 0 10px;
+		font-size: 2.5rem;
+	}
+}

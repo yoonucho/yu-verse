@@ -39,9 +39,6 @@
 	display: block;
 }
 
-.holidayData .inner {
-}
-
 .holidayDate .week {
 	font-size: 1.4rem;
 }
@@ -70,4 +67,16 @@
 	font-weight: 700;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+@media (max-width: 568px) {
+	.holidayDate {
+		flex: 0 0 40%;
+		min-width: auto;
+	}
+
+	.title {
+		flex: 0 0 50%;
+		min-width: auto;
+	}
 }
