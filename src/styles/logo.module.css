@@ -22,6 +22,7 @@
 @media (max-width: 500px) {
 	.iconContainer {
 		top: 5px;
+		left: 10px;
 	}
 
 	.icon {
