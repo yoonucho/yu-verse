@@ -55,3 +55,9 @@
 	color: var(--primary-font-color);
 	font-size: 2rem;
 }
+
+@media (max-width: 640px) {
+	.btnContainer {
+		flex-direction: column;
+	}
+}

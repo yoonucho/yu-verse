@@ -187,6 +187,12 @@
 	color: var(--primary-gray2) !important;
 }
 
+@media (max-width: 768px) {
+	.react-datepicker__view-calendar-icon input {
+		width: 100%;
+	}
+}
+
 @media (max-width: 568px) {
 	.fc .fc-toolbar.fc-header-toolbar {
 		position: relative;

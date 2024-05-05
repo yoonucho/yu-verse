@@ -18,8 +18,8 @@
 	justify-content: center;
 	align-items: center;
 	gap: 10px;
-	width: 100%;
-	min-width: 800px;
+	/* width: 100%; */
+	width: 800px;
 	padding: 5px 20px;
 	font-weight: 700;
 	border: 1px solid var(--accent-color);
@@ -29,6 +29,7 @@
 
 .inputBar > div:first-child {
 	flex-basis: 100%;
+	min-width: 360px;
 	margin-top: -7px;
 }
 
@@ -94,6 +95,7 @@
 .btnContainer {
 	position: relative;
 	display: flex;
+	justify-content: flex-end;
 	align-items: center;
 	gap: 10px;
 	width: 100%;
@@ -140,4 +142,67 @@
 	right: 5px;
 	font-size: 2rem;
 	background-color: transparent;
+}
+
+@media (max-width: 1024px) {
+	.container {
+		width: calc(100% - 130px);
+	}
+}
+
+@media (max-width: 960px) {
+	.inputBar {
+		width: 100%;
+	}
+
+	.btnContainer button {
+		padding: 2px 5px;
+		word-break: keep-all;
+	}
+}
+
+@media (max-width: 768px) {
+	.container {
+		min-height: 50px;
+		height: 100%;
+	}
+
+	.inputBar {
+		position: relative;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.inputBar > div:first-child {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		min-width: unset;
+		margin-top: 1px;
+	}
+
+	.btnContainer {
+		justify-content: center;
+	}
+
+	.btnContainer button {
+		width: 50%;
+	}
+}
+
+@media (max-width: 640px) {
+	.container {
+		width: 100%;
+	}
+
+	.inputBar > div:first-child {
+		flex-direction: column;
+	}
+
+	.inputBar .dash {
+		opacity: 0;
+		height: 0;
+		margin-bottom: 10px;
+	}
 }
