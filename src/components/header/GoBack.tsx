@@ -14,7 +14,7 @@ export default function GoBack({ isOpen, onClick, isClose = false }: GoBackProps
 	return (
 		<div className={`${styles.container} ${isOpen ? styles.show : ""}`}>
 			<div className={styles.btnContainer}>
-				<div>
+				<div className={styles.btnInner}>
 					<button type="button" className={`${styles.goBackBtn} fa-2x`} onClick={onClick}>
 						<FontAwesomeIcon icon={faArrowLeft} />
 					</button>

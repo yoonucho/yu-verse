@@ -60,4 +60,9 @@
 	.btnContainer {
 		flex-direction: column;
 	}
+
+	.btnInner {
+		position: relative;
+		width: 100%;
+	}
 }

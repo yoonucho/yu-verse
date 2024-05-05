@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: calc(100vh - 170px);
+	/* height: calc(100vh - 170px); */
 }
 
 .inner {
@@ -15,4 +15,15 @@
 
 .inner h1 {
 	margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+	.container {
+		margin-top: 50px;
+	}
+}
+@media (max-width: 640px) {
+	.container {
+		margin-top: 140px;
+	}
 }
