@@ -195,10 +195,6 @@
 		min-width: unset;
 	}
 
-	.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:first-child {
-		/* margin-left: 0; */
-	}
-
 	.fc-toolbar-title {
 		min-width: 100px;
 		font-size: 1.6rem !important;
@@ -232,5 +228,11 @@
 	.fc-toolbar-title {
 		min-width: 80px;
 		font-size: 1.4rem !important;
+	}
+}
+
+@media (max-width: 400px) {
+	.fc .fc-button-group > .fc-button {
+		padding: 5px 2px;
 	}
 }
