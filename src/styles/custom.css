@@ -193,17 +193,22 @@
 	}
 }
 
+@media (max-width: 640px) {
+	.fc .fc-toolbar.fc-header-toolbar {
+		min-width: 100%;
+	}
+	.fc-toolbar-title {
+		min-width: 100px;
+		font-size: 1.6rem !important;
+	}
+}
+
 @media (max-width: 568px) {
 	.fc .fc-toolbar.fc-header-toolbar {
 		position: relative;
 		/* flex-direction: row-reverse; */
 		width: 100%;
 		min-width: unset;
-	}
-
-	.fc-toolbar-title {
-		min-width: 100px;
-		font-size: 1.6rem !important;
 	}
 
 	.fc .fc-button-group > .fc-button {

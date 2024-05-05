@@ -16,6 +16,8 @@ export default function MainCalendar({}) {
 	const [events, setEvents] = useState([]);
 	const [loading, setLoading] = useState(true);
 
+	const height = window.innerHeight - 40;
+
 	useEffect(() => {
 		async function fetchEvents() {
 			const data = await getFetchHolidays();
@@ -62,6 +64,7 @@ export default function MainCalendar({}) {
 						selectable={true}
 						selectMirror={true}
 						events={events}
+						height={height}
 					/>
 				</div>
 			</div>
