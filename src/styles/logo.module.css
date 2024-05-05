@@ -18,3 +18,9 @@
 .calendarIcon {
 	color: var(--primary-color);
 }
+
+@media (max-width: 500px) {
+	.icon {
+		margin-top: 0;
+	}
+}
