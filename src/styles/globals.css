@@ -144,3 +144,8 @@ input:focus {
 	outline: none;
 	outline-offset: 2px;
 }
+
+input,
+textarea {
+	touch-action: pan-y;
+}
