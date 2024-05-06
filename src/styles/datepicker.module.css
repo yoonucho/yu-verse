@@ -57,13 +57,14 @@
 }
 
 .customHeader select {
+	min-width: 80px;
 	font-size: inherit;
 	outline: none;
 	color: inherit;
 }
 
 .customHeader select + span {
-	margin-left: 2px;
+	margin-left: 5px;
 	font-weight: 500;
 }
 
@@ -74,7 +75,9 @@
 .customHeader button {
 	padding: 10px;
 	font-size: 2rem;
+	background-color: transparent;
 }
+
 .customHeader button:not(:disabled) > svg {
 	color: var(--primary-color);
 }
