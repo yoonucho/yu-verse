@@ -190,6 +190,7 @@
 @media (max-width: 768px) {
 	.react-datepicker__view-calendar-icon input {
 		width: 100%;
+		font-size: 1.6rem;
 	}
 }
 

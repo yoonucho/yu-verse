@@ -71,7 +71,6 @@ body {
 	min-height: 100%;
 	font-size: 1.4rem;
 	font-weight: 600;
-	touch-action: pan-y;
 }
 
 dl,
