@@ -15,10 +15,11 @@ export default function MainCalendar({}) {
 
 	const [events, setEvents] = useState([]);
 	const [loading, setLoading] = useState(true);
-
-	const height = window.innerHeight - 40;
+	const [height, setHeight] = useState(0);
 
 	useEffect(() => {
+		setHeight(window.innerHeight - 40);
+
 		async function fetchEvents() {
 			const data = await getFetchHolidays();
 			setEvents(data);
