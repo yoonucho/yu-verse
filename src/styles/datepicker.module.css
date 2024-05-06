@@ -63,6 +63,7 @@
 }
 
 .customHeader select + span {
+	margin-left: 2px;
 	font-weight: 500;
 }
 
