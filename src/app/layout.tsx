@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 		description: "현재는 공휴일 검색만 가능합니다!",
 		siteName: "YU캘린더",
 		images: { url: "/assets/images/yu-open-graph.png" },
-		url: "https://events-scheduler.vercel.app",
+		url: "https://yu-calendar.vercel.app",
 		type: "website",
 	},
 };
