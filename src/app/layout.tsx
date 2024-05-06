@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Head from "next/head";
 import { Noto_Sans_KR } from "next/font/google";
 import "../styles/globals.css";
 import "../styles/custom.css";
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 		template: "YU캘린더 | %s",
 		default: "YU캘린더 검색 페이지",
 	},
-	description: "YU캘린더",
+	description: "현재는 공휴일 검색만 가능합니다!",
 	icons: {
 		icon: "/favicon.ico",
 	},
@@ -37,6 +38,12 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="ko">
+			{/* opengraph 설정 */}
+			<Head>
+				<meta property="og:image" content="/assets/images/yoonu-opengraph.png" />
+				<meta property="og:url" content="https://events-scheduler.vercel.app" />
+				<meta property="og:type" content="website" />
+			</Head>
 			<body className={notoSansKR.className}>{children}</body>
 		</html>
 	);
