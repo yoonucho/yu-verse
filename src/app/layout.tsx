@@ -21,10 +21,10 @@ const notoSansKR: FontDetails = Noto_Sans_KR({
 
 export const metadata: Metadata = {
 	title: {
-		template: "캘린더 | %s",
-		default: "캘린더 검색 페이지",
+		template: "YU캘린더 | %s",
+		default: "YU캘린더 검색 페이지",
 	},
-	description: "캘린더",
+	description: "YU캘린더",
 	icons: {
 		icon: "/favicon.ico",
 	},
