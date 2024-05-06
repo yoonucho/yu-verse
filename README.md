@@ -1,6 +1,6 @@
-# 사이드프로젝트 - 캘린더앱
+# 사이드프로젝트 - YU캘린더
 
-![preview](https://github.com/yoonucho/salon-scheduler/assets/2981954/7385cdf5-8b15-430e-a945-d3a49c6ad984)
+![preview](https://github.com/yoonucho/)
 
                                                   
 ## 개발 환경
@@ -17,7 +17,7 @@
  
 ### 1. 저장소 클론
 ~~~sh
-git clone https://github.com/yoonucho/salon-scheduler.git
+git clone https://github.com/yoonucho/yu-calendar.git
 ~~~
 
 ### 2. node.js 설치(>=18.18.0)
@@ -32,8 +32,8 @@ npm run dev
 ~~~
 
 ## 배포
-https://salon-scheduler.vercel.app
+https://yu-calendar.vercel.app/
 
 ## 요구사항 명세서
-https://github.com/yoonucho/salon-scheduler/issues/1
+https://github.com/yoonucho/yu-calendar/issues/1
 
