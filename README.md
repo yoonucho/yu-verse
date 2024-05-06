@@ -1,7 +1,6 @@
 # 사이드프로젝트 - YU캘린더
 
-![preview](https://gist.github.com/assets/2981954/1f8884f6-1453-48a8-b930-04514ba720a1)
-
+![preview](https://github.com/yoonucho/yu-calendar/assets/2981954/0d656087-024f-4bc2-8723-d537e376976f)
 
                                                   
 ## 개발 환경
