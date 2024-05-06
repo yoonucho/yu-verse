@@ -71,7 +71,7 @@ body {
 	min-height: 100%;
 	font-size: 1.4rem;
 	font-weight: 600;
-	/* background-color: #dcecf2; */
+	touch-action: pan-y;
 }
 
 dl,
@@ -143,9 +143,4 @@ input:focus {
 	border: 1px solid var(--accent-color);
 	outline: none;
 	outline-offset: 2px;
-}
-
-input,
-textarea {
-	touch-action: pan-y;
 }
