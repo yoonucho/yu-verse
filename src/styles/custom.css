@@ -4,12 +4,14 @@
 }
 
 .fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:first-child {
-	margin-left: 100px;
+	margin-left: 70px;
 }
+
 .fc-toolbar-title {
 	min-width: 150px;
 	font-size: 1.5rem;
 	color: var(--primary-font-color);
+	word-break: keep-all;
 }
 
 .fc .fc-button-primary {
@@ -205,6 +207,10 @@
 }
 
 @media (max-width: 568px) {
+	.calendar-container {
+		margin-top: 40px;
+	}
+
 	.fc .fc-toolbar.fc-header-toolbar {
 		position: relative;
 		/* flex-direction: row-reverse; */
@@ -215,9 +221,7 @@
 	.fc .fc-button-group > .fc-button {
 		padding: 5px 2px;
 	}
-}
 
-@media (max-width: 500px) {
 	.fc .fc-searchButton-button {
 		position: absolute;
 		top: -45px;
@@ -225,16 +229,18 @@
 		background-size: 30px 30px;
 	}
 
-	.calendar-container {
-		margin-top: 40px;
-	}
-
 	.fc .fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:first-child {
+		min-width: 97px;
 		margin-left: 0;
 	}
 
-	.fc .fc-button-group > .fc-button {
+	/* .fc .fc-button-group > .fc-button {
 		padding: 0.4em 0.65em;
+	} */
+
+	.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+		margin-left: 2px;
+		padding: 5px 2px;
 	}
 
 	.fc-toolbar-title {
@@ -243,8 +249,21 @@
 	}
 }
 
+@media (max-width: 500px) {
+}
+
 @media (max-width: 400px) {
+	.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+		padding: 5px 2px;
+	}
+
 	.fc .fc-button-group > .fc-button {
 		padding: 5px 2px;
+	}
+}
+
+@media (max-width: 360px) {
+	.fc-toolbar-title {
+		margin: 0 0 0 20px !important;
 	}
 }

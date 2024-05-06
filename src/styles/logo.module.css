@@ -20,12 +20,14 @@
 }
 
 @media (max-width: 500px) {
+	.icon {
+		margin-top: 0;
+	}
+}
+
+@media (max-width: 400px) {
 	.iconContainer {
 		top: 5px;
 		left: 10px;
-	}
-
-	.icon {
-		margin-top: 0;
 	}
 }
