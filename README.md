@@ -1,6 +1,7 @@
 # 사이드프로젝트 - YU캘린더
 
-![preview](https://github.com/yoonucho/)
+![preview](https://gist.github.com/assets/2981954/1f8884f6-1453-48a8-b930-04514ba720a1)
+
 
                                                   
 ## 개발 환경
@@ -34,6 +35,7 @@ npm run dev
 ## 배포
 https://yu-calendar.vercel.app/
 
+
 ## 요구사항 명세서
-https://github.com/yoonucho/yu-calendar/issues/1
+작성 중
 
