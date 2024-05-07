@@ -7,6 +7,7 @@
 
 * **Framewrok** : Node.js(>=18.18.0), Next.js 14
 * **Language** : TypeScript
+* **상세기술스택** : (https://stackshare.io/yoonucho/yu-calendar)
 
 
 ## 제공 API
