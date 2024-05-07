@@ -7,6 +7,7 @@
 
 * **Framewrok** : Node.js(>=18.18.0), Next.js 14
 * **Language** : TypeScript
+* **상세기술스택** : (https://stackshare.io/yoonucho/yu-calendar)
 
 
 ## 제공 API
@@ -30,6 +31,9 @@ https://nodejs.org/en/download
 npm install
 npm run dev
 ~~~
+
+## Trouble Shooting 
+[IOS 인풋창 클릭 시 날짜선택기 확대 이슈](https://www.notion.so/tomorrowcho/IOS-c3df81c14f334102b97f71e3d49468f9)
 
 ## 배포
 https://yu-calendar.vercel.app/
