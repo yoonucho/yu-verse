@@ -2,6 +2,7 @@
 
 ![preview](https://github.com/yoonucho/yu-calendar/assets/2981954/0d656087-024f-4bc2-8723-d537e376976f)
 
+* 현재는 공휴일 검색 기능만 구현되어 있습니다.
                                                   
 ## 개발 환경
 
