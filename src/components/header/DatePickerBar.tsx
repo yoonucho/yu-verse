@@ -15,7 +15,7 @@ interface DatePickerBarProps {
 }
 
 export default function DatePickerBar({ startDate, endDate, setStartDate, setEndDate, onSearch }: DatePickerBarProps) {
-	const years = Array.from({ length: 30 }, (_, i) => new Date().getFullYear() + i);
+	const years = Array.from({ length: 11 }, (_, i) => new Date().getFullYear() + i);
 	const isRangeSelected = startDate && endDate;
 	const isRangeAllSelected = isRangeSelected && startDate !== endDate;
 
