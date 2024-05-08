@@ -47,5 +47,5 @@ https://yu-calendar.vercel.app/
 
 
 ## 요구사항 명세서
-작성 중
+[요구사항 명세서](https://www.notion.so/tomorrowcho/66717788a1564a19b04da9130f988c4f)
 
