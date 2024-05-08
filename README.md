@@ -33,7 +33,14 @@ npm run dev
 ~~~
 
 ## Trouble Shooting 
-[IOS 인풋창 클릭 시 날짜선택기 확대 이슈](https://www.notion.so/tomorrowcho/IOS-c3df81c14f334102b97f71e3d49468f9)
+
+* [검색 결과 페이지 오류 분석](https://www.notion.so/tomorrowcho/5776f3f177fc4f73b8f1fd93f4dbc00f)
+* [Zustand로 날짜 상태관리하기](https://www.notion.so/tomorrowcho/Zustand-2ad6bf64297e476fb7219112a915c9ba)
+* [Zustand로 메뉴 상태관리 & React FullCalendar Custom Button 생성하기](https://www.notion.so/tomorrowcho/Zustand-React-FullCalendar-Custom-Button-63cbf318620f434b8224b63645b0eb59)
+* [IOS 인풋창 클릭 시 날짜선택기 확대 이슈](https://www.notion.so/tomorrowcho/IOS-c3df81c14f334102b97f71e3d49468f9)
+* [window is not defined 오류 해결 과정](https://www.notion.so/tomorrowcho/window-is-not-defined-225266cad69a4a96bb6c49d5737fa0c1)
+* [React DatePicker에 커스텀 헤더 추가하여 년도 선택하기 기능 추가하기](https://www.notion.so/tomorrowcho/React-DatePicker-adb7b1a18bad4543889226b826651125)
+
 
 ## 배포
 https://yu-calendar.vercel.app/
