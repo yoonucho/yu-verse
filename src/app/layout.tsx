@@ -38,14 +38,16 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{
+interface RootLayoutProps {
 	children: React.ReactNode;
-}>) {
+}
+
+const RootLayout = ({ children }: RootLayoutProps): JSX.Element => {
 	return (
 		<html lang="ko">
 			<body className={notoSansKR.className}>{children}</body>
 		</html>
 	);
-}
+};
+
+export default RootLayout;

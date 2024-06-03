@@ -6,15 +6,33 @@ export const formatDate = (date: string) => {
 	return formatISO(new Date(date), { representation: "date" });
 };
 
-export default async function getFetchHolidays(year = getYear(new Date())) {
-	// await new Promise(resolve => setTimeout(resolve, 100000));
+type Holiday = {
+	date: string;
+	localName: string;
+};
+
+type HolidayDate = {
+	id: number;
+	title: string;
+	start: string;
+	resourceId: number;
+	dayOfWeek: string;
+};
+
+const getFetchHolidays = async (year: number = getYear(new Date())): Promise<HolidayDate[]> => {
 	const response = await fetch(`${API_URL}/${year}/KR`);
-	const data = await response.json();
-	return data.map((holiday: any, index: number) => ({
+	if (!response.ok) {
+		throw new Error("응답 실패");
+	}
+	// await new Promise(resolve => setTimeout(resolve, 100000));
+	const data: Holiday[] = await response.json();
+	return data.map((holiday, index) => ({
 		id: index,
 		title: holiday.localName,
 		start: formatDate(holiday.date),
 		resourceId: index + 1,
 		dayOfWeek: format(parseISO(holiday.date), "EEEE", { locale: ko }),
 	}));
-}
+};
+
+export default getFetchHolidays;

@@ -4,9 +4,9 @@ import styles from "../styles/not-found.module.css";
 import GoBack from "@/components/header/GoBack";
 import { useRouter } from "next/navigation";
 
-export default function NotFound() {
+const NotFound: React.FC = () => {
 	const router = useRouter();
-	const handleClick = () => {
+	const handleClick = (): void => {
 		router.back();
 	};
 	return (
@@ -16,4 +16,6 @@ export default function NotFound() {
 			<h1 className={styles.errorText}>요청하신 페이지가 존재하지 않습니다.</h1>
 		</main>
 	);
-}
+};
+
+export default NotFound;
