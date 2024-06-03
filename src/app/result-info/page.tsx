@@ -5,23 +5,17 @@ import GoBack from "@/components/header/GoBack";
 import useFetchHolidays from "@/hooks/useFetchHolidays";
 import HolidayTotalCount from "@/components/result-info/HolidayTotalCount";
 import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
-import useSetDateStore from "@/stores/useSetDateStore";
 import useMenuStore from "@/stores/useMenuStore";
-import { formatISO } from "date-fns";
 import styles from "@/styles/result-info.module.css";
 
-export default function ResultInfo(isMenuOpen) {
-	const router = useRouter();
-	const { startDate, endDate } = useSetDateStore();
-	const { closeMenu } = useMenuStore();
-	const { holidays, isLoading, error } = useFetchHolidays();
+// type ResultInfoProps = {
+// 	isMenuOpen: boolean;
+// };
 
-	const handleShowDetails = () => {
-		// 날짜를 ISO 문자열로 변환
-		const startFormatDate = startDate ? formatISO(startDate, { representation: "date" }) : "";
-		const endFormatDate = endDate ? formatISO(endDate, { representation: "date" }) : "";
-		router.push(`/result-info/show-details?startDate=${startFormatDate}&endDate=${endFormatDate}`);
-	};
+const ResultInfo: React.FC = () => {
+	const router = useRouter();
+	const { closeMenu, isMenuOpen } = useMenuStore();
+	const { holidays, isLoading, error } = useFetchHolidays();
 
 	const handleClick = () => {
 		router.back();
@@ -44,4 +38,6 @@ export default function ResultInfo(isMenuOpen) {
 			</div>
 		</>
 	);
-}
+};
+
+export default ResultInfo;

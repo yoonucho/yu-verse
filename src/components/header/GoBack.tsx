@@ -4,13 +4,14 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import SearchEventDay from "./SearchEventsDay";
 import styles from "@/styles/go-back.module.css";
 
-interface GoBackProps {
+type GoBackProps = {
 	isOpen: boolean;
 	onClick: () => void;
 	isClose?: boolean;
-}
+};
 
-export default function GoBack({ isOpen, onClick, isClose = false }: GoBackProps) {
+const GoBack = ({ isOpen, onClick, isClose = false }: GoBackProps) => {
+	console.log("GoBack isOpen:", isOpen);
 	return (
 		<div className={`${styles.container} ${isOpen ? styles.show : ""}`}>
 			<div className={styles.btnContainer}>
@@ -24,4 +25,6 @@ export default function GoBack({ isOpen, onClick, isClose = false }: GoBackProps
 			</div>
 		</div>
 	);
-}
+};
+
+export default GoBack;
