@@ -35,7 +35,7 @@ const DatePickerBar: React.FC<DatePickerBarProps> = ({ startDate, endDate, setSt
 	}
 
 	const handleReset = () => {
-		console.log("handleReset");
+		// console.log("handleReset");
 		setStartDate(null);
 		setEndDate(null);
 	};

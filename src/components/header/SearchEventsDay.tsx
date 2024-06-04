@@ -26,7 +26,7 @@ const SearchEventDay: React.FC<SearchEventDayProps> = ({ isClose }) => {
 		const endFormatDate = formatISO(endDate, { representation: "date" });
 		if (startFormatDate && endFormatDate) {
 			router.push(`/result-info?startDate=${startFormatDate}&endDate=${endFormatDate}`);
-			console.log("startDate:", startFormatDate, "endDate:", endFormatDate, typeof startFormatDate, typeof endFormatDate);
+			// console.log("startDate:", startFormatDate, "endDate:", endFormatDate, typeof startFormatDate, typeof endFormatDate);
 		} else {
 			alert("날짜를 선택하세요!");
 		}

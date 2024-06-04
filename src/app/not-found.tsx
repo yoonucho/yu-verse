@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
-import styles from "../styles/not-found.module.css";
 import GoBack from "@/components/header/GoBack";
 import { useRouter } from "next/navigation";
+import styles from "../styles/not-found.module.css";
 
 const NotFound: React.FC = () => {
 	const router = useRouter();

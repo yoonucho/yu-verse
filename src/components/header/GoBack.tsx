@@ -11,7 +11,7 @@ type GoBackProps = {
 };
 
 const GoBack: React.FC<GoBackProps> = ({ isOpen, onClick, isClose = false }) => {
-	console.log("isOpen:", isOpen, "isClose:", isClose);
+	// console.log("isOpen:", isOpen, "isClose:", isClose);
 	return (
 		<div className={`${styles.container} ${isOpen ? styles.show : ""}`}>
 			<div className={styles.btnContainer}>
