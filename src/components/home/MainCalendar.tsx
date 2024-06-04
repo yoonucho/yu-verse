@@ -10,8 +10,8 @@ import styles from "@/styles/main-calendar.module.css";
 import getFetchHolidays from "@/app/api/holidayAPI";
 import Loading from "@/components/icons/LoadingIcon";
 
-export default function MainCalendar({}) {
-	const toggleMenu = useMenuStore(state => state.toggleMenu);
+const MainCalendar: React.FC = () => {
+	const { openMenu } = useMenuStore();
 
 	const [events, setEvents] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -49,7 +49,7 @@ export default function MainCalendar({}) {
 						customButtons={{
 							searchButton: {
 								text: "",
-								click: toggleMenu,
+								click: openMenu,
 							},
 						}}
 						buttonText={{
@@ -71,4 +71,6 @@ export default function MainCalendar({}) {
 			</div>
 		</>
 	);
-}
+};
+
+export default MainCalendar;

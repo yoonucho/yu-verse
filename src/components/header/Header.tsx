@@ -1,9 +1,13 @@
+import useMenuStore from "@/stores/useMenuStore";
 import GoBack from "./GoBack";
 
-export default function Header({ isMenuOpen, toggleMenu }) {
+const Header: React.FC = () => {
+	const { isMenuOpen, closeMenu } = useMenuStore();
 	return (
 		<div>
-			<GoBack onClick={toggleMenu} isOpen={isMenuOpen} />
+			<GoBack isOpen={isMenuOpen} onClick={closeMenu} />
 		</div>
 	);
-}
+};
+
+export default Header;

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface DateState {
+type DateState = {
 	startDate: Date | null;
 	endDate: Date | null;
 	setStartDate: (date: Date) => void;

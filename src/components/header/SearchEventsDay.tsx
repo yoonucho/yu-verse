@@ -1,13 +1,15 @@
 "use client";
-import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { formatISO } from "date-fns";
 import DatePickerBar from "@/components/header/DatePickerBar";
 import useSetDateStore from "@/stores/useSetDateStore";
 
-export default function SearchEventDay({ isClose }) {
-	const { startDate, endDate, setStartDate, setEndDate } = useSetDateStore();
+type SearchEventDayProps = {
+	isClose?: boolean;
+};
 
+const SearchEventDay: React.FC<SearchEventDayProps> = ({ isClose }) => {
+	const { startDate, endDate, setStartDate, setEndDate } = useSetDateStore();
 	const router = useRouter();
 
 	if (isClose) {
@@ -31,4 +33,6 @@ export default function SearchEventDay({ isClose }) {
 	};
 
 	return <DatePickerBar startDate={startDate} endDate={endDate} setStartDate={setStartDate} setEndDate={setEndDate} onSearch={handleDaySearch} />;
-}
+};
+
+export default SearchEventDay;

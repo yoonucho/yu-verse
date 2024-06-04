@@ -11,7 +11,7 @@ type Holiday = {
 	localName: string;
 };
 
-type HolidayDate = {
+type HoliDayDates = Holiday & {
 	id: number;
 	title: string;
 	start: string;
@@ -19,7 +19,7 @@ type HolidayDate = {
 	dayOfWeek: string;
 };
 
-const getFetchHolidays = async (year: number = getYear(new Date())): Promise<HolidayDate[]> => {
+const getFetchHolidays = async (year: number = getYear(new Date())): Promise<HoliDayDates[]> => {
 	const response = await fetch(`${API_URL}/${year}/KR`);
 	if (!response.ok) {
 		throw new Error("응답 실패");
@@ -27,6 +27,7 @@ const getFetchHolidays = async (year: number = getYear(new Date())): Promise<Hol
 	// await new Promise(resolve => setTimeout(resolve, 100000));
 	const data: Holiday[] = await response.json();
 	return data.map((holiday, index) => ({
+		...holiday,
 		id: index,
 		title: holiday.localName,
 		start: formatDate(holiday.date),

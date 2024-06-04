@@ -6,15 +6,15 @@ import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "@/styles/datepicker.module.css";
 
-interface DatePickerBarProps {
+type DatePickerBarProps = {
 	startDate: Date | null;
 	endDate: Date | null;
 	setStartDate: (date: Date) => void;
 	setEndDate: (date: Date) => void;
 	onSearch: () => void;
-}
+};
 
-export default function DatePickerBar({ startDate, endDate, setStartDate, setEndDate, onSearch }: DatePickerBarProps) {
+const DatePickerBar: React.FC<DatePickerBarProps> = ({ startDate, endDate, setStartDate, setEndDate, onSearch }) => {
 	const years = Array.from({ length: 11 }, (_, i) => new Date().getFullYear() + i);
 	const isRangeSelected = startDate && endDate;
 	const isRangeAllSelected = isRangeSelected && startDate !== endDate;
@@ -140,4 +140,6 @@ export default function DatePickerBar({ startDate, endDate, setStartDate, setEnd
 			</div>
 		</div>
 	);
-}
+};
+
+export default DatePickerBar;

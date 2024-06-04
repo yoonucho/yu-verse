@@ -41,6 +41,12 @@
 	padding: 10px 20px;
 }
 
+.btnInner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .goBackBtn {
 	font-family: var(--primary-font);
 	background-color: transparent;
@@ -59,6 +65,7 @@
 @media (max-width: 640px) {
 	.btnContainer {
 		flex-direction: column;
+		padding-top: 0;
 	}
 
 	.btnInner {

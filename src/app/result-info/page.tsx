@@ -8,10 +8,6 @@ import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
 import useMenuStore from "@/stores/useMenuStore";
 import styles from "@/styles/result-info.module.css";
 
-// type ResultInfoProps = {
-// 	isMenuOpen: boolean;
-// };
-
 const ResultInfo: React.FC = () => {
 	const router = useRouter();
 	const { closeMenu, isMenuOpen } = useMenuStore();

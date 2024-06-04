@@ -5,13 +5,13 @@ import SearchEventDay from "./SearchEventsDay";
 import styles from "@/styles/go-back.module.css";
 
 type GoBackProps = {
-	isOpen: boolean;
+	isOpen?: boolean;
 	onClick: () => void;
 	isClose?: boolean;
 };
 
-const GoBack = ({ isOpen, onClick, isClose = false }: GoBackProps) => {
-	console.log("GoBack isOpen:", isOpen);
+const GoBack: React.FC<GoBackProps> = ({ isOpen, onClick, isClose = false }) => {
+	console.log("isOpen:", isOpen, "isClose:", isClose);
 	return (
 		<div className={`${styles.container} ${isOpen ? styles.show : ""}`}>
 			<div className={styles.btnContainer}>
@@ -21,7 +21,7 @@ const GoBack = ({ isOpen, onClick, isClose = false }: GoBackProps) => {
 					</button>
 					&nbsp; <span>이전으로</span>
 				</div>
-				<SearchEventDay isClose={isClose} />
+				{!isClose && <SearchEventDay />}
 			</div>
 		</div>
 	);

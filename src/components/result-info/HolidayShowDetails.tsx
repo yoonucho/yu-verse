@@ -1,6 +1,10 @@
 import styles from "@/styles/show-detail.module.css";
 
-export default function HolidayShowDetails({ holidays }) {
+type HolidayShowDetailsProps = {
+	holidays: { title?: string; start?: string; dayOfWeek?: string }[];
+};
+
+const HolidayShowDetails: React.FC<HolidayShowDetailsProps> = ({ holidays }) => {
 	return (
 		<div className={styles.container}>
 			{holidays.map((holiday: any, index: number) => (
@@ -22,4 +26,6 @@ export default function HolidayShowDetails({ holidays }) {
 			))}
 		</div>
 	);
-}
+};
+
+export default HolidayShowDetails;

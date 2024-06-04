@@ -3,18 +3,18 @@ import { getYear, parseISO, isWithinInterval } from "date-fns";
 import getFetchHolidays from "@/app/api/holidayAPI";
 import useSetDateStore from "@/stores/useSetDateStore";
 
+type Holiday = {
+	id?: number;
+	title?: string;
+	start?: string;
+	dayOfWeek?: string;
+};
+
 const useFetchHolidays = () => {
 	const { startDate, endDate } = useSetDateStore();
-	const [holidays, setHolidays] = useState([]);
+	const [holidays, setHolidays] = useState<Holiday[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
-
-	interface Holiday {
-		id?: number;
-		title?: string;
-		start?: string;
-		dayOfWeek?: string;
-	}
 
 	useEffect(() => {
 		const fetchHolidays = async () => {
@@ -28,15 +28,15 @@ const useFetchHolidays = () => {
 					setIsLoading(false);
 					return;
 				}
-				let promises = [];
+				const promises: Promise<Holiday[]>[] = [];
 
 				for (let year = fromYear; year <= toYear; year++) {
 					promises.push(getFetchHolidays(year));
 				}
 
-				let results = await Promise.all(promises);
+				const results = await Promise.all(promises);
 				// console.log("API Results:", results); // API 응답 로그
-				let allHolidays = [].concat(...results);
+				const allHolidays = [].concat(...results);
 
 				const filteredHolidays = allHolidays.filter(holiday => isWithinInterval(parseISO(holiday.start), { start: parseISO(startDate.toISOString()), end: parseISO(endDate.toISOString()) }));
 

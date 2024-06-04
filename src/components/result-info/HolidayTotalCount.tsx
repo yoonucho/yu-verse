@@ -1,6 +1,10 @@
 import styles from "@/styles/total-count.module.css";
 
-export default function HolidayTotalCount({ count }) {
+type HolidayTotalCountProps = {
+	count: number;
+};
+
+const HolidayTotalCount: React.FC<HolidayTotalCountProps> = ({ count }) => {
 	return (
 		<div className={styles.container}>
 			<p className={styles.text}>
@@ -10,4 +14,6 @@ export default function HolidayTotalCount({ count }) {
 			</p>
 		</div>
 	);
-}
+};
+
+export default HolidayTotalCount;

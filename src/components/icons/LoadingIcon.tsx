@@ -3,7 +3,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import styles from "@/styles/loading.module.css";
 
-export default function Loading() {
+const Loading: React.FC = () =>  {
 	return (
 		<div className={styles.container}>
 			<div className="fa-3x">
@@ -13,3 +13,5 @@ export default function Loading() {
 		</div>
 	);
 }
+
+export default Loading;
