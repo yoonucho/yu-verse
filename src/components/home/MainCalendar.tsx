@@ -1,21 +1,49 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import useMenuStore from "@/stores/useMenuStore";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { ko } from "date-fns/locale";
-import styles from "./main-calendar.module.css";
 import getFetchHolidays from "@/app/api/holidayAPI";
+import useMenuStore from "@/stores/useMenuStore";
+import usePopupStore from "@/stores/usePopupStore";
 import Loading from "@/components/icons/LoadingIcon";
+import EventPopup from "@/components/popup/EventPopup";
+import styles from "./main-calendar.module.css";
 
 const MainCalendar: React.FC = () => {
 	const { openMenu } = useMenuStore();
+	const { isPopupOpen, openPopup, closePopup } = usePopupStore();
 
 	const [events, setEvents] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [height, setHeight] = useState(0);
+	const [selectedEvent, setSelectedEvent] = useState(null); // 이벤트 클릭시 선택된 이벤트
+	const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+
+	const eventClick = info => {
+		// alert("Event: " + info.event.title);
+		console.log(info.event, typeof info.event);
+		setSelectedEvent(info.event);
+
+		// 클릭한 이벤트의 DOM 요소 위치 가져오기
+		const rect = info.el.getBoundingClientRect();
+		setPopupPosition({ x: rect.left, y: rect.top + window.scrollY });
+		openPopup();
+	};
+
+	const handleClosePopup = () => {
+		closePopup();
+		setSelectedEvent(null);
+	};
+
+	// 팝업창의 외부를 클릭하면 팝업창 닫기
+	const handleClickOutside = (event: MouseEvent) => {
+		if (isPopupOpen && !(event.target as HTMLElement).closest(`.event-popup_popup`) && !(event.target as HTMLElement).closest(`.fc-event`)) {
+			handleClosePopup();
+		}
+	};
 
 	useEffect(() => {
 		setHeight(window.innerHeight - 40);
@@ -27,6 +55,13 @@ const MainCalendar: React.FC = () => {
 		}
 		fetchEvents();
 	}, []);
+
+	useEffect(() => {
+		document.addEventListener("click", handleClickOutside);
+		return () => {
+			document.removeEventListener("click", handleClickOutside);
+		};
+	});
 
 	if (loading) {
 		return (
@@ -65,9 +100,11 @@ const MainCalendar: React.FC = () => {
 						selectable={true}
 						selectMirror={true}
 						events={events}
+						eventClick={eventClick}
 						height={height}
 					/>
 				</div>
+				{isPopupOpen && selectedEvent && <EventPopup event={selectedEvent} closePopup={handleClosePopup} position={popupPosition} />}
 			</div>
 		</>
 	);
