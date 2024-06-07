@@ -6,7 +6,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import { ko } from "date-fns/locale";
-import styles from "@/styles/main-calendar.module.css";
+import styles from "./main-calendar.module.css";
 import getFetchHolidays from "@/app/api/holidayAPI";
 import Loading from "@/components/icons/LoadingIcon";
 

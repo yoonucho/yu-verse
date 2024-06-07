@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-regular-svg-icons";
-import styles from "@/styles/logo.module.css";
+import styles from "./logo.module.css";
 
 const Logo: React.FC = () => {
 	return (

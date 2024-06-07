@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import SearchEventDay from "./SearchEventsDay";
-import styles from "@/styles/go-back.module.css";
+import styles from "./go-back.module.css";
 
 type GoBackProps = {
 	isOpen?: boolean;

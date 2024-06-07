@@ -1,4 +1,4 @@
-import styles from "@/styles/total-count.module.css";
+import styles from "./total-count.module.css";
 
 type HolidayTotalCountProps = {
 	count: number;

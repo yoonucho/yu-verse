@@ -6,7 +6,7 @@ import useFetchHolidays from "@/hooks/useFetchHolidays";
 import HolidayTotalCount from "@/components/result-info/HolidayTotalCount";
 import HolidayShowDetails from "@/components/result-info/HolidayShowDetails";
 import useMenuStore from "@/stores/useMenuStore";
-import styles from "@/styles/result-info.module.css";
+import styles from "./page.module.css";
 
 const ResultInfo: React.FC = () => {
 	const router = useRouter();

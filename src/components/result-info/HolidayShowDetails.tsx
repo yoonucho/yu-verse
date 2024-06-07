@@ -1,4 +1,4 @@
-import styles from "@/styles/show-detail.module.css";
+import styles from "./show-detail.module.css";
 
 type HolidayShowDetailsProps = {
 	holidays: { title?: string; start?: string; dayOfWeek?: string }[];
