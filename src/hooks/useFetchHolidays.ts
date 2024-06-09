@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getYear, parseISO, isWithinInterval } from "date-fns";
 import getFetchHolidays from "@/app/api/holidayAPI";
 import useSetDateStore from "@/stores/useSetDateStore";
+import useLoadingStore from "@/stores/useLoadingStore";
 
 type Holiday = {
 	id?: number;
@@ -13,7 +14,7 @@ type Holiday = {
 const useFetchHolidays = () => {
 	const { startDate, endDate } = useSetDateStore();
 	const [holidays, setHolidays] = useState<Holiday[]>([]);
-	const [isLoading, setIsLoading] = useState(false);
+	const { setIsLoading } = useLoadingStore();
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
@@ -53,9 +54,9 @@ const useFetchHolidays = () => {
 		if (startDate && endDate) {
 			fetchHolidays();
 		}
-	}, [startDate, endDate]); // 변경될 때마다 useEffect 내부의 fetchHolidays 함수 실행
+	}, [startDate, endDate, setIsLoading]); // 변경될 때마다 useEffect 내부의 fetchHolidays 함수 실행
 
-	return { holidays, isLoading, error };
+	return { holidays , error };
 };
 
 export default useFetchHolidays;

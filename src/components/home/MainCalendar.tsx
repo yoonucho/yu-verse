@@ -8,24 +8,37 @@ import { ko } from "date-fns/locale";
 import getFetchHolidays from "@/app/api/holidayAPI";
 import useMenuStore from "@/stores/useMenuStore";
 import usePopupStore from "@/stores/usePopupStore";
+import useLoadingStore from "@/stores/useLoadingStore";
 import Loading from "@/components/icons/LoadingIcon";
 import EventPopup from "@/components/popup/EventPopup";
 import styles from "./main-calendar.module.css";
 
 const MainCalendar: React.FC = () => {
 	const { openMenu } = useMenuStore();
-	const { isPopupOpen, openPopup, closePopup } = usePopupStore();
+	const { isPopupOpen, openPopup, closePopup, popupPosition, setPopupPosition } = usePopupStore();
+	const { isLoading, setIsLoading } = useLoadingStore();
 
 	const [events, setEvents] = useState([]);
-	const [loading, setLoading] = useState(true);
 	const [height, setHeight] = useState(0);
 	const [selectedEvent, setSelectedEvent] = useState(null); // 이벤트 클릭시 선택된 이벤트
-	const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
 
-	const eventClick = info => {
-		// alert("Event: " + info.event.title);
-		console.log(info.event, typeof info.event);
+	type EventClickArg = {
+		event: {
+			title?: string;
+			startStr?: string;
+			endStr?: string;
+			extendedProps?: {
+				dayOfWeek?: string;
+			};
+		};
+		el: HTMLElement;
+		jsEvent: MouseEvent;
+		view: any;
+	};
+
+	const eventClick = (info: EventClickArg) => {
 		setSelectedEvent(info.event);
+		// console.log("e", info.event);
 
 		// 클릭한 이벤트의 DOM 요소 위치 가져오기
 		const rect = info.el.getBoundingClientRect();
@@ -51,10 +64,10 @@ const MainCalendar: React.FC = () => {
 		async function fetchEvents() {
 			const data = await getFetchHolidays();
 			setEvents(data);
-			setLoading(false);
+			setIsLoading(false);
 		}
 		fetchEvents();
-	}, []);
+	}, [setIsLoading]);
 
 	useEffect(() => {
 		document.addEventListener("click", handleClickOutside);
@@ -63,7 +76,7 @@ const MainCalendar: React.FC = () => {
 		};
 	});
 
-	if (loading) {
+	if (isLoading) {
 		return (
 			<div>
 				<Loading />
