@@ -14,10 +14,10 @@ type CalendarComponentProps = {
 	events: any[];
 	eventClick: (info: any) => void;
 	handleYearChange: (year: number) => void;
-	loadedYears: Set<number>;
+	
 };
 
-const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClick, handleYearChange, loadedYears }) => {
+const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClick, handleYearChange }) => {
 	const { openMenu } = useMenuStore();
 	const [height, setHeight] = useState(0);
 
@@ -42,7 +42,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClic
 			for (let year = startYear; year <= endYear; year++) {
 				// console.log("start", startYear, "end", endYear, year);
 				visibleYear.add(year);
-				console.log("visibleYear", visibleYear);
+				// console.log("visibleYear", visibleYear);
 			}
 		}
 

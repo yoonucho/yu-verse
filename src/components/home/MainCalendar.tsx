@@ -66,7 +66,7 @@ const MainCalendar: React.FC = () => {
 			currentYearRef.current = newYear;
 			fetchEvents(newYear);
 			// URL을 새로운 연도로 업데이트
-			router.replace(`?year=${newYear}`); 
+			router.replace(`?year=${newYear}`);
 			// console.log("newYear", newYear);
 		}
 	};
@@ -92,7 +92,7 @@ const MainCalendar: React.FC = () => {
 	}
 	return (
 		<>
-			<CalendarComponent events={events} eventClick={eventClick} handleYearChange={handleYearChange} loadedYears={loadedYears.current} />
+			<CalendarComponent events={events} eventClick={eventClick} handleYearChange={handleYearChange} />
 			<EventPopupControl selectedEvent={selectedEvent} handleClosePopup={handleClosePopup} />
 		</>
 	);
