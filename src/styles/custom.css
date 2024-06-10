@@ -71,6 +71,13 @@
 	color: var(--primary-color);
 }
 
+.fc-day-other .fc-event {
+	background-color: var(--primary-gray2);
+	border: 1px solid var(--primary-gray2);
+	cursor: default;
+	pointer-events: none;
+}
+
 /* datepicker custom */
 
 .react-datepicker {
