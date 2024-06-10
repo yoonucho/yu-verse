@@ -18,6 +18,7 @@ const MainCalendar: React.FC = () => {
 	const [events, setEvents] = useState([]);
 	const [selectedEvent, setSelectedEvent] = useState(null);
 	const loadedYears = useRef(new Set<number>());
+	const currentYearRef = useRef<number | null>(null);
 
 	type EventClickArg = {
 		event: {
@@ -40,16 +41,17 @@ const MainCalendar: React.FC = () => {
 		openPopup();
 	};
 
-	// 팝업 닫기
+	// 팝업 닫기 및 선택된 이벤트 초기화
 	const handleClosePopup = () => {
 		closePopup();
 		setSelectedEvent(null);
 	};
 
+	// 연도별 이벤트 데이터 가져오기
 	const fetchEvents = useCallback(
 		async (year: number) => {
 			const data = await getFetchHolidays(year);
-			console.log(`Fetched events for year ${year}:`, data); // 로그 추가
+			// console.log(`Fetched events for year ${year}:`, data); // 로그 추가
 			setEvents(prevEvents => [...prevEvents, ...data]);
 			setIsLoading(false);
 			loadedYears.current.add(year);
@@ -58,19 +60,26 @@ const MainCalendar: React.FC = () => {
 	);
 
 	const handleYearChange = (newYear: number) => {
-		// if (loadedYears.current.has(newYear)) return;
-		router.push(`?year=${newYear}`, undefined);
-		fetchEvents(newYear);
-		console.log("newYear", newYear);
+		// 현재 연도와 새로운 연도가 다를 때만 실행
+		if (currentYearRef.current !== newYear) {
+			// 현재 연도를 새로운 연도로 업데이트
+			currentYearRef.current = newYear;
+			fetchEvents(newYear);
+			// URL을 새로운 연도로 업데이트
+			router.replace(`?year=${newYear}`); 
+			// console.log("newYear", newYear);
+		}
 	};
 
 	useEffect(() => {
-		// setIsLoading(true);
+		// URL에서 year 파라미터를 가져옴
 		const yearParam = searchParams.get("year");
+		// 현재 연도 가져오기
 		const currentYear = new Date().getFullYear();
-		// URL에서 연도 가져오기
+		//  URL에서 가져온 연도가 있으면 그 값을 사용하고, 없으면 현재 연도를 사용
 		const year = yearParam ? parseInt(yearParam, 10) : currentYear;
-		console.log("year", year);
+		// console.log("year", year);
+		// 해당 연도의 이벤트 데이터를 가져오는 함수 호출
 		fetchEvents(year);
 	}, [searchParams, fetchEvents]);
 
@@ -83,7 +92,7 @@ const MainCalendar: React.FC = () => {
 	}
 	return (
 		<>
-			<CalendarComponent events={events} eventClick={eventClick} handleYearChange={handleYearChange} />
+			<CalendarComponent events={events} eventClick={eventClick} handleYearChange={handleYearChange} loadedYears={loadedYears.current} />
 			<EventPopupControl selectedEvent={selectedEvent} handleClosePopup={handleClosePopup} />
 		</>
 	);

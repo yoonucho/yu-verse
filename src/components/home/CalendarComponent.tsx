@@ -14,9 +14,10 @@ type CalendarComponentProps = {
 	events: any[];
 	eventClick: (info: any) => void;
 	handleYearChange: (year: number) => void;
+	loadedYears: Set<number>;
 };
 
-const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClick, handleYearChange }) => {
+const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClick, handleYearChange, loadedYears }) => {
 	const { openMenu } = useMenuStore();
 	const [height, setHeight] = useState(0);
 
@@ -25,17 +26,19 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClic
 	}, []);
 
 	const handleDatesSet = (dateInfo: DatesSetArg) => {
-		console.log("dateInfo", dateInfo.view.title);
+		// console.log("dateInfo", dateInfo.view.title);
+		// 시작, 끝 연도 가져오기
 		const startYear = dateInfo.start.getFullYear();
 		const endYear = dateInfo.end.getFullYear();
-
+		// 보이는 연도 가져오기
 		const visibleYear = new Set<number>();
 		// console.log("visibleYear", typeof visibleYear);
-
+		// 12월이면 연도 - 1
 		if (dateInfo.view.title.includes("12월")) {
 			// console.log("12월");
 			visibleYear.add(endYear - 1);
 		} else {
+			//12월이 아닌 월은 연도 + 1
 			for (let year = startYear; year <= endYear; year++) {
 				// console.log("start", startYear, "end", endYear, year);
 				visibleYear.add(year);
