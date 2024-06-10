@@ -58,6 +58,7 @@ const MainCalendar: React.FC = () => {
 	);
 
 	const handleYearChange = (newYear: number) => {
+		// if (loadedYears.current.has(newYear)) return;
 		router.push(`?year=${newYear}`, undefined);
 		fetchEvents(newYear);
 		console.log("newYear", newYear);
@@ -65,8 +66,10 @@ const MainCalendar: React.FC = () => {
 
 	useEffect(() => {
 		// setIsLoading(true);
+		const yearParam = searchParams.get("year");
+		const currentYear = new Date().getFullYear();
 		// URL에서 연도 가져오기
-		const year = parseInt(searchParams.get("year") || "", 10) || new Date().getFullYear();
+		const year = yearParam ? parseInt(yearParam, 10) : currentYear;
 		console.log("year", year);
 		fetchEvents(year);
 	}, [searchParams, fetchEvents]);

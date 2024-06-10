@@ -25,14 +25,22 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClic
 	}, []);
 
 	const handleDatesSet = (dateInfo: DatesSetArg) => {
+		console.log("dateInfo", dateInfo.view.title);
 		const startYear = dateInfo.start.getFullYear();
 		const endYear = dateInfo.end.getFullYear();
 
 		const visibleYear = new Set<number>();
-		console.log("visibleYear", typeof visibleYear);
-		for (let year = startYear; year <= endYear; year++) {
-			visibleYear.add(year);
-			console.log("visibleYear", visibleYear);
+		// console.log("visibleYear", typeof visibleYear);
+
+		if (dateInfo.view.title.includes("12월")) {
+			// console.log("12월");
+			visibleYear.add(endYear - 1);
+		} else {
+			for (let year = startYear; year <= endYear; year++) {
+				// console.log("start", startYear, "end", endYear, year);
+				visibleYear.add(year);
+				console.log("visibleYear", visibleYear);
+			}
 		}
 
 		visibleYear.forEach(year => handleYearChange(year));
