@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import getFetchHolidays from "@/app/api/holidayAPI";
+import getFetchHolidays, { HoliDayDates } from "@/app/api/holidayAPI";
 import useLoadingStore from "@/stores/useLoadingStore";
 import usePopupStore from "@/stores/usePopupStore";
+import useEventStore, { EventType } from "@/stores/useEventStore";
 import CalendarComponent from "./CalendarComponent";
 import Loading from "@/components/icons/LoadingIcon";
 import EventPopupControl from "@/components/popup/EventPopupControl";
@@ -13,46 +14,43 @@ const MainCalendar: React.FC = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const { isLoading, setIsLoading } = useLoadingStore();
-	const { openPopup, closePopup, setPopupPosition } = usePopupStore();
+	const { openPopup, setPopupPosition } = usePopupStore();
+	const { events, setEvents, setSelectedEvent, setSelectedDate, setIsEditing } = useEventStore();
 
-	const [events, setEvents] = useState([]);
-	const [selectedEvent, setSelectedEvent] = useState(null);
 	const loadedYears = useRef(new Set<number>());
 	const currentYearRef = useRef<number | null>(null);
 
 	type EventClickArg = {
-		event: {
-			title?: string;
-			startStr?: string;
-			endStr?: string;
-			extendedProps?: {
-				dayOfWeek?: string;
-			};
-		};
+		event: EventType;
 		el: HTMLElement;
+	};
+
+	// 날짜 클릭시 팝업 x, y 좌표 설정
+	const handleDateDoubleClick = (dateInfo: any) => {
+		// alert("clicked on " + info.el);
+		setSelectedDate(dateInfo.dateStr);
+		setSelectedEvent(null);
+		setIsEditing(true);
+		const rect = dateInfo.dayEl.getBoundingClientRect();
+		setPopupPosition({ x: rect.left, y: rect.top + window.scrollY });
+		openPopup();
 	};
 
 	// 이벤트 클릭시 팝업 x, y 좌표 설정
 	const eventClick = (info: EventClickArg) => {
 		setSelectedEvent(info.event);
-
+		
 		const rect = info.el.getBoundingClientRect();
 		setPopupPosition({ x: rect.left, y: rect.top + window.scrollY });
 		openPopup();
 	};
 
-	// 팝업 닫기 및 선택된 이벤트 초기화
-	const handleClosePopup = () => {
-		closePopup();
-		setSelectedEvent(null);
-	};
-
 	// 연도별 이벤트 데이터 가져오기
 	const fetchEvents = useCallback(
 		async (year: number) => {
-			const data = await getFetchHolidays(year);
+			const data: HoliDayDates[] = await getFetchHolidays(year);
 			// console.log(`Fetched events for year ${year}:`, data); // 로그 추가
-			setEvents(prevEvents => [...prevEvents, ...data]);
+			setEvents(prevEvents => [...prevEvents, ...data]); // 새로운 배열을 직접 설정
 			setIsLoading(false);
 			loadedYears.current.add(year);
 		},
@@ -92,8 +90,8 @@ const MainCalendar: React.FC = () => {
 	}
 	return (
 		<>
-			<CalendarComponent events={events} eventClick={eventClick} handleYearChange={handleYearChange} />
-			<EventPopupControl selectedEvent={selectedEvent} handleClosePopup={handleClosePopup} />
+			<CalendarComponent events={events} eventClick={eventClick} handleYearChange={handleYearChange} handleDateDoubleClick={handleDateDoubleClick} />
+			<EventPopupControl />
 		</>
 	);
 };

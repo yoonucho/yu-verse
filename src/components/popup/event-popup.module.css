@@ -1,8 +1,8 @@
 .popup {
 	position: absolute;
 	z-index: 2;
-	width: 200px;
-	height: 150px;
+	width: 220px;
+	min-height: 150px;
 }
 
 .popupContent {
