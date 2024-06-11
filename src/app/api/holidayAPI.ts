@@ -11,7 +11,7 @@ type Holiday = {
 	localName: string;
 };
 
-type HoliDayDates = Holiday & {
+export type HoliDayDates = Holiday & {
 	id: number;
 	title: string;
 	start: string;
