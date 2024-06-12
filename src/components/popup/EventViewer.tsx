@@ -1,16 +1,21 @@
 import { EventType } from "@/stores/useEventStore";
+import { HoliDayDates } from "@/app/api/holidayAPI";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import EventActions from "./EventActions";
 import styles from "./event-viewer.module.css";
 
 type EventViewerProps = {
-	event: any | null;
-	onEdit: (event: EventType) => void;
+	event: EventType | any;
+	onEdit: () => void;
 	onDelete: (eventId: string) => void;
 };
 
 const EventViewer: React.FC<EventViewerProps> = ({ event, onEdit, onDelete }) => {
+	const isHoliday = (event: any): event is HoliDayDates => {
+		// 공휴일인지 확인 하는 함수
+		return event.extendedProps?.types?.[0] === "Public";
+	};
 	return (
 		<div className={styles.viewer}>
 			<h2 className={styles.title}>{event.title}</h2>
@@ -36,7 +41,7 @@ const EventViewer: React.FC<EventViewerProps> = ({ event, onEdit, onDelete }) =>
 					</>
 				)}
 			</p>
-			<EventActions isEditing={false} onSave={() => {}} onDelete={() => onDelete(event.id || "")} onEdit={onEdit} />
+			{!isHoliday(event) && <EventActions isEditing={false} onSave={() => {}} onDelete={() => onDelete(event.id || "")} onEdit={onEdit} />}
 		</div>
 	);
 };
