@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { EventType } from "@/stores/useEventStore";
-import { EventApi } from '@fullcalendar/core';
-import { HoliDayDates } from '@/app/api/holidayAPI';
+import { EventApi } from "@fullcalendar/core";
+import { HoliDayDates } from "@/app/api/holidayAPI";
 import styles from "./event-form.module.css";
 import EventActions from "./EventActions";
 
@@ -37,28 +37,32 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSave, onDelete }) => {
 	}, [event]);
 
 	const handleSubmit = () => {
-		const updatedEvent = {
-			...event,
+		if (!title || !start) {
+			alert("제목과 시작일은 필수 입력사항입니다.");
+			return;
+		}
+		const updatedEvent: Partial<EventApi> = {
+			id: event?.id || uuidv4(),
 			title,
-			id: uuidv4(),
-			start,
-			end,
-			extendedProps: { ...event?.extendedProps, description },
+			start: new Date(start),
+			end: end ? new Date(end) : null,
+			extendedProps: { description: description || "" },
 		};
-		onSave(updatedEvent);
+
+		onSave(JSON.parse(JSON.stringify(updatedEvent))); // 순환 참조를 제거
 	};
 
 	return (
 		<div className={styles.form}>
 			{/* <h2>{event ? "수정하기" : "추가하기"}</h2> */}
 			<label>
-				<input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="일정 추가하기" />
+				<input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="일정 추가하기" required />
 			</label>
 			<label>
 				{/* <span>
 					<FontAwesomeIcon icon={faClock} style={{ color: "var(--primary-color)" }} />
 				</span> */}
-				<input type="datetime-local" value={start} onChange={e => setStart(e.target.value)} placeholder="시작일" />
+				<input type="datetime-local" value={start} onChange={e => setStart(e.target.value)} placeholder="시작일" required />
 			</label>
 			<label>
 				{/* <span>

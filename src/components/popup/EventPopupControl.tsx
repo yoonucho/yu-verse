@@ -18,9 +18,9 @@ const EventPopupControl: React.FC = () => {
 
 	// 이벤트 추가 및 수정
 	const handleSave = (event: EventApi) => {
-		if (selectedEvent) {
+		if (selectedEvent && "id" in selectedEvent) {
 			const updatedEvent = { ...event, id: selectedEvent.id };
-			updateEvent(updatedEvent as EventApi);
+			updateEvent(updatedEvent);
 		} else {
 			const newEvent: EventApi = { ...event, id: uuidv4() };
 			addEvent(newEvent);

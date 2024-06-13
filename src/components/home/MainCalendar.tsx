@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { EventApi } from "@fullcalendar/core";
+import { EventApi, CalendarApi } from "@fullcalendar/core";
 import getFetchHolidays, { HoliDayDates } from "@/app/api/holidayAPI";
 import useLoadingStore from "@/stores/useLoadingStore";
 import usePopupStore from "@/stores/usePopupStore";
@@ -14,9 +14,10 @@ import EventPopupControl from "@/components/popup/EventPopupControl";
 const MainCalendar: React.FC = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
+	const [holidayEvents, setHolidayEvents] = useState<HoliDayDates[]>([]);
 	const { isLoading, setIsLoading } = useLoadingStore();
 	const { openPopup, setPopupPosition } = usePopupStore();
-	const { events, setEvents, setSelectedEvent, setSelectedDate, setIsEditing } = useEventStore();
+	const { events, fetchEvents, setSelectedEvent, setSelectedDate, setIsEditing } = useEventStore();
 
 	const loadedYears = useRef(new Set<number>());
 	const currentYearRef = useRef<number | null>(null);
@@ -24,6 +25,7 @@ const MainCalendar: React.FC = () => {
 	type EventClickArg = {
 		event: EventType;
 		el: HTMLElement;
+		view: any;
 	};
 
 	// 날짜 클릭시 팝업 x, y 좌표 설정
@@ -33,30 +35,59 @@ const MainCalendar: React.FC = () => {
 		setSelectedEvent(null);
 		setIsEditing(true);
 		const rect = dateInfo.dayEl.getBoundingClientRect();
-		setPopupPosition({ x: rect.left, y: rect.top + window.scrollY });
+		const calendarEl = dateInfo.view.calendar.el;
+		const calendarElRect = calendarEl.getBoundingClientRect();
+		const calendarWidth = calendarElRect.width;
+
+		let popupX = rect.left;
+		let popupY = rect.top + window.scrollY;
+		// 팝업이 화면 밖으로 나가지 않도록 조정
+		if (calendarWidth - rect.left < 300) {
+			// console.log("넘어간드앙!");
+			popupX = rect.left - 300;
+		}
+		setPopupPosition({ x: popupX, y: popupY });
 		openPopup();
 	};
 
 	// 이벤트 클릭시 팝업 x, y 좌표 설정
 	const eventClick = (info: EventClickArg) => {
 		setSelectedEvent(info.event);
-		// console.log("info", info, info.event);
-
+		console.log("info", info.event);
 		const rect = info.el.getBoundingClientRect();
-		setPopupPosition({ x: rect.left, y: rect.top + window.scrollY });
+		const calendarEl = info.view.calendar.el;
+		const calendarElRect = calendarEl.getBoundingClientRect();
+		const calendarWidth = calendarElRect.width;
+
+		let popupX = rect.left;
+		let popupY = rect.top + window.scrollY;
+		// 팝업이 화면 밖으로 나가지 않도록 조정
+		if (calendarWidth - rect.left < 300) {
+			// console.log("넘어간드앙!");
+			popupX = rect.left - 300;
+		}
+		setPopupPosition({ x: popupX, y: popupY });
 		openPopup();
 	};
 
 	// 연도별 이벤트 데이터 가져오기
-	const fetchEvents = useCallback(
+	const fetchHolidayEvents = useCallback(
 		async (year: number) => {
+			if (loadedYears.current.has(year)) {
+				return;
+			}
 			const data: HoliDayDates[] = await getFetchHolidays(year);
 			// console.log(`Fetched events for year ${year}:`, data); // 로그 추가
-			setEvents(prevEvents => [...prevEvents, ...data]); // 새로운 배열을 직접 설정
-			setIsLoading(false);
+			// setHolidayEvents(prevEvents => [...prevEvents, ...data]); // 새로운 배열을 직접 설정
+			setHolidayEvents(prevEvents => {
+				const existingEventIds = new Set(prevEvents.map(event => event.id));
+				const newEvents = data.filter(event => !existingEventIds.has(event.id));
+				return [...prevEvents, ...newEvents];
+			});
+
 			loadedYears.current.add(year);
 		},
-		[setEvents, setIsLoading]
+		[setHolidayEvents]
 	);
 
 	const handleYearChange = (newYear: number) => {
@@ -64,7 +95,7 @@ const MainCalendar: React.FC = () => {
 		if (currentYearRef.current !== newYear) {
 			// 현재 연도를 새로운 연도로 업데이트
 			currentYearRef.current = newYear;
-			fetchEvents(newYear);
+			fetchHolidayEvents(newYear);
 			// URL을 새로운 연도로 업데이트
 			router.replace(`?year=${newYear}`);
 			// console.log("newYear", newYear);
@@ -72,16 +103,21 @@ const MainCalendar: React.FC = () => {
 	};
 
 	useEffect(() => {
+		// setIsLoading(true);
 		// URL에서 year 파라미터를 가져옴
 		const yearParam = searchParams.get("year");
 		// 현재 연도 가져오기
 		const currentYear = new Date().getFullYear();
 		//  URL에서 가져온 연도가 있으면 그 값을 사용하고, 없으면 현재 연도를 사용
 		const year = yearParam ? parseInt(yearParam, 10) : currentYear;
-		// console.log("year", year);
+		console.log("year", year);
 		// 해당 연도의 이벤트 데이터를 가져오는 함수 호출
-		fetchEvents(year);
-	}, [searchParams, fetchEvents]);
+		fetchHolidayEvents(year);
+		// 처음 로드될 때만 사용자 이벤트 페치
+		if (!events.length) {
+			fetchEvents(setIsLoading);
+		}
+	}, [searchParams, fetchHolidayEvents, fetchEvents, events.length, setIsLoading]);
 
 	if (isLoading) {
 		return (
@@ -90,9 +126,12 @@ const MainCalendar: React.FC = () => {
 			</div>
 		);
 	}
+
+	const combinedEvents = [...events, ...holidayEvents];
+	console.log("combinedEvents", combinedEvents, events);
 	return (
 		<>
-			<CalendarComponent events={events} eventClick={eventClick} handleYearChange={handleYearChange} handleDateDoubleClick={handleDateDoubleClick} />
+			<CalendarComponent events={combinedEvents} eventClick={eventClick} handleYearChange={handleYearChange} handleDateDoubleClick={handleDateDoubleClick} />
 			<EventPopupControl />
 		</>
 	);
