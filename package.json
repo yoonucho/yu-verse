@@ -23,6 +23,7 @@
 		"@fullcalendar/interaction": "^6.1.14",
 		"@fullcalendar/react": "^6.1.14",
 		"@fullcalendar/timegrid": "^6.1.14",
+		"@supabase/supabase-js": "^2.43.4",
 		"date-fns": "^3.6.0",
 		"next": "^14.3.0-canary.43",
 		"react": "^18.3.1",
