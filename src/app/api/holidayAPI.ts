@@ -28,10 +28,10 @@ const getFetchHolidays = async (year: number = getYear(new Date())): Promise<Hol
 	const data: Holiday[] = await response.json();
 	return data.map((holiday, index) => ({
 		...holiday,
-		id: index.toString(),
+		id: `${holiday.date}-${index + 1}`,
 		title: holiday.localName,
 		start: formatDate(holiday.date),
-		resourceId: index.toString(),
+		resourceId: `${holiday.date}-${index + 1}`,
 		dayOfWeek: format(parseISO(holiday.date), "EEEE", { locale: ko }),
 	}));
 };
