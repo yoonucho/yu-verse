@@ -78,6 +78,10 @@
 	pointer-events: none;
 }
 
+.fc-daygrid-event-dot {
+	border: calc(var(--fc-daygrid-event-dot-width) / 2) solid var(--primary-color)
+}
+
 /* datepicker custom */
 
 .react-datepicker {

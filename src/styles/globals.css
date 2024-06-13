@@ -138,10 +138,16 @@ textarea::placeholder {
 	color: #a8a8a8;
 }
 
-input:focus {
+input:focus,
+textarea:focus {
 	border: 1px solid var(--accent-color);
 	outline: none;
 	outline-offset: 2px;
+}
+
+input,
+textarea {
+	padding: 10px;
 }
 
 select {
@@ -152,4 +158,22 @@ select {
 	background-repeat: no-repeat;
 	background-position: 98% 50%;
 	background-size: 20px 20px;
+}
+
+/* 말줄임 */
+/* text ellipsis*/
+.ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* multi line(two) */
+.ellipsis.lineclamp {
+	display: -webkit-box;
+	line-height: 1.6em;
+	height: 3.2em;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+	white-space: unset;
 }
