@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { EventApi } from "@fullcalendar/core";
 import getFetchHolidays, { HoliDayDates } from "@/app/api/holidayAPI";
 import useLoadingStore from "@/stores/useLoadingStore";
 import usePopupStore from "@/stores/usePopupStore";
@@ -39,7 +40,8 @@ const MainCalendar: React.FC = () => {
 	// 이벤트 클릭시 팝업 x, y 좌표 설정
 	const eventClick = (info: EventClickArg) => {
 		setSelectedEvent(info.event);
-		
+		// console.log("info", info, info.event);
+
 		const rect = info.el.getBoundingClientRect();
 		setPopupPosition({ x: rect.left, y: rect.top + window.scrollY });
 		openPopup();

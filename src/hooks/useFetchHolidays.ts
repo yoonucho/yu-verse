@@ -5,7 +5,7 @@ import useSetDateStore from "@/stores/useSetDateStore";
 import useLoadingStore from "@/stores/useLoadingStore";
 
 type Holiday = {
-	id?: number;
+	id?: string;
 	title?: string;
 	start?: string;
 	dayOfWeek?: string;
@@ -56,7 +56,7 @@ const useFetchHolidays = () => {
 		}
 	}, [startDate, endDate, setIsLoading]); // 변경될 때마다 useEffect 내부의 fetchHolidays 함수 실행
 
-	return { holidays , error };
+	return { holidays, error };
 };
 
 export default useFetchHolidays;

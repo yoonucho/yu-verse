@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import useEventStore, { EventType } from "@/stores/useEventStore";
+import { EventApi } from "@fullcalendar/core";
 import EventForm from "./EventForm";
 import EventViewer from "./EventViewer";
 import styles from "./event-popup.module.css";
 
 type EventPopupProps = {
 	event: EventType | null;
-	onSave: (event: EventType) => void;
+	onSave: (event: EventApi) => void;
 	onDelete: (eventId: string) => void;
 	closePopup: () => void;
 	position: { x: number; y: number };
@@ -27,7 +28,11 @@ const EventPopup: React.FC<EventPopupProps> = ({ event, onSave, onDelete, closeP
 					<button className={styles.close} onClick={closePopup}>
 						<FontAwesomeIcon icon={faXmark} />
 					</button>
-					{isEditing ? <EventForm event={event} onSave={onSave} onDelete={onDelete} /> : event && <EventViewer event={event} onEdit={() => setIsEditing(true)} onDelete={onDelete} />}
+					{isEditing ? (
+						<EventForm event={event} onSave={onSave} onDelete={id => onDelete(id)} />
+					) : (
+						event && <EventViewer event={event} onEdit={() => setIsEditing(true)} onDelete={() => onDelete(event.id)} />
+					)}
 				</div>
 			</div>
 		</>

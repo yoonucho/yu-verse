@@ -7,16 +7,16 @@ export const formatDate = (date: string) => {
 };
 
 type Holiday = {
-	date: string;
-	localName: string;
+	date?: string;
+	localName?: string;
 };
 
 export type HoliDayDates = Holiday & {
-	id: number;
+	id?: string;
 	title: string;
-	start: string;
-	resourceId: number;
-	dayOfWeek: string;
+	start?: string;
+	resourceId?: string;
+	dayOfWeek?: string;
 };
 
 const getFetchHolidays = async (year: number = getYear(new Date())): Promise<HoliDayDates[]> => {
@@ -28,10 +28,10 @@ const getFetchHolidays = async (year: number = getYear(new Date())): Promise<Hol
 	const data: Holiday[] = await response.json();
 	return data.map((holiday, index) => ({
 		...holiday,
-		id: index,
+		id: index.toString(),
 		title: holiday.localName,
 		start: formatDate(holiday.date),
-		resourceId: index + 1,
+		resourceId: index.toString(),
 		dayOfWeek: format(parseISO(holiday.date), "EEEE", { locale: ko }),
 	}));
 };

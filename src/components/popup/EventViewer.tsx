@@ -1,7 +1,10 @@
 import { EventType } from "@/stores/useEventStore";
 import { HoliDayDates } from "@/app/api/holidayAPI";
+import { EventApi } from "@fullcalendar/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { format } from "date-fns";
+import { ko } from "date-fns/locale";
 import EventActions from "./EventActions";
 import styles from "./event-viewer.module.css";
 
@@ -16,16 +19,25 @@ const EventViewer: React.FC<EventViewerProps> = ({ event, onEdit, onDelete }) =>
 		// 공휴일인지 확인 하는 함수
 		return event.extendedProps?.types?.[0] === "Public";
 	};
+
+	const formatDateForInput = (date: Date) => {
+		if (isHoliday(event)) {
+			return format(date, "yyyy년 MM월 dd일", { locale: ko });
+		} else {
+			return format(date, "yyyy년 MM월 dd일 a HH:mm", { locale: ko });
+		}
+	};
+
 	return (
 		<div className={styles.viewer}>
-			<h2 className={styles.title}>{event.title}</h2>
+			<h2 className={`${styles.title} ellipsis`}>{event.title}</h2>
 			<p className={styles.time}>
 				{event.startStr && (
 					<>
 						<span>
 							<FontAwesomeIcon icon={faClock} style={{ color: "var(--primary-color)" }} />
 						</span>
-						<span>{event.startStr}</span>
+						<span>{formatDateForInput(new Date(event.startStr))}</span>
 						<span>{event.extendedProps?.dayOfWeek}</span>
 					</>
 				)}
@@ -35,13 +47,14 @@ const EventViewer: React.FC<EventViewerProps> = ({ event, onEdit, onDelete }) =>
 					<>
 						<span>
 							<FontAwesomeIcon icon={faClock} style={{ color: "var(--primary-color)" }} />
-							{event.endStr}
+							{formatDateForInput(new Date(event.endStr))}
 						</span>
 						<span>{event.extendedProps?.dayOfWeek}</span>
 					</>
 				)}
 			</p>
-			{!isHoliday(event) && <EventActions isEditing={false} onSave={() => {}} onDelete={() => onDelete(event.id || "")} onEdit={onEdit} />}
+			{event.extendedProps?.description && <p className={styles.description}>{event.extendedProps.description}</p>}
+			{!isHoliday(event) && <EventActions isEditing={false} onSave={() => {}} onDelete={() => onDelete(event.id)} onEdit={onEdit} />}
 		</div>
 	);
 };

@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useCallback } from "react";
 import EventPopup from "@/components/popup/EventPopup";
 import usePopupStore from "@/stores/usePopupStore";
 import useEventStore, { EventType } from "@/stores/useEventStore";
+import { EventApi } from "@fullcalendar/core";
+import { v4 as uuidv4 } from "uuid";
 
 const EventPopupControl: React.FC = () => {
 	const { isPopupOpen, popupPosition, closePopup } = usePopupStore();
@@ -15,11 +17,13 @@ const EventPopupControl: React.FC = () => {
 	}, [isPopupOpen, setIsEditing]);
 
 	// 이벤트 추가 및 수정
-	const handleSave = (event: EventType) => {
+	const handleSave = (event: EventApi) => {
 		if (selectedEvent) {
-			updateEvent(event);
+			const updatedEvent = { ...event, id: selectedEvent.id };
+			updateEvent(updatedEvent as EventApi);
 		} else {
-			addEvent(event);
+			const newEvent: EventApi = { ...event, id: uuidv4() };
+			addEvent(newEvent);
 		}
 		handleClosePopup();
 	};
@@ -27,6 +31,7 @@ const EventPopupControl: React.FC = () => {
 	// 이벤트 삭제
 	const handleDelete = (eventId: string) => {
 		deleteEvent(eventId);
+		// console.log("deleteEvent", eventId);
 		handleClosePopup();
 	};
 
@@ -42,7 +47,6 @@ const EventPopupControl: React.FC = () => {
 		(event: MouseEvent) => {
 			// popupRef.current가 유효하고 클릭한 이벤트 타겟이 팝업 내부에 포함되지 않은 경우 팝업 닫기
 			if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-				// if (popupRef.current && !(event.target as HTMLElement).closest(`.event-popup_popup`) && !(event.target as HTMLElement).closest(`.fc-event`)) {
 				handleClosePopup();
 			}
 		},
