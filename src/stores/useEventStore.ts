@@ -7,7 +7,7 @@ import { fetchEventsFromSupabase, addEventToSupabase, updateEventToSupabase, del
 export type EventType = EventApi | HoliDayDates;
 
 type EventState = {
-	events?: EventType[];
+	events?: EventApi[];
 	selectedEvent?: EventType | null;
 	selectedDate?: string | null;
 	isEditing?: boolean;

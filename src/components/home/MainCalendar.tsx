@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { EventApi, CalendarApi } from "@fullcalendar/core";
 import getFetchHolidays, { HoliDayDates } from "@/app/api/holidayAPI";
 import useLoadingStore from "@/stores/useLoadingStore";
 import usePopupStore from "@/stores/usePopupStore";
