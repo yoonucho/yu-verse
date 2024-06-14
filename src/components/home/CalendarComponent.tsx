@@ -14,10 +14,10 @@ type CalendarComponentProps = {
 	events: any[];
 	eventClick: (info: any) => void;
 	handleYearChange: (year: number) => void;
-	handleDateDoubleClick: (dateInfo: any) => void;
+	handleDateClick: (dateInfo: any) => void;
 };
 
-const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClick, handleYearChange, handleDateDoubleClick }) => {
+const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClick, handleYearChange, handleDateClick }) => {
 	const { openMenu } = useMenuStore();
 	const [height, setHeight] = useState(0);
 
@@ -49,15 +49,15 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClic
 		visibleYear.forEach(year => handleYearChange(year));
 	};
 
-	const handleDateClick = (dateInfo: any) => {
-		// 이전 월의 날짜인 경우 더블클릭을 막음
-		if (dateInfo.dayEl.classList.contains("fc-day-other")) {
-			return;
-		}
-		if (dateInfo.jsEvent.detail === 2) {
-			handleDateDoubleClick(dateInfo);
-		}
-	};
+	// const handleDateClick = (dateInfo: any) => {
+	// 	// 이전 월의 날짜인 경우 더블클릭을 막음
+	// 	if (dateInfo.dayEl.classList.contains("fc-day-other")) {
+	// 		return;
+	// 	}
+	// 	if (dateInfo.jsEvent.detail === 2) {
+	// 		handleDateDoubleClick(dateInfo);
+	// 	}
+	// };
 
 	return (
 		<div className={styles.container}>
