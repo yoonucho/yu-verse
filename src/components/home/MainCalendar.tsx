@@ -10,6 +10,7 @@ import useEventStore, { EventType } from "@/stores/useEventStore";
 import CalendarComponent from "./CalendarComponent";
 import Loading from "@/components/icons/LoadingIcon";
 import EventPopupControl from "@/components/popup/EventPopupControl";
+import { calculatePosition } from "@/utils/caluatePosition";
 
 const MainCalendar: React.FC = () => {
 	const router = useRouter();
@@ -28,25 +29,14 @@ const MainCalendar: React.FC = () => {
 		view: any;
 	};
 
-	// 날짜 클릭시 팝업 x, y 좌표 설정
+	// 날짜 더블 클릭시 팝업 x, y 좌표 설정
 	const handleDateDoubleClick = (dateInfo: any) => {
 		// alert("clicked on " + info.el);
 		setSelectedDate(dateInfo.dateStr);
 		setSelectedEvent(null);
 		setIsEditing(true);
-		const rect = dateInfo.dayEl.getBoundingClientRect();
-		const calendarEl = dateInfo.view.calendar.el;
-		const calendarElRect = calendarEl.getBoundingClientRect();
-		const calendarWidth = calendarElRect.width;
-
-		let popupX = rect.left;
-		let popupY = rect.top + window.scrollY;
-		// 팝업이 화면 밖으로 나가지 않도록 조정
-		if (calendarWidth - rect.left < 300) {
-			// console.log("넘어간드앙!");
-			popupX = rect.left - 300;
-		}
-		setPopupPosition({ x: popupX, y: popupY });
+		const position = calculatePosition(dateInfo.dayEl, dateInfo.view.calendar.el);
+		setPopupPosition(position);
 		openPopup();
 	};
 
@@ -54,19 +44,8 @@ const MainCalendar: React.FC = () => {
 	const eventClick = (info: EventClickArg) => {
 		setSelectedEvent(info.event);
 		console.log("info", info.event);
-		const rect = info.el.getBoundingClientRect();
-		const calendarEl = info.view.calendar.el;
-		const calendarElRect = calendarEl.getBoundingClientRect();
-		const calendarWidth = calendarElRect.width;
-
-		let popupX = rect.left;
-		let popupY = rect.top + window.scrollY;
-		// 팝업이 화면 밖으로 나가지 않도록 조정
-		if (calendarWidth - rect.left < 300) {
-			// console.log("넘어간드앙!");
-			popupX = rect.left - 300;
-		}
-		setPopupPosition({ x: popupX, y: popupY });
+		const position = calculatePosition(info.el, info.view.calendar.el);
+		setPopupPosition(position);
 		openPopup();
 	};
 
@@ -128,7 +107,7 @@ const MainCalendar: React.FC = () => {
 	}
 
 	const combinedEvents = [...events, ...holidayEvents];
-	console.log("combinedEvents", combinedEvents, events);
+	// console.log("combinedEvents", combinedEvents, events);
 	return (
 		<>
 			<CalendarComponent events={combinedEvents} eventClick={eventClick} handleYearChange={handleYearChange} handleDateDoubleClick={handleDateDoubleClick} />
