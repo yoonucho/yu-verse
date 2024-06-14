@@ -6,11 +6,11 @@
 * 메인 캘린더 이벤트 팝업 기능 구현
                                                   
 ## 개발 환경
-
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/yoonucho/yu-calendar)
 * **Framewrok** : Node.js(>=18.18.0), Next.js 14
 * **Language** : TypeScript
 * **Database** : Supabase V2.0
-* **상세기술스택** : (https://stackshare.io/yoonucho/yu-calendar)
+* **상세기술스택** : (https://stackshare.io/yoonucho/yu-calendar) 
 
 
 
