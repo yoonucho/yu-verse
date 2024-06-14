@@ -50,6 +50,10 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClic
 	};
 
 	const handleDateClick = (dateInfo: any) => {
+		// 이전 월의 날짜인 경우 더블클릭을 막음
+		if (dateInfo.dayEl.classList.contains("fc-day-other")) {
+			return;
+		}
 		if (dateInfo.jsEvent.detail === 2) {
 			handleDateDoubleClick(dateInfo);
 		}
