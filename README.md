@@ -2,17 +2,19 @@
 
 ![preview](https://github.com/yoonucho/yu-calendar/assets/2981954/0d656087-024f-4bc2-8723-d537e376976f)
 
-* 현재는 공휴일 검색 기능만 구현되어 있습니다.
-* 메인 캘린더 이벤트 팝업 기능
+* 공휴일 검색 기능 구현
+* 메인 캘린더 이벤트 팝업 기능 구현
                                                   
 ## 개발 환경
 
 * **Framewrok** : Node.js(>=18.18.0), Next.js 14
 * **Language** : TypeScript
+* **Database** : Supabase V2.0
 * **상세기술스택** : (https://stackshare.io/yoonucho/yu-calendar)
 
 
-## 제공 API
+
+## 공휴일 API
 * [Nager.Date](https://date.nager.at/Api)
 
 
