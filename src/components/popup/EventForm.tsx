@@ -54,7 +54,6 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSave, onDelete }) => {
 
 	return (
 		<div className={styles.form}>
-			{/* <h2>{event ? "수정하기" : "추가하기"}</h2> */}
 			<label>
 				<input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="일정 추가하기" required />
 			</label>
