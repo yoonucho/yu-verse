@@ -50,17 +50,21 @@ const MainCalendar: React.FC = () => {
 		}
 		// 터치 이벤트인 경우
 		else if (type === "touchend") {
-			const currentTime = new Date().getTime();
+			// const currentTime = new Date().getTime();
 			if (dateInfo.dayEl.classList.contains("fc-day-other")) {
 				return;
 			}
+
+			console.log("touch");
+
+			handleDateDoubleClick(dateInfo);
 			// 마지막 터치 이벤트와 현재 시간 사이의 시간이 0.3초 미만인 경우 더블 터치로 판단
-			if (currentTime - lastTouchEnd.current < 300) {
-				console.log("double touch");
-				handleDateDoubleClick(dateInfo);
-			}
+			// if (currentTime - lastTouchEnd.current < 300) {
+			// 	console.log("double touch");
+			// 	handleDateDoubleClick(dateInfo);
+			// }
 			// 마지막 터치 이벤트 발생 시간을 현재 시간으로 업데이트
-			lastTouchEnd.current = currentTime;
+			// lastTouchEnd.current = currentTime;
 		}
 	};
 
