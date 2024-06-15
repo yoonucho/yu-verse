@@ -12,14 +12,14 @@
 	width: 100%;
 	border: 0;
 	border-bottom: 2px solid var(--primary-color);
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	-ms-border-radius: 0;
+	-o-border-radius: 0;
 }
 
 .form textarea {
 	min-height: 100px;
 	background-color: var(--sub-light-color);
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-ms-border-radius: 5px;
-	-o-border-radius: 5px;
 }
