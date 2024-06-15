@@ -21,7 +21,6 @@ const MainCalendar: React.FC = () => {
 
 	const loadedYears = useRef(new Set<number>());
 	const currentYearRef = useRef<number | null>(null);
-	const lastTouchEnd = useRef<number>(0);
 
 	type EventClickArg = {
 		event: EventType;
@@ -55,16 +54,9 @@ const MainCalendar: React.FC = () => {
 				return;
 			}
 
-			console.log("touch");
-
+			// console.log("touch");
 			handleDateDoubleClick(dateInfo);
-			// 마지막 터치 이벤트와 현재 시간 사이의 시간이 0.3초 미만인 경우 더블 터치로 판단
-			// if (currentTime - lastTouchEnd.current < 300) {
-			// 	console.log("double touch");
-			// 	handleDateDoubleClick(dateInfo);
-			// }
-			// 마지막 터치 이벤트 발생 시간을 현재 시간으로 업데이트
-			// lastTouchEnd.current = currentTime;
+			
 		}
 	};
 

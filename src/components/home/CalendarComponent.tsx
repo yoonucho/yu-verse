@@ -49,16 +49,6 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClic
 		visibleYear.forEach(year => handleYearChange(year));
 	};
 
-	// const handleDateClick = (dateInfo: any) => {
-	// 	// 이전 월의 날짜인 경우 더블클릭을 막음
-	// 	if (dateInfo.dayEl.classList.contains("fc-day-other")) {
-	// 		return;
-	// 	}
-	// 	if (dateInfo.jsEvent.detail === 2) {
-	// 		handleDateDoubleClick(dateInfo);
-	// 	}
-	// };
-
 	return (
 		<div className={styles.container}>
 			<div className="calendar-container">
@@ -87,6 +77,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClic
 					editable={true}
 					selectable={true}
 					selectMirror={true}
+					dayMaxEvents={true}
 					events={events}
 					eventClick={eventClick}
 					datesSet={handleDatesSet}
