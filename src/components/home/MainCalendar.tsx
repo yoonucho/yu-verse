@@ -27,6 +27,41 @@ const MainCalendar: React.FC = () => {
 		event: EventType;
 		el: HTMLElement;
 		view: any;
+		jsEvent: any;
+	};
+
+	// 클릭, 더블 클릭, 터치 이벤트 처리
+	const handleInteraction = (dateInfo: any) => {
+		const mouseEvent = dateInfo.jsEvent;
+		const type = mouseEvent.type;
+		// console.log("dateInfo", dateInfo.jsEvent.type);
+		// 마우스 클릭 이벤트인 경우
+		if (type === "mouseup") {
+			if (dateInfo.dayEl.classList.contains("fc-day-other")) {
+				return;
+			}
+			if (mouseEvent.detail === 1) {
+				console.log("single click");
+				// 마우스 더블  클릭인 경우
+			} else if (mouseEvent.detail === 2) {
+				console.log("double click");
+				handleDateDoubleClick(dateInfo);
+			}
+		}
+		// 터치 이벤트인 경우
+		else if (type === "touchend") {
+			const currentTime = new Date().getTime();
+			if (dateInfo.dayEl.classList.contains("fc-day-other")) {
+				return;
+			}
+			// 마지막 터치 이벤트와 현재 시간 사이의 시간이 0.3초 미만인 경우 더블 터치로 판단
+			if (currentTime - lastTouchEnd.current < 300) {
+				console.log("double touch");
+				handleDateDoubleClick(dateInfo);
+			}
+			// 마지막 터치 이벤트 발생 시간을 현재 시간으로 업데이트
+			lastTouchEnd.current = currentTime;
+		}
 	};
 
 	// 날짜 더블 클릭시 팝업 x, y 좌표 설정
@@ -38,21 +73,6 @@ const MainCalendar: React.FC = () => {
 		const position = calculatePosition(dateInfo.dayEl, dateInfo.view.calendar.el);
 		setPopupPosition(position);
 		openPopup();
-	};
-
-	// 날짜 터치시 더블 클릭 판단
-	const handleDateTouch = (dateInfo: any) => {
-		if (dateInfo.dayEl.classList.contains("fc-day-other")) {
-			return;
-		}
-
-		const currentTime = new Date().getTime();
-		// 마지막 터치 이벤트와 현재 시간 사이의 시간이 0.3초 미만인 경우 더블 터치로 판단
-		if (currentTime - lastTouchEnd.current < 300) {
-			handleDateDoubleClick(dateInfo);
-		}
-		// 마지막 터치 이벤트 발생 시간을 현재 시간으로 업데이트
-		lastTouchEnd.current = currentTime;
 	};
 
 	// 이벤트 클릭시 팝업 x, y 좌표 설정
@@ -125,7 +145,7 @@ const MainCalendar: React.FC = () => {
 	// console.log("combinedEvents", combinedEvents, events);
 	return (
 		<>
-			<CalendarComponent events={combinedEvents} eventClick={eventClick} handleYearChange={handleYearChange} handleDateClick={handleDateTouch} />
+			<CalendarComponent events={combinedEvents} eventClick={eventClick} handleYearChange={handleYearChange} handleDateClick={handleInteraction} />
 			<EventPopupControl />
 		</>
 	);
