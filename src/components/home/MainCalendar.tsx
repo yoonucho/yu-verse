@@ -34,7 +34,7 @@ const MainCalendar: React.FC = () => {
 	const handleInteraction = (dateInfo: any) => {
 		const mouseEvent = dateInfo.jsEvent;
 		const type = mouseEvent.type;
-		// console.log("dateInfo", dateInfo.jsEvent.type);
+		console.log("dateInfo", dateInfo.jsEvent.type);
 		// 마우스 클릭 이벤트인 경우
 		if (type === "mouseup") {
 			if (dateInfo.dayEl.classList.contains("fc-day-other")) {
