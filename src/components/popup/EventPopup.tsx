@@ -1,7 +1,8 @@
+import { EventApi } from "@fullcalendar/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import useEventStore, { EventType } from "@/stores/useEventStore";
-import { EventApi } from "@fullcalendar/core";
+import { EventType } from "@/types.d";
+import useEventStore from "@/stores/useEventStore";
 import EventForm from "./EventForm";
 import EventViewer from "./EventViewer";
 import styles from "./event-popup.module.css";

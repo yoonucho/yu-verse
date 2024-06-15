@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import getFetchHolidays, { HoliDayDates } from "@/app/api/holidayAPI";
+import { EventType, HoliDayDates } from "@/types.d";
+import getFetchHolidays from "@/app/api/holidayAPI";
 import useLoadingStore from "@/stores/useLoadingStore";
 import usePopupStore from "@/stores/usePopupStore";
-import useEventStore, { EventType } from "@/stores/useEventStore";
+import useEventStore from "@/stores/useEventStore";
 import CalendarComponent from "./CalendarComponent";
 import Loading from "@/components/icons/LoadingIcon";
 import EventPopupControl from "@/components/popup/EventPopupControl";
@@ -33,17 +34,17 @@ const MainCalendar: React.FC = () => {
 	const handleInteraction = (dateInfo: any) => {
 		const mouseEvent = dateInfo.jsEvent;
 		const type = mouseEvent.type;
-		console.log("dateInfo", dateInfo.jsEvent.type);
+		// console.log("dateInfo", dateInfo.jsEvent.type);
 		// 마우스 클릭 이벤트인 경우
 		if (type === "mouseup") {
 			if (dateInfo.dayEl.classList.contains("fc-day-other")) {
 				return;
 			}
 			if (mouseEvent.detail === 1) {
-				console.log("single click");
+				// console.log("single click");
 				// 마우스 더블  클릭인 경우
 			} else if (mouseEvent.detail === 2) {
-				console.log("double click");
+				// console.log("double click");
 				handleDateDoubleClick(dateInfo);
 			}
 		}
@@ -56,7 +57,6 @@ const MainCalendar: React.FC = () => {
 
 			// console.log("touch");
 			handleDateDoubleClick(dateInfo);
-			
 		}
 	};
 
@@ -120,7 +120,7 @@ const MainCalendar: React.FC = () => {
 		const currentYear = new Date().getFullYear();
 		//  URL에서 가져온 연도가 있으면 그 값을 사용하고, 없으면 현재 연도를 사용
 		const year = yearParam ? parseInt(yearParam, 10) : currentYear;
-		console.log("year", year);
+		// console.log("year", year);
 		// 해당 연도의 이벤트 데이터를 가져오는 함수 호출
 		fetchHolidayEvents(year);
 		// 처음 로드될 때만 사용자 이벤트 페치

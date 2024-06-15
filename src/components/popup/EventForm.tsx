@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from "uuid";
-import { EventType } from "@/stores/useEventStore";
 import { EventApi } from "@fullcalendar/core";
-import { HoliDayDates } from "@/app/api/holidayAPI";
-import styles from "./event-form.module.css";
+import { v4 as uuidv4 } from "uuid";
+import { EventType } from "@/types.d";
 import EventActions from "./EventActions";
+import styles from "./event-form.module.css";
 
 type EventFormProps = {
 	event: EventType | any;

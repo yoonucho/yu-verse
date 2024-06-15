@@ -1,6 +1,7 @@
 import { formatISO, format, getYear, parseISO } from "date-fns";
 import { ko } from "date-fns/locale";
 import { API_URL } from "../constants";
+import { HoliDayDates } from "@/types.d";
 
 export const formatDate = (date: string) => {
 	return formatISO(new Date(date), { representation: "date" });
@@ -9,14 +10,6 @@ export const formatDate = (date: string) => {
 type Holiday = {
 	date?: string;
 	localName?: string;
-};
-
-export type HoliDayDates = Holiday & {
-	id?: string;
-	title: string;
-	start?: string;
-	resourceId?: string;
-	dayOfWeek?: string;
 };
 
 const getFetchHolidays = async (year: number = getYear(new Date())): Promise<HoliDayDates[]> => {

@@ -1,10 +1,8 @@
-import { EventType } from "@/stores/useEventStore";
-import { HoliDayDates } from "@/app/api/holidayAPI";
-import { EventApi } from "@fullcalendar/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
+import { EventType, HoliDayDates } from "@/types.d";
 import EventActions from "./EventActions";
 import styles from "./event-viewer.module.css";
 

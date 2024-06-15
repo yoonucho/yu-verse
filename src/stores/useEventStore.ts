@@ -1,42 +1,14 @@
 import { create } from "zustand";
 import { EventApi } from "@fullcalendar/core";
 import { v4 as uuidv4 } from "uuid";
-import { HoliDayDates } from "@/app/api/holidayAPI";
+import { EventState } from "@/types.d";
 import { fetchEventsFromSupabase, addEventToSupabase, updateEventToSupabase, deleteEventFromSupabase } from "@/lib/supabaseEvents";
-
-export type EventType = EventApi | HoliDayDates;
-
-type EventState = {
-	events?: EventApi[];
-	selectedEvent?: EventType | null;
-	selectedDate?: string | null;
-	isEditing?: boolean;
-	addEvent: (event: EventApi) => void;
-	updateEvent: (event: EventApi) => void;
-	deleteEvent: (eventId: string) => void;
-	setEvents: (updater: (events: EventApi[]) => EventApi[]) => void;
-	setSelectedEvent: (event: EventType | null) => void;
-	setSelectedDate: (date: string) => void;
-	setIsEditing: (isEditing: boolean) => void;
-	fetchEvents: (setIsLoading: (isLoading: boolean) => void) => void;
-};
 
 const useEventStore = create<EventState>(set => ({
 	events: [],
 	selectedEvent: null,
 	selectedDate: null,
 	isEditing: false,
-	// fetchEvents: async setIsLoading => {
-	// 	try {
-	// 		setIsLoading(true);
-	// 		const event = await fetchEventsFromSupabase();
-	// 		set(state => ({ events: [...state.events, ...event] }));
-	// 	} catch (error) {
-	// 		console.error("Error fetching events:", error);
-	// 	} finally {
-	// 		setIsLoading(false);
-	// 	}
-	// },
 	addEvent: async event => {
 		try {
 			const newEvent: EventApi = { ...event, id: uuidv4() };

@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useCallback } from "react";
-import EventPopup from "@/components/popup/EventPopup";
-import usePopupStore from "@/stores/usePopupStore";
-import useEventStore, { EventType } from "@/stores/useEventStore";
 import { EventApi } from "@fullcalendar/core";
 import { v4 as uuidv4 } from "uuid";
+import EventPopup from "@/components/popup/EventPopup";
+import usePopupStore from "@/stores/usePopupStore";
+import useEventStore from "@/stores/useEventStore";
 
 const EventPopupControl: React.FC = () => {
 	const { isPopupOpen, popupPosition, closePopup } = usePopupStore();
