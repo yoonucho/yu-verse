@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+:root {
+	/* Main colors */
+	--primary-color: #8d80b0;
+	--accent-color: #8397c4;
+	--hover-color: #d1ccdf;
+	--result-hover-color: #e6eaf3;
+	--error-color: #ff619a;
+
+	/* Sub colors */
+	--sub-light-color: rgb(241, 243, 253);
+
+	/* Gray */
+	--primary-gray1: #5c5c5c;
+	--primary-gray2: #b9b9b9;
+	--primary-gray3: #d9d9d9;
+
+	/* B&W */
+	--primary-white: #ffffff;
+	--primary-black: #0e0e0e;
+
+	/* Font */
+	--primary-title-color: #62597b;
+	--primary-font-color: #2a2634;
+
+	/* Font Style */
+	--primary-font: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+		"Noto Color Emoji", sans-serif;
+
+	--min-font-size: 14px;
+
+	/* Box Shadow */
+	--shadow1: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+	/* Transition */
+	--transition-1: all 0.3s linear;
+}
+
+p,
+span,
+h1,
+h2,
+h3 {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	font-family: var(--primary-font);
+	overflow-x: auto;
+	overflow-y: auto;
+	min-height: 100%;
+	font-size: 1.4rem;
+	font-weight: 600;
+}
+
+dl,
+ul,
+ol,
+menu,
+li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Responsive img, video */
+img,
+video {
+	display: block;
+	overflow: hidden;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover;
+}
+
+a {
+	color: var(--primary-black);
+	text-decoration: none;
+}
+
+button {
+	border: 0;
+	cursor: pointer;
+}
+
+a,
+button {
+	transition: all ease 0.5s;
+	-webkit-transition: all ease 0.5s;
+	-moz-transition: all ease 0.5s;
+	-ms-transition: all ease 0.5s;
+	-o-transition: all ease 0.5s;
+}
+
+a,
+button,
+span {
+	letter-spacing: 0;
+}
+
+h1,
+h2 {
+	color: var(--primary-title-color);
+}
+
+h1 {
+	font-family: var(--primary-title-font);
+	margin-bottom: 0;
+	font-size: min(5vw, 60px);
+}
+
+h2 {
+	margin-bottom: 6px;
+	font-size: min(3vw, 40px);
+}
+
+textarea::placeholder {
+	color: #a8a8a8;
+}
+
+input:focus,
+textarea:focus {
+	border: 1px solid var(--accent-color);
+	outline: none;
+	outline-offset: 2px;
+}
+
+input,
+textarea {
+	padding: 10px;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-image: url("/assets/images/arrow-down.svg");
+	background-repeat: no-repeat;
+	background-position: 98% 50%;
+	background-size: 20px 20px;
+}
+
+/* 말줄임 */
+/* text ellipsis*/
+.ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* multi line(two) */
+.ellipsis.lineclamp {
+	display: -webkit-box;
+	line-height: 1.6em;
+	height: 3.2em;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+	white-space: unset;
+}

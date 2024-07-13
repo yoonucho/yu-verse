@@ -1,0 +1,9 @@
+.container {
+	position: relative;
+	z-index: 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: calc(100vh - 120px);
+	background-color: var(--primary-white);
+}
