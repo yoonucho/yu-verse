@@ -1,0 +1,40 @@
+.text {
+	color: var(--primary-black);
+	font-size: 3rem;
+	font-weight: 400;
+}
+
+.text code {
+	font-family: inherit;
+	padding: 10px;
+	color: var(--primary-color);
+	font-weight: 700;
+	border-bottom: 0.0625em solid var(--primary-color);
+	box-shadow: 0 -0.4em 0 inset var(--primary-color);
+}
+
+.showDetailBtn {
+	font-family: inherit;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.6rem;
+	color: var(--primary-color);
+	font-weight: 700;
+	border: 1px solid var(--primary-color);
+	background-color: var(--primary-white);
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	cursor: pointer;
+}
+
+@media (max-width: 375px) {
+	.text {
+		padding: 0 10px;
+		font-size: 2.5rem;
+	}
+}

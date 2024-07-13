@@ -1,0 +1,82 @@
+.container {
+	padding: 20px;
+}
+
+.eventItem {
+	display: flex;
+	align-items: center;
+	height: 60px;
+	margin-top: -1px;
+	color: var(--primary-black);
+	font-size: 1.6rem;
+	font-weight: 400;
+	line-height: 21px;
+	border-top: 1px solid var(--primary-gray3);
+	border-bottom: 1px solid var(--primary-gray3);
+}
+
+.eventItem:hover {
+	background-color: var(--result-hover-color);
+}
+
+.holidayNumber {
+	display: inline-block;
+	min-width: 20px;
+	font-size: 2rem;
+}
+
+.holidayDate {
+	flex: 0 0 10.2%;
+	min-width: 200px;
+	padding: 0 0 0 12px;
+	color: var(--primary-title-color);
+	font-weight: 700;
+	font-size: 1.6rem;
+	box-sizing: border-box;
+}
+
+.holidayDate > span {
+	display: block;
+}
+
+.holidayDate .week {
+	font-size: 1.4rem;
+}
+
+.barInner {
+	flex: 0 0 3.33%;
+}
+
+.bar {
+	display: block;
+	width: 4px;
+	height: 42px;
+	margin: 0 auto;
+	border-radius: 2px;
+	background-size: 6px 6px;
+	border: 1px solid var(--primary-color);
+	background-color: var(--primary-color);
+	box-sizing: border-box;
+}
+
+.title {
+	flex: 0 0 18.5%;
+	overflow: hidden;
+	display: block;
+	min-width: 300px;
+	font-weight: 700;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@media (max-width: 568px) {
+	.holidayDate {
+		flex: 0 0 40%;
+		min-width: auto;
+	}
+
+	.title {
+		flex: 0 0 50%;
+		min-width: auto;
+	}
+}
