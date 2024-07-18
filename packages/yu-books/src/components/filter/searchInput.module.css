@@ -1,0 +1,22 @@
+.container {
+	position: relative;
+	height: 60px;
+	margin: 10px auto;
+}
+
+.searchInput {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	/* width: 100%; */
+	max-width: 700px;
+	min-width: 320px;
+	height: 100%;
+	margin: 0 20px;
+	padding: 10px 20px;
+	border: 1px solid #9e6969;
+	border-radius: 4px;
+	font-size: 1.6rem;
+}

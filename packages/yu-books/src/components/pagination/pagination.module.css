@@ -1,0 +1,80 @@
+.pageWrap {
+	overflow-x: auto;
+	position: absolute;
+	bottom: 20px;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	white-space: nowrap;
+}
+
+.pageWrap::-webkit-scrollbar {
+	display: none; /* 스크롤바 숨김 */
+}
+
+.inner {
+	overflow-x: auto;
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.pageItem {
+	margin: 0 0.25rem;
+}
+
+.pageLink {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background-color: #f9f9f9;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.pageLink:hover {
+	background-color: #ececec;
+}
+
+.pageLink.disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.pagination {
+	display: flex;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.pageItem .pageLink.active {
+	background-color: #0070f3;
+	color: #fff;
+	border-color: #0070f3;
+}
+
+.pageLink img {
+	width: 30px;
+	height: 30px;
+}
+
+.reverse img {
+	transform: rotate(180deg);
+}
+
+@media screen and (max-width: 640px) {
+	.pageArrow {
+		/* display: none; */
+	}
+
+	.pageLink {
+		width: 60px;
+		height: 60px;
+	}
+}
