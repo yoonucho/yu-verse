@@ -1,0 +1,204 @@
+@charset "UTF-8";
+
+/* 기본 스타일 초기화 */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* 스크롤 동작 설정 */
+html {
+	scroll-behavior: smooth;
+}
+
+:root {
+	/* Main colors */
+	--primary-color: #00b8ff;
+	--accent-color: #0179ff;
+	--accent-color2: #007bff;
+
+	/* Red */
+	--primary-red: #ff2c51;
+
+	/* Gray */
+	--primary-gray1: #f2f4f6;
+	--primary-gray2: #f7f8f9;
+	--primary-gray3: #c5c8ce;
+
+	/* B&W */
+	--primary-white: #ffffff;
+	--primary-black: #0e0e0e;
+
+	/* Font */
+	--primary-title-color: #28323c;
+	--primary-font-color: #374553;
+
+	/* Border */
+	--primary-border-color: #f8f9fb;
+
+	/* Font Style */
+	--primary-font: "SpoqaHanSansNeo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+		"Noto Color Emoji", sans-serif;
+
+	--min-font-size: 14px;
+
+	/* Box Shadow */
+	--shadow1: 0px 0px 30px 0px rgba(0, 0, 0, 0.05);
+
+	/* Transition */
+	--transition-1: all 0.3s linear;
+}
+
+/* 텍스트 초기화 */
+p,
+span,
+h1,
+h2,
+h3 {
+	margin: 0;
+	padding: 0;
+}
+
+/* HTML, BODY 초기화 */
+html {
+	height: 100%;
+	font-size: 62.5%;
+}
+
+body {
+	font-family: var(--primary-font);
+	overflow-x: auto;
+	overflow-y: auto;
+	min-height: 100%;
+	font-size: 1.4rem;
+	font-weight: 500;
+	background-color: var(--primary-gray1);
+}
+
+/* 리스트 스타일 초기화 */
+dl,
+ul,
+ol,
+menu,
+li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* 반응형 이미지, 비디오 */
+img,
+video {
+	display: block;
+	overflow: hidden;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover;
+}
+
+/* 링크 스타일 초기화 */
+a {
+	color: var(--primary-black);
+	text-decoration: none;
+}
+
+/* 버튼 스타일 초기화 */
+button {
+	border: 0;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+/* 전환 효과 적용 */
+a,
+button {
+	transition: all ease 0.5s;
+	-webkit-transition: all ease 0.5s;
+	-moz-transition: all ease 0.5s;
+	-ms-transition: all ease 0.5s;
+	-o-transition: all ease 0.5s;
+}
+
+/* 텍스트 스타일 초기화 */
+a,
+button,
+span {
+	letter-spacing: 0;
+}
+
+/* 제목 스타일 설정 */
+h1,
+h2 {
+	margin-bottom: 0;
+	color: var(--primary-title-color);
+}
+
+/* 입력 필드 및 텍스트 영역 스타일 설정*/
+textarea::placeholder {
+	color: #a8a8a8;
+}
+
+input:focus,
+textarea:focus {
+	border: 1px solid var(--accent-color);
+	outline: none;
+	outline-offset: 2px;
+}
+
+input,
+textarea {
+	padding: 10px;
+}
+
+/* 셀렉트 박스 스타일 설정 */
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	/* background-image: url("/assets/images/arrow-down.svg"); */
+	background-repeat: no-repeat;
+	background-position: 98% 50%;
+	background-size: 20px 20px;
+}
+
+/* 접근성 요소 숨김 처리*/
+.blind {
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	clip: rect(0 0 0 0);
+}
+
+/* 텍스트 말줄임 설정말줄임 */
+/* text ellipsis*/
+.ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* 다중 라인 텍스트 말줄임 (2줄) */
+.ellipsis.lineclamp {
+	display: -webkit-box;
+	line-height: 1.6em;
+	height: 3.2em;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+	white-space: unset;
+}
+
+.separator {
+	display: flex;
+	align-items: center;
+}
+
+/* 텍스트 구분 기호 */
+.separator::after {
+	content: "";
+	width: 1px;
+	height: 14px;
+	margin-left: 10px;
+	background-color: var(--primary-gray3);
+}
