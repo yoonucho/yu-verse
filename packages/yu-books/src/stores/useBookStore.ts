@@ -62,7 +62,7 @@ const useBookStore = create<BookStore>((set, get) => ({
 			const data: KeywordBookResponse = await response.json();
 			const { documents, meta } = data;
 			set({ documents, meta });
-			setTotalPage(Math.ceil(meta.total_count / 10));
+			setTotalPage(Math.ceil(meta.pageable_count / 10));
 		} catch (error) {
 			console.error(error);
 		}
