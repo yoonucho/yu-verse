@@ -1,0 +1,151 @@
+/* 아이템 레이아웃 */
+
+.bookItem {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row-reverse;
+	gap: 20px;
+	padding: 20px 0;
+	border-bottom: 1px solid var(--primary-border-color);
+}
+
+.bookItem:hover {
+	background-color: var(--hover-color);
+}
+
+.bookItem img {
+	margin-right: 5px;
+	object-fit: contain;
+	background-color: var(--primary-white);
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+}
+
+.bookItem figcaption {
+	font-family: var(--primary-font);
+	width: calc(100% - 93px);
+	margin-top: 12px;
+	padding: 6px;
+	color: var(--primary-title-color);
+	text-align: left;
+}
+
+.bookTitle {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	font-size: 1.4rem;
+}
+
+.bookTitle h3 {
+	margin-bottom: 6px;
+	font-size: 2rem;
+}
+
+.bookTitle span {
+	font-size: 1.3rem;
+	font-weight: 400;
+}
+
+.bookTitle span + span {
+	margin-left: 4px;
+}
+
+.author,
+.publisher {
+	display: flex;
+}
+
+.highlight {
+	padding: 4px;
+	color: var(--primary-color);
+	border: 1px solid var(--primary-color);
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+
+.bookInfo {
+	display: flex;
+	gap: 4px;
+}
+
+.bookInfo p {
+	display: flex;
+	gap: 4px;
+}
+
+.percentage {
+	margin-right: 6px;
+	color: var(--primary-red);
+	font-size: 1.8rem;
+}
+
+/* 상세페이지 */
+
+.detailImg {
+	height: 200px;
+	background-color: var(--primary-gray2);
+}
+
+.detailImg + p {
+	position: absolute;
+	top: 18px;
+	right: 8px;
+}
+
+.detailImg + p > span {
+	margin-right: 5px;
+	color: var(--primary-white);
+	background-color: var(--primary-color);
+}
+
+.strikethrough {
+	margin-right: 10px;
+	color: var(--primary-gray3);
+	font-size: 1.2rem;
+	text-decoration: line-through;
+}
+
+.detailInfo {
+	padding: 12px 18px;
+	font-size: 1.4rem;
+	border-bottom: 1px solid var(--primary-gray3);
+	background-color: var(--primary-gray2);
+}
+
+.detailInfo h4 {
+	margin-bottom: 6px;
+	font-size: 1.6rem;
+}
+
+.detailInfo div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+}
+
+.detailInfo span {
+	min-width: 126px;
+}
+
+.detailInfo p {
+	text-align: left;
+	font-size: 1.4rem;
+}
+
+/* 반응형 작업 */
+@media screen and (max-width: 360px) {
+	.text {
+		min-width: 52px;
+		max-width: 120px;
+	}
+}

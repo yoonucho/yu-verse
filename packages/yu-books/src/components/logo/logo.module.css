@@ -1,0 +1,37 @@
+.iconContainer {
+	position: absolute;
+	top: 50%;
+	left: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 3px;
+	transform: translateY(-50%);
+}
+
+.icon {
+	width: auto;
+	height: 35px;
+	margin: 0 3px 0 0;
+	background-color: var(--primary-color);
+	border-radius: 50%;
+}
+
+.bookIcon {
+	position: relative;
+	top: 0;
+	color: var(--primary-color);
+}
+
+@media (max-width: 500px) {
+	.icon {
+		margin-top: 0;
+	}
+}
+
+@media (max-width: 400px) {
+	.iconContainer {
+		top: 5px;
+		left: 10px;
+	}
+}
