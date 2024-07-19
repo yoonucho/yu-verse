@@ -22,8 +22,22 @@ const spoqa = localFont({
 });
 
 export const metadata: Metadata = {
-	title: "YU 도서 검색",
-	description: "YU 도서 검색",
+	title: {
+		template: "YU책찾기 | %s",
+		default: "YU책찾기 페이지",
+	},
+	description: "YU책찾기",
+	icons: {
+		icon: "/favicon.ico",
+	},
+	openGraph: {
+		title: "YU책찾기",
+		description: "YU책찾기",
+		siteName: "YU책찾기",
+		images: { url: "https://yu-books.vercel.app/assets/images/yu-open-graph.png" },
+		url: "https://yu-books.vercel.app",
+		type: "website",
+	},
 };
 
 export default function RootLayout({
