@@ -1,14 +1,8 @@
 .filterButtonBox {
-	overflow-x: auto;
-	/* for smooth scrolling on iOS */
-	/* -webkit-overflow-scrolling: touch;  */
-	scrollbar-width: none; /* Firefox */
-	-ms-overflow-style: none; /* IE and Edge */
+	-webkit-overflow-scrolling: touch;
+	/* scrollbar-width: none; 
+	-ms-overflow-style: none; */
 	white-space: nowrap;
-}
-
-.filterButtonBox::-webkit-scrollbar {
-	display: none; /* 스크롤바 숨김 */
 }
 
 .inner {
@@ -44,7 +38,8 @@
 	font-family: inherit;
 	min-width: 70px;
 	padding: 10px 5px;
-	background-color: #f0f0f0;
+	color: var(--primary-title-color);
+	background-color: var(--sub-light-color);
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	cursor: pointer;
@@ -78,7 +73,7 @@
 }
 
 .active {
-	background-color: var(--accent-color2);
+	background-color: var(--primary-color);
 	color: white;
 }
 

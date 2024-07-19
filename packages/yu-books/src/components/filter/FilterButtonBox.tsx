@@ -60,7 +60,7 @@ const FilterButtonBox: React.FC = () => {
 	return (
 		<>
 			<div className={styles.filterButtonBox}>
-				<div className={styles.inner}>
+				<div className={`${styles.inner} scrollbar`}>
 					{/* 장르 버튼 */}
 					<div className={styles.tagButtonBar}>
 						{relatedKeywords.map(keyword => (

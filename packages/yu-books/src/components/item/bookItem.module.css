@@ -11,10 +11,14 @@
 	border-bottom: 1px solid var(--primary-border-color);
 }
 
+.bookItem:hover {
+	background-color: var(--hover-color);
+}
+
 .bookItem img {
-	min-width: 93px;
+	margin-right: 5px;
 	object-fit: contain;
-	background-color: var(--primary-gray2);
+	background-color: var(--primary-white);
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
@@ -24,7 +28,7 @@
 
 .bookItem figcaption {
 	font-family: var(--primary-font);
-	width: 100%;
+	width: calc(100% - 93px);
 	margin-top: 12px;
 	padding: 6px;
 	color: var(--primary-title-color);

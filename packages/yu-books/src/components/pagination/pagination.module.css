@@ -54,9 +54,10 @@
 }
 
 .pageItem .pageLink.active {
-	background-color: #0070f3;
-	color: #fff;
-	border-color: #0070f3;
+	background-color: var(--primary-color);
+	color: var(--primary-white);
+	/* border: 1px solid var(--primary-color); */
+	font-weight: normal;
 }
 
 .pageLink img {

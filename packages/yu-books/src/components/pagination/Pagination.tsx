@@ -30,7 +30,7 @@ const Pagination: React.FC<PaginationProps> = ({ onPageChange }) => {
 
 	return (
 		<nav aria-label="Page navigation" className={styles.pageWrap}>
-			<div className={styles.inner}>
+			<div className={`${styles.inner} scrollbar`}>
 				<div className={`${styles.pageArrow} ${styles.pageItem}`}>
 					<button
 						type="button"
