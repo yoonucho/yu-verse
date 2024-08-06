@@ -6,6 +6,7 @@
 	],
 	"scripts": {
 		"yu-calendar": "pnpm --filter yu-calendar",
+		"yu-books": "pnpm --filter yu-books",
 		"test": "jest",
 		"test:watch": "jest --watch"
 	},
