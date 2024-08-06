@@ -76,7 +76,7 @@ const BookList: React.FC = () => {
 					{!isSearchTriggered || (query.length === 0 && !selectedKeyword) ? (
 						<div className={styles.noData}>
 							<Image src="/assets/images/message-icon.svg" alt="message" width={300} height={400} />
-							<p>도서를 검색해주세요.</p>
+							<p>책을 검색해주세요.</p>
 						</div>
 					) : (
 						<>
@@ -84,8 +84,8 @@ const BookList: React.FC = () => {
 								<div className={styles.noData}>
 									<Image src="/assets/images/message-icon.svg" alt="message" width={400} height={400} />
 									<p>
-										선택하신 조건에 맞는 도서가 없습니다. <br />
-										준비된 다른 도서를 확인해 보세요!
+										선택하신 조건에 맞는 책이 없습니다. <br />
+										준비된 다른 책을 확인해 보세요!
 									</p>
 								</div>
 							) : (
