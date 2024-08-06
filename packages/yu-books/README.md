@@ -1,6 +1,6 @@
 # 사이드프로젝트 - YU 책 찾기
 
-![preview](https://github.com/yoonucho/yu-calendar/assets/2981954/0d656087-024f-4bc2-8723-d537e376976f)
+https://gist.github.com/user-attachments/assets/14294ac0-26ac-4919-ab4c-c991b0b75926
 
 * 책 카테고리별 검색 기능 구현
 * 검색어 입력 검색 기능 구현
