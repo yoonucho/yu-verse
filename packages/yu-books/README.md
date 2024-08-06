@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 사이드프로젝트 - YU 책 찾기
 
-## Getting Started
+![preview](https://github.com/yoonucho/yu-calendar/assets/2981954/0d656087-024f-4bc2-8723-d537e376976f)
 
-First, run the development server:
+* 책 카테고리별 검색 기능 구현
+* 검색어 입력 검색 기능 구현
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 개발 환경
+[![StackShare](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/yoonucho/yu-books)
+* **Framewrok** : Node.js(>=18.18.0), Next.js 14(App Router)
+* **Language** : TypeScript
+* **상세기술스택** : (https://stackshare.io/yoonucho/yu-books) 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 책 검색하기 API
+* [Kakao 도서검색 OpenAPI](https://developers.kakao.com/docs/latest/ko/daum-search/dev-guide#search-book)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+<!-- ## Trouble Shooting  -->
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 배포
+https://yu-books.vercel.app/book-list
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 요구사항 명세서
+[요구사항 명세서](https://www.notion.so/tomorrowcho/yu-books-d3020a7061cf4c0e836c5a490a588dc9)
