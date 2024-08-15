@@ -17,40 +17,45 @@ export async function GET(req: Request) {
 	}
 
 	try {
-		let allBooks: BookListInfo[] = [];
-		let pageCount = 1;
-		let totalCount = 0;
+		if (sortOption === "asc" || sortOption === "desc") {
+			let allBooks: BookListInfo[] = [];
+			let pageCount = 1;
+			let totalCount = 0;
 
-		// 전체 데이터를 가져오기 위해 페이지를 반복해서 호출
-		while (true) {
-			const data = await fetchBooks(keyword as string, pageCount, 50);
-			allBooks = allBooks.concat(data.documents);
-			totalCount = data.meta.pageable_count;
-			if (allBooks.length >= totalCount || data.meta.is_end) {
-				break;
+			// 전체 데이터를 가져오기 위해 페이지를 반복해서 호출
+			while (true) {
+				const data = await fetchBooks(keyword as string, pageCount, 50);
+				allBooks = allBooks.concat(data.documents);
+				totalCount = data.meta.pageable_count;
+				if (allBooks.length >= totalCount || data.meta.is_end) {
+					break;
+				}
+				pageCount++;
 			}
-			pageCount++;
+
+			allBooks.sort((a, b) => (sortOption === "asc" ? a.sale_price - b.sale_price : b.sale_price - a.sale_price));
+
+			// 필요한 페이지 데이터 추출
+			const start = (Number(page) - 1) * Number(size);
+			const end = start + Number(size);
+			const paginatedBooks = allBooks.slice(start, end);
+
+			return NextResponse.json({
+				documents: paginatedBooks,
+				meta: {
+					is_end: end >= totalCount,
+					pageable_count: totalCount,
+					total_count: totalCount,
+				},
+			});
+		} else {
+			// 정렬이 필요없는 경우 한 페이지 데이터만 가져오기
+			const data = await fetchBooks(keyword as string, Number(page), Number(size));
+			return NextResponse.json({
+				documents: data.documents,
+				meta: data.meta,
+			});
 		}
-
-		if (sortOption === "asc") {
-			allBooks.sort((a, b) => a.sale_price - b.sale_price);
-		} else if (sortOption === "desc") {
-			allBooks.sort((a, b) => b.sale_price - a.sale_price);
-		}
-
-		// 필요한 페이지 데이터 추출
-		const start = (Number(page) - 1) * Number(size);
-		const end = start + Number(size);
-		const paginatedBooks = allBooks.slice(start, end);
-
-		return NextResponse.json({
-			documents: paginatedBooks,
-			meta: {
-				is_end: end >= totalCount,
-				pageable_count: totalCount,
-				total_count: totalCount,
-			},
-		});
 	} catch (error) {
 		console.error(error);
 		return NextResponse.json({ error: "도서 정보를 불러오는데 실패했습니다." }, { status: 500 });
