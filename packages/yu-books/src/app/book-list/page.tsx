@@ -47,15 +47,17 @@ const BookList: React.FC = () => {
 	}, [meta, setTotalPage, fetchBooks, documents]);
 
 	const formatBooks = (books: BookListInfo[]): FormattedBookListInfo[] => {
+		
+
 		return books.map(book => {
-			const discountPercent = ((book.price - book.sale_price) / book.price) * 100;
-			const { discountPrice, disCountText } = calculateDiscountRate(book.price, discountPercent);
+			// const discountPercent = ((book.price - book.sale_price) / book.price) * 100;
+			// const { discountPrice, disCountText } = calculateDiscountRate(book.price, discountPercent);
 
 			return {
 				...book,
 				formattedPrice: formatPriceWithComma(book.price),
-				disCountText,
-				discountPrice: formatPriceWithComma(discountPrice),
+				// disCountText,
+				discountPrice: formatPriceWithComma(book.sale_price),
 				formattedDate: formatDate(book.datetime),
 			};
 		});

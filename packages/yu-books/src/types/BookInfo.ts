@@ -58,7 +58,7 @@ export type KeywordBookResponse = BookResponse & {
 // 포맷팅된 도서 정보 타입 정의
 export type FormattedBookInfo = {
 	formattedPrice: string;
-	disCountText: string;
+	// disCountText: string;
 	discountPrice: string;
 	formattedDate: string;
 };
