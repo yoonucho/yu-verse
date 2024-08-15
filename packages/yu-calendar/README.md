@@ -18,24 +18,6 @@
 * [Nager.Date](https://date.nager.at/Api)
 
 
-## 시작하기
- 
-### 1. 저장소 클론
-~~~sh
-git clone https://github.com/yoonucho/yu-calendar.git
-~~~
-
-### 2. node.js 설치(>=18.18.0)
-https://nodejs.org/en/download
-
-
-### 3. 모듈 설치 & 실행 
-
-~~~sh
-npm install
-npm run dev
-~~~
-
 ## Trouble Shooting 
 
 * [검색 결과 페이지 오류 분석](https://www.notion.so/tomorrowcho/5776f3f177fc4f73b8f1fd93f4dbc00f)
