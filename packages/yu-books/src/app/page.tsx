@@ -93,3 +93,5 @@ export default function Home() {
     </main>
   );
 }
+
+export const runtime = process.env.NODE_ENV === "development" ? "nodejs" : "experimental-edge";
