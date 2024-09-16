@@ -18,4 +18,4 @@ const HomePage: React.FC = () => {
 };
 
 export default HomePage;
-export const runtime = process.env.NODE_ENV === "development" ? "nodejs" : "experimental-edge";
+// export const runtime = process.env.NODE_ENV === "development" ? "nodejs" : "experimental-edge";
