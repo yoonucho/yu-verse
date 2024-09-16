@@ -26,8 +26,17 @@ const BookListItem: React.FC<BookListItemProps> = ({ book }) => {
 				</div>
 				<div className={styles.bookInfo}>
 					<p>
-						판매가 <span className={`separator ${styles.text}`}>{book.discountPrice}원</span>
-						<span className={styles.strikethrough}>{book.formattedPrice}원</span>
+						판매가
+						{book.discountPrice < book.formattedPrice ? (
+							<>
+								<span className={`separator ${styles.text}`}>{book.discountPrice}원</span>
+								<span className={styles.strikethrough}>{book.formattedPrice}원</span>
+							</>
+						) : (
+							<span className={styles.text}>{book.discountPrice}원</span>
+						)}
+						{/* <span className={`separator ${styles.text}`}>{book.discountPrice}원</span>
+						<span className={styles.strikethrough}>{book.formattedPrice}원</span> */}
 						{/* {book.disCountText && <strong className={styles.percentage}>{`${book.disCountText}`}</strong>} */}
 					</p>
 				</div>

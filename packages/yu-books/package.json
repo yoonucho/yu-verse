@@ -9,21 +9,8 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@fortawesome/free-solid-svg-icons": "^6.5.2",
-		"@fortawesome/react-fontawesome": "^0.2.2",
 		"@types/lodash": "^4.17.6",
-		"lodash": "^4.17.21",
-		"next": "14.2.5",
-		"react": "^18",
-		"react-dom": "^18",
-		"zustand": "^4.5.4"
-	},
-	"devDependencies": {
-		"@types/node": "^20",
-		"@types/react": "^18",
-		"@types/react-dom": "^18",
-		"eslint": "^8",
-		"eslint-config-next": "14.2.5",
-		"typescript": "^5"
+		"lodash": "^4.17.21"
 	}
+	
 }
