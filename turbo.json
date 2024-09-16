@@ -1,17 +1,21 @@
 {
-	"pipeline": {
-		"build": {
-			"dependsOn": ["^build"],
-			"outputs": [".next/**"]
-		},
-		"dev": {
-			"cache": false
-		},
-		"lint": {
-			"outputs": []
-		},
-		"test": {
-			"outputs": []
-		}
-	}
+  "tasks": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        ".next/**"
+      ]
+    },
+    "dev": {
+      "cache": false
+    },
+    "lint": {
+      "outputs": []
+    },
+    "test": {
+      "outputs": []
+    }
+  }
 }
