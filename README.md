@@ -1,4 +1,4 @@
-﻿# YU Verse
+# YU Verse
 
 YU-Verse는 여러 프로젝트를 단일 저장소에서 관리하기 위해 구축된 모노레포입니다. 이 저장소는 [Turborepo](https://turborepo.org/)와 [pnpm](https://pnpm.io/)을 사용하여 효율적이고 일관된 의존성 관리를 제공합니다.
 
@@ -87,9 +87,9 @@ git clone https://github.com/yoonucho/yu-verse.git
 ```bash
 pnpm install
 # yu-books 실행
-pnpm --filter yu-books run dev
+pnpm run yu-books dev
 # yu-calendar 실행
-pnpm --filter yu-calendar run dev
+pnpm run yu-calendar dev
 ```
 
 
