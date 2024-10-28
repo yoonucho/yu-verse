@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { EventApi } from "@fullcalendar/core";
 import { v4 as uuidv4 } from "uuid";
 import { EventState } from "@/types.d";
-import { fetchEventsFromSupabase, addEventToSupabase, updateEventToSupabase, deleteEventFromSupabase } from "@/lib/supabaseEvents";
+import { fetchEventsFromSupabase, addEventToSupabase, updateEventToSupabase, deleteEventFromSupabase } from "@/actions/supabaseEventsActions";
 
 const useEventStore = create<EventState>(set => ({
 	events: [],

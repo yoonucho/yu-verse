@@ -5,13 +5,13 @@ export const metadata = {
 	title: "Home",
 };
 
-const Main = lazy(() => import("@/components/home/Main"));
+const UI = lazy(() => import("@/app/ui"));
 
 const HomePage: React.FC = () => {
 	return (
 		<>
 			<Suspense fallback={<Loading />}>
-				<Main />
+				<UI />
 			</Suspense>
 		</>
 	);
