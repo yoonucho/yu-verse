@@ -1,5 +1,6 @@
 "use server";
 
+import { startOfDay, endOfDay, format } from "date-fns";
 import createServerSupabaseClient from "@/lib/supabaseServer";
 import { Database } from "../../types_db";
 
@@ -65,12 +66,31 @@ export const deleteEventFromSupabase = async (eventId: string): Promise<void> =>
 // 이벤트 시작일 종료일로 필터링 후 가져오는 함수
 export const fetchEventsByDateRange = async (startDate: string, endDate: string): Promise<YuCalendarRow[]> => {
 	const supabase = createServerSupabaseClient();
-	const { data, error } = await supabase.from("yu_calendar").select("*").gte("start", startDate).lte("end", endDate).order("start", { ascending: true });
-	console.log("fetch", data);
+
+	// 시작일과 종료일을 date-fns 라이브러리로 처리
+	const startOfDayDate = startOfDay(new Date(startDate));
+	const endOfDayDate = endOfDay(new Date(endDate));
+
+	// 날짜를 ISO 문자열로 변환
+	const startISODateStr = format(startOfDayDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+	const endISODateStr = format(endOfDayDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+
+	console.log("startDate:", startISODateStr);
+	console.log("endDate:", endISODateStr);
+
+	const { data, error } = await supabase
+		.from("yu_calendar")
+		.select("*")
+		.gte("start", startDate)
+		.lte("start", endISODateStr)
+		.or(`end.is.null,end.gte.${startISODateStr},end.lte.${endISODateStr}`)
+		.order("start", { ascending: true });
+
 	if (error) {
 		console.error("이벤트를 가져오는 중 오류 발생:", error);
 		throw new Error("이벤트를 가져오는 중 오류가 발생했습니다.");
 	}
 
+	console.log("Fetched events:", data);
 	return data as YuCalendarRow[];
 };

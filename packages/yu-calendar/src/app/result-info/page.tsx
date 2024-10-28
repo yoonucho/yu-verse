@@ -17,7 +17,7 @@ const ResultInfo = async ({ searchParams }: ResultInfoProps) => {
 	const endDateParam = searchParams.endDate;
 
 	if (!startDateParam || !endDateParam) {
-		return <p>날짜를 선택해주세요. </p>;
+		return <p>날짜를 선택해주세요.</p>;
 	}
 
 	// 서버 액션을 통해 이벤트 데이터를 가져옵니다.
@@ -30,7 +30,7 @@ const ResultInfo = async ({ searchParams }: ResultInfoProps) => {
 			<div className={styles.container}>
 				<ClientLoadingComponent>
 					<div className={styles.inner}>
-						<h1>공휴일 결과 페이지</h1>
+						<h1> 결과 페이지</h1>
 						<div>
 							{/* 공휴일 관련 데이터는 클라이언트 컴포넌트로 관리 */}
 							{/* <HolidayClientComponent /> */}

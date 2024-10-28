@@ -6,6 +6,7 @@ type EventShowDetailsProps = {
 		title?: string;
 		start?: Date;
 		end?: Date;
+		extendedProps?: { description: string };
 	}[];
 };
 
@@ -19,7 +20,6 @@ const EventShowDetails: React.FC<EventShowDetailsProps> = ({ events }) => {
 					</div>
 					<div className={styles.eventDate}>
 						<span>{event.start}</span>
-						<span className={styles.week}>{event.dayOfWeek}</span>
 					</div>
 					<div className={styles.barInner}>
 						<span className={styles.bar}></span>
@@ -27,6 +27,7 @@ const EventShowDetails: React.FC<EventShowDetailsProps> = ({ events }) => {
 					<div className={styles.title}>
 						<span>{event.title}</span>
 					</div>
+					<div className={styles.description}>{event.extendedProps?.description && <p className={styles.description}>{event.extendedProps.description}</p>}</div>
 				</div>
 			))}
 		</div>

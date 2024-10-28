@@ -6,21 +6,27 @@ export type Database = {
 			yu_calendar: {
 				Row: {
 					end?: Date;
-					extendedProps?: Json | null;
+					extendedProps?: {
+						description: string;
+					};
 					id: string;
 					start: Date;
 					title: string;
 				};
 				Insert: {
 					end?: Date;
-					extendedProps?: Json | null;
+					extendedProps?: {
+						description: string;
+					};
 					id?: string;
 					start?: Date;
 					title: string;
 				};
 				Update: {
 					end?: Date;
-					extendedProps?: Json | null;
+					extendedProps?: {
+						description: string;
+					};
 					id?: string;
 					start?: Date;
 					title?: string;
