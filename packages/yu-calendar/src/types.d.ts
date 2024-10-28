@@ -29,3 +29,12 @@ export type EventState = {
 	setIsEditing: (isEditing: boolean) => void;
 	fetchEvents: (setIsLoading: (isLoading: boolean) => void) => void;
 };
+
+// 직접 생성한 이벤트 
+export type PersonalEvent = {
+	id: string;
+	title: string;
+	start: string;
+	end: string;
+	description?: Dictionary<string>;
+};
