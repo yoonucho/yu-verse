@@ -53,7 +53,7 @@ Next.js와 TypeScript로 개발된 일정 관리 웹앱입니다.
 
 - **주요 기능**: 공휴일 검색, 메인 캘린더 이벤트 팝업 기능
 - **개발 환경**: Node.js(>=18.18.0), Next.js 14, TypeScript, Supabase V2.0.
-- **배포**: [YU캘린더](https://yu-calendar.vercel.app/).
+- **배포**: [YU캘린더](https://yu-calendar.vercel.app/)
 - **Trouble Shooting**: [노션 링크](https://www.notion.so/tomorrowcho/YU-e3d060001cd84f919f1adafc90e20166?pvs=4#96db7517f88e4ff8abe7d73ca387a4f3)
 
 프로젝트의 자세한 내용은 [YU캘린더 README](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-calendar#readme)에서 확인하실 수 있습니다.
@@ -63,7 +63,7 @@ Next.js와 TypeScript를 사용하여 개발된 책 검색 서비스입니다.
 
 - **주요 기능**: 책 검색
 - **개발 환경**: Node.js(>=18.18.0), Next.js 14, TypeScript
-- **배포**: [YU 책 찾기](https://yu-books.vercel.app/)
+- **배포**: [YU 책 찾기](https://yu-books.vercel.app/book-list)
 
 프로젝트의 자세한 내용은 [YU책찾기 README](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-books#readme)에서 확인하실 수 있습니다.
 
