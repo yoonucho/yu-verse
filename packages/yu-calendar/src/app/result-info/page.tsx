@@ -2,7 +2,7 @@ import GoBack from "@/components/header/GoBack";
 import { fetchEventsByDateRange } from "@/actions/supabaseEventsActions";
 import EventShowDetails from "@/components/result-info/EventShowDetails";
 import ClientLoadingComponent from "@/components/ClientLoadingComponent";
-import HolidayClientComponent from "@/components/HolidayClientComponent";
+import HolidayAndEventComponent from "@/components/HolidayAndEventComponent";
 import styles from "./page.module.css";
 
 export type ResultInfoProps = {
@@ -23,7 +23,7 @@ const ResultInfo = async ({ searchParams }: ResultInfoProps) => {
 	// 서버 액션을 통해 이벤트 데이터를 가져옵니다.
 	const personalEvent = await fetchEventsByDateRange(startDateParam, endDateParam);
 
-	console.log("personalEvent:", personalEvent);
+	// console.log("personalEvent:", personalEvent);
 	return (
 		<>
 			<GoBack />
@@ -32,9 +32,7 @@ const ResultInfo = async ({ searchParams }: ResultInfoProps) => {
 					<div className={styles.inner}>
 						<h1> 결과 페이지</h1>
 						<div>
-							{/* 공휴일 관련 데이터는 클라이언트 컴포넌트로 관리 */}
-							{/* <HolidayClientComponent /> */}
-							<EventShowDetails events={personalEvent} />
+							<HolidayAndEventComponent events={personalEvent} />
 						</div>
 					</div>
 				</ClientLoadingComponent>
