@@ -27,7 +27,7 @@ const EventShowDetails: React.FC<EventShowDetailsProps> = ({ events }) => {
 					<div className={styles.title}>
 						<span>{event.title}</span>
 					</div>
-					<div className={styles.description}>{event.extendedProps?.description && <p className={styles.description}>{event.extendedProps.description}</p>}</div>
+					<div className={styles.description}>{event.extendedProps?.description && <span className={styles.description}>{event.extendedProps.description}</span>}</div>
 				</div>
 			))}
 		</div>
