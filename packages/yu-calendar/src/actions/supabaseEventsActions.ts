@@ -75,7 +75,7 @@ export const fetchEventsByDateRange = async (startDate: string, endDate: string)
 	const startISODateStr = format(startOfDayDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 	const endISODateStr = format(endOfDayDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 
-	console.log("startDate:", startISODateStr);
+	console.log("startDate:", startISODateStr, typeof startISODateStr);
 	console.log("endDate:", endISODateStr);
 
 	const { data, error } = await supabase
@@ -91,6 +91,6 @@ export const fetchEventsByDateRange = async (startDate: string, endDate: string)
 		throw new Error("이벤트를 가져오는 중 오류가 발생했습니다.");
 	}
 
-	console.log("Fetched events:", data);
+	// console.log("Fetched events:", data);
 	return data as YuCalendarRow[];
 };
