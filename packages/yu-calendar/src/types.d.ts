@@ -38,3 +38,8 @@ export type PersonalEvent = {
 	end: string;
 	description?: Dictionary<string>;
 };
+
+// FullCalendar의 이벤트 타입 확장
+export type ExtendedEventApi = EventApi & {
+	extendedProps: Dictionary<string>;
+};
