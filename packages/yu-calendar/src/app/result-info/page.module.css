@@ -21,9 +21,10 @@
 	.container {
 		margin-top: 50px;
 	}
+
+	.inner {
+		margin-top: 0;
+	}
 }
 @media (max-width: 640px) {
-	.container {
-		margin-top: 140px;
-	}
 }

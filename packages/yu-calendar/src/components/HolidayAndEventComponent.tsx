@@ -3,14 +3,12 @@
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { toZonedTime } from 'date-fns-tz';
-import useFetchHolidays from '@/hooks/useFetchHolidays';
+import useHolidayStore from '@/stores/useHolidayStore';
 import HolidayAndShowDetails from '@/components/result-info/HolidayAndEventShowDetails';
 
 const HolidayAndEventComponent = ({ events }) => {
-	const { holidays, error } = useFetchHolidays();
+	const holidays = useHolidayStore(state => state.holidays);
 	const timezone = 'Asia/Seoul';
-
-	if (error) return <p>{'데이터를 가져오는 중 문제가 발생했습니다'}</p>;
 
 	// 한국 시간대에 맞춰 날짜 형식을 "yyyy- M- d a h: mm분으로 변환합니다.
 	const formatEventDateToLocal = dateString => {
@@ -40,7 +38,6 @@ const HolidayAndEventComponent = ({ events }) => {
 
 	return (
 		<>
-			{holidays.length}
 			<HolidayAndShowDetails events={holidaysAndEvents} />
 		</>
 	);
