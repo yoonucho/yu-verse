@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { EventApi } from "@fullcalendar/core";
 import { v4 as uuidv4 } from "uuid";
-import { EventState } from "@/types.d";
+import { EventState, ExtendedEventApi } from "@/types.d";
 import { fetchEventsFromSupabase, addEventToSupabase, updateEventToSupabase, deleteEventFromSupabase } from "@/actions/supabaseEventsActions";
 
 const useEventStore = create<EventState>(set => ({
@@ -11,7 +11,14 @@ const useEventStore = create<EventState>(set => ({
 	isEditing: false,
 	addEvent: async event => {
 		try {
-			const newEvent: EventApi = { ...event, id: uuidv4() };
+			const newEvent: ExtendedEventApi = {
+				...event,
+				id: uuidv4(),
+				extendedProps: {
+					...event.extendedProps,
+					description: event.extendedProps?.description || '',
+				},
+			};
 			await addEventToSupabase(newEvent);
 			set(state => ({ events: [...state.events, newEvent] }));
 		} catch (error) {

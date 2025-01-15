@@ -4,6 +4,10 @@
   "scripts": {
     "yu-calendar": "pnpm --filter yu-calendar",
     "yu-books": "pnpm --filter yu-books",
+	"build": "pnpm build:all",
+    "build:all": "pnpm --filter yu-calendar build && pnpm --filter yu-books build",
+    "build:calendar": "pnpm --filter yu-calendar build",
+    "build:books": "pnpm --filter yu-books build",
     "test": "jest",
     "test:watch": "jest --watch"
   },
