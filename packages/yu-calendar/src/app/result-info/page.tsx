@@ -27,12 +27,12 @@ const ResultInfo = async ({ searchParams }: ResultInfoProps) => {
 	console.log('personalEvent:', personalEvent);
 	return (
 		<HolidayProvider>
-			<GoBack />
+			<GoBack isOpen={true} />
 			<div className={styles.container}>
 				<ClientLoadingComponent>
 					<div className={styles.inner}>
 						<h1> 결과 페이지</h1>
-						<HolidayTotalCount  />
+						<HolidayTotalCount />
 						<div>
 							<HolidayAndEventComponent events={personalEvent} />
 						</div>
