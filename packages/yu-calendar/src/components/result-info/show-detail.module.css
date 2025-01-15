@@ -19,15 +19,15 @@
 	background-color: var(--result-hover-color);
 }
 
-.holidayNumber {
+.eventNumber {
 	display: inline-block;
 	min-width: 20px;
 	font-size: 2rem;
 }
 
-.holidayDate {
-	flex: 0 0 10.2%;
-	min-width: 200px;
+.eventDate {
+	flex: 0 0 25.2%;
+	min-width: 250px;
 	padding: 0 0 0 12px;
 	color: var(--primary-title-color);
 	font-weight: 700;
@@ -35,11 +35,11 @@
 	box-sizing: border-box;
 }
 
-.holidayDate > span {
+.eventDate > span {
 	display: block;
 }
 
-.holidayDate .week {
+.eventDate .week {
 	font-size: 1.4rem;
 }
 
@@ -69,14 +69,27 @@
 	white-space: nowrap;
 }
 
+.description {
+	overflow: hidden;
+	display: block;
+	min-width: 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: left;
+}
+
 @media (max-width: 568px) {
-	.holidayDate {
-		flex: 0 0 40%;
-		min-width: auto;
+	.eventDate {
+		flex: 0 0 42%;
+		min-width: 190px;
 	}
 
 	.title {
-		flex: 0 0 50%;
+		flex: 0 0 52%;
 		min-width: auto;
+	}
+
+	.description {
+		display: none;
 	}
 }

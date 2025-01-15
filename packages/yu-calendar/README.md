@@ -2,7 +2,7 @@
 
 ![preview](https://github.com/yoonucho/yu-calendar/assets/2981954/0d656087-024f-4bc2-8723-d537e376976f)
 
-* 공휴일 검색 기능 구현
+* 공휴일, 이벤트 날짜 검색 기능 구현
 * 메인 캘린더 이벤트 팝업 기능 구현
                                                   
 ## 개발 환경
@@ -25,7 +25,7 @@
 * [Zustand로 메뉴 상태관리 & React FullCalendar Custom Button 생성하기](https://www.notion.so/tomorrowcho/Zustand-React-FullCalendar-Custom-Button-63cbf318620f434b8224b63645b0eb59)
 * [IOS 인풋창 클릭 시 날짜선택기 확대 이슈](https://www.notion.so/tomorrowcho/IOS-c3df81c14f334102b97f71e3d49468f9)
 * [window is not defined 오류 해결 과정](https://www.notion.so/tomorrowcho/window-is-not-defined-225266cad69a4a96bb6c49d5737fa0c1)
-* [React DatePicker에 커스텀 헤더 추가하여 년도 선택하기 기능 추가하기](https://www.notion.so/tomorrowcho/React-DatePicker-adb7b1a18bad4543889226b826651125)
+* [React DatePicker에 커스텀 헤더 추가하여 연도 선택하기 기능 추가하기](https://www.notion.so/tomorrowcho/React-DatePicker-adb7b1a18bad4543889226b826651125)
 
 
 ## 배포
