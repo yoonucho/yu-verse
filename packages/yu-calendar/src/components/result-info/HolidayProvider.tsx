@@ -4,7 +4,11 @@ import { useEffect } from 'react';
 import useFetchHolidays from '@/hooks/useFetchHolidays';
 import useHolidayStore from '@/stores/useHolidayStore';
 
-const HolidayProvider = ({ children }) => {
+type HolidayProviderProps = {
+	children: React.ReactNode;
+};
+
+const HolidayProvider = ({ children }: HolidayProviderProps) => {
 	const { holidays, error } = useFetchHolidays();
 	const setHolidays = useHolidayStore(state => state.setHolidays);
 

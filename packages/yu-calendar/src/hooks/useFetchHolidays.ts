@@ -1,18 +1,12 @@
-import { useState, useEffect } from "react";
-import { getYear, parseISO, isWithinInterval } from "date-fns";
-import getFetchHolidays from "@/app/api/holidayAPI";
-import useSetDateStore from "@/stores/useSetDateStore";
-
-type Holiday = {
-	id?: string;
-	title?: string;
-	start?: string;
-	dayOfWeek?: string;
-};
+import { useState, useEffect } from 'react';
+import { getYear, parseISO, isWithinInterval } from 'date-fns';
+import getFetchHolidays from '@/app/api/holidayAPI';
+import { HolidayDates } from '@/types.d';
+import useSetDateStore from '@/stores/useSetDateStore';
 
 const useFetchHolidays = () => {
 	const { startDate, endDate } = useSetDateStore();
-	const [holidays, setHolidays] = useState<Holiday[]>([]);
+	const [holidays, setHolidays] = useState<HolidayDates[]>([]);
 	const [localLoading, setLocalLoading] = useState(true); // 로컬 로딩 상태
 	const [error, setError] = useState(null);
 
@@ -30,11 +24,11 @@ const useFetchHolidays = () => {
 				const fromYear = startDate ? getYear(parseISO(startDate.toISOString())) : null;
 				const toYear = endDate ? getYear(parseISO(endDate.toISOString())) : null;
 				if (!fromYear || !toYear) {
-					setError(new Error("Invalid dates"));
+					setError(new Error('Invalid dates'));
 					setLocalLoading(false);
 					return;
 				}
-				const promises: Promise<Holiday[]>[] = [];
+				const promises: Promise<HolidayDates[]>[] = [];
 
 				for (let year = fromYear; year <= toYear; year++) {
 					promises.push(getFetchHolidays(year));
@@ -48,7 +42,7 @@ const useFetchHolidays = () => {
 
 				setHolidays(filteredHolidays);
 			} catch (error) {
-				console.error("Failed to fetch holidays:", error);
+				console.error('Failed to fetch holidays:', error);
 				setError(error);
 				setHolidays([]);
 			} finally {

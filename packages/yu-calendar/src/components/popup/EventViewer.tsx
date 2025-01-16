@@ -1,10 +1,10 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
-import { format } from "date-fns";
-import { ko } from "date-fns/locale";
-import { EventType, HoliDayDates } from "@/types.d";
-import EventActions from "./EventActions";
-import styles from "./event-viewer.module.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import { EventType, HolidayDates } from '@/types.d';
+import EventActions from './EventActions';
+import styles from './event-viewer.module.css';
 
 type EventViewerProps = {
 	event: EventType | any;
@@ -13,16 +13,16 @@ type EventViewerProps = {
 };
 
 const EventViewer: React.FC<EventViewerProps> = ({ event, onEdit, onDelete }) => {
-	const isHoliday = (event: any): event is HoliDayDates => {
+	const isHoliday = (event: any): event is HolidayDates => {
 		// 공휴일인지 확인 하는 함수
-		return event.extendedProps?.types?.[0] === "Public";
+		return event.extendedProps?.types?.[0] === 'Public';
 	};
 
 	const formatDateForInput = (date: Date) => {
 		if (isHoliday(event)) {
-			return format(date, "yyyy년 MM월 dd일", { locale: ko });
+			return format(date, 'yyyy년 MM월 dd일', { locale: ko });
 		} else {
-			return format(date, "yyyy년 MM월 dd일 a HH:mm", { locale: ko });
+			return format(date, 'yyyy년 MM월 dd일 a HH:mm', { locale: ko });
 		}
 	};
 
@@ -33,7 +33,7 @@ const EventViewer: React.FC<EventViewerProps> = ({ event, onEdit, onDelete }) =>
 				{event.startStr && (
 					<>
 						<span>
-							<FontAwesomeIcon icon={faClock} style={{ color: "var(--primary-color)" }} />
+							<FontAwesomeIcon icon={faClock} style={{ color: 'var(--primary-color)' }} />
 						</span>
 						<span>{formatDateForInput(new Date(event.startStr))}</span>
 						<span>{event.extendedProps?.dayOfWeek}</span>
@@ -44,7 +44,7 @@ const EventViewer: React.FC<EventViewerProps> = ({ event, onEdit, onDelete }) =>
 				{event.endStr && (
 					<>
 						<span>
-							<FontAwesomeIcon icon={faClock} style={{ color: "var(--primary-color)" }} />
+							<FontAwesomeIcon icon={faClock} style={{ color: 'var(--primary-color)' }} />
 							{formatDateForInput(new Date(event.endStr))}
 						</span>
 						<span>{event.extendedProps?.dayOfWeek}</span>

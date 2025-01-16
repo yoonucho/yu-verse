@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { EventType, HoliDayDates } from "@/types.d";
-import getFetchHolidays from "@/app/api/holidayAPI";
-import useLoadingStore from "@/stores/useLoadingStore";
-import usePopupStore from "@/stores/usePopupStore";
-import useEventStore from "@/stores/useEventStore";
-import CalendarComponent from "./CalendarComponent";
-import Loading from "@/components/icons/LoadingIcon";
-import EventPopupControl from "@/components/popup/EventPopupControl";
-import { calculatePosition } from "@/utils/calcuatePosition";
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { EventType, HolidayDates } from '@/types.d';
+import getFetchHolidays from '@/app/api/holidayAPI';
+import useLoadingStore from '@/stores/useLoadingStore';
+import usePopupStore from '@/stores/usePopupStore';
+import useEventStore from '@/stores/useEventStore';
+import CalendarComponent from './CalendarComponent';
+import Loading from '@/components/icons/LoadingIcon';
+import EventPopupControl from '@/components/popup/EventPopupControl';
+import { calculatePosition } from '@/utils/calcuatePosition';
 
 const MainCalendar: React.FC = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const [holidayEvents, setHolidayEvents] = useState<HoliDayDates[]>([]);
+	const [holidayEvents, setHolidayEvents] = useState<HolidayDates[]>([]);
 	const { isLoading, setIsLoading } = useLoadingStore();
 	const { openPopup, setPopupPosition } = usePopupStore();
 	const { events, fetchEvents, setSelectedEvent, setSelectedDate, setIsEditing } = useEventStore();
@@ -36,8 +36,8 @@ const MainCalendar: React.FC = () => {
 		const type = mouseEvent.type;
 		// console.log("dateInfo", dateInfo.jsEvent.type);
 		// 마우스 클릭 이벤트인 경우
-		if (type === "mouseup") {
-			if (dateInfo.dayEl.classList.contains("fc-day-other")) {
+		if (type === 'mouseup') {
+			if (dateInfo.dayEl.classList.contains('fc-day-other')) {
 				return;
 			}
 			if (mouseEvent.detail === 1) {
@@ -49,9 +49,9 @@ const MainCalendar: React.FC = () => {
 			}
 		}
 		// 터치 이벤트인 경우
-		else if (type === "touchend") {
+		else if (type === 'touchend') {
 			// const currentTime = new Date().getTime();
-			if (dateInfo.dayEl.classList.contains("fc-day-other")) {
+			if (dateInfo.dayEl.classList.contains('fc-day-other')) {
 				return;
 			}
 
@@ -86,7 +86,7 @@ const MainCalendar: React.FC = () => {
 			if (loadedYears.current.has(year)) {
 				return;
 			}
-			const data: HoliDayDates[] = await getFetchHolidays(year);
+			const data: HolidayDates[] = await getFetchHolidays(year);
 			// console.log(`Fetched events for year ${year}:`, data); // 로그 추가
 			// setHolidayEvents(prevEvents => [...prevEvents, ...data]); // 새로운 배열을 직접 설정
 			setHolidayEvents(prevEvents => {
@@ -115,7 +115,7 @@ const MainCalendar: React.FC = () => {
 	useEffect(() => {
 		// setIsLoading(true);
 		// URL에서 year 파라미터를 가져옴
-		const yearParam = searchParams.get("year");
+		const yearParam = searchParams.get('year');
 		// 현재 연도 가져오기
 		const currentYear = new Date().getFullYear();
 		//  URL에서 가져온 연도가 있으면 그 값을 사용하고, 없으면 현재 연도를 사용

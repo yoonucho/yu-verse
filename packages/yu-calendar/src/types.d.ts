@@ -1,12 +1,12 @@
-export type EventType = EventApi | HoliDayDates;
+export type EventType = EventApi | HolidayDates;
 
 // 공휴일
-type Holiday = {
+export type Holiday = {
 	date?: string;
 	localName?: string;
 };
 
-export type HoliDayDates = Holiday & {
+export type HolidayDates = Holiday & {
 	id?: string;
 	title: string;
 	start?: string;
