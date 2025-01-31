@@ -1,8 +1,9 @@
+import React from 'react';
 import { SearchInputProps } from "@/types/BookInfo";
 
 import styles from "./searchInput.module.css";
 
-const SearchInput: React.FC<SearchInputProps> = ({ value, onChange }) => {
+const SearchInput: React.FC<SearchInputProps> = React.memo(function SearchInput ({ value, onChange }) { // React.memo 사용
 	return (
 		<div className={styles.searchBoxBar}>
 			<div className={styles.searchBox}>
@@ -12,6 +13,9 @@ const SearchInput: React.FC<SearchInputProps> = ({ value, onChange }) => {
 			</div>
 		</div>
 	);
-};
+});
+
+// displayName을 명시적으로 설정하여 ESLint 경고 해결
+SearchInput.displayName = 'SearchInput';
 
 export default SearchInput;
