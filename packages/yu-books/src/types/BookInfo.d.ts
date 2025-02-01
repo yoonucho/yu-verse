@@ -34,6 +34,7 @@ export type BookResponse = {
 
 export type BookStore = {
 	query: string; // 검색어
+	searchInput: string; //실시간 입력값
 	selectedKeyword: string; // 선택된 카테고리 키워드
 	documents: BookListInfo[]; // 도서 리스트
 	meta: MetaInfo | null; // 메타 정보
@@ -43,9 +44,10 @@ export type BookStore = {
 	sortOption: 'asc' | 'desc' | ''; // 가격 정렬 옵션 (초기값은 "")
 
 	setQuery: (query: string) => void; // 검색어 설정 함수
+	setSearchInput: (input: string) => void,
 	setSelectedKeyword: (keyword: string) => void; // 선택된 카테고리 설정 함수
 	setCurrentPage: (page: number) => void; // 페이지 변경 핸들러
-	setSortOption: (option: 'asc' | 'desc'| "") => void; // 정렬 옵션 설정
+	setSortOption: (option: 'asc' | 'desc' | '') => void; // 정렬 옵션 설정
 	fetchBooks: () => Promise<void>; // 도서 검색 함수
 	resetSearch: () => void; // 검색어 초기화 함수
 };
@@ -70,6 +72,7 @@ export type BookListItemProps = {
 
 export type SearchInputProps = {
 	value: string;
+	onReset: () => void; 
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -112,6 +115,10 @@ export type FilterStore = {
 	toggleOption: (option: string) => void; // 옵션 토글 함수
 	setFiltered: (isFiltered: boolean) => void; // 필터 적용 여부 설정 함수
 };
+
+export type FilterButtonProps = {
+	onReset: () => void;
+}
 
 // 페이지 네이션 데이터
 export type PaginationProps = {

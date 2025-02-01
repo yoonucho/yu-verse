@@ -3,12 +3,12 @@ import { SearchInputProps } from "@/types/BookInfo";
 
 import styles from "./searchInput.module.css";
 
-const SearchInput: React.FC<SearchInputProps> = React.memo(function SearchInput ({ value, onChange }) { // React.memo 사용
+const SearchInput: React.FC<SearchInputProps> = React.memo(function SearchInput ({ value, onChange, onReset }) { // React.memo 사용
 	return (
 		<div className={styles.searchBoxBar}>
 			<div className={styles.searchBox}>
 				<div className={styles.container}>
-					<input type="text" placeholder="검색어를 입력하세요" value={value} onChange={onChange} className={styles.searchInput} />
+					<input type="text" placeholder="검색어를 입력하세요" value={value} onChange={onChange} onReset={onReset} className={styles.searchInput} />
 				</div>
 			</div>
 		</div>
