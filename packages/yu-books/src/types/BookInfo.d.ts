@@ -39,6 +39,7 @@ export type BookStore = {
 	documents: BookListInfo[]; // 도서 리스트
 	meta: MetaInfo | null; // 메타 정보
 	isLoading: boolean; // 로딩 상태
+	isSorting: boolean; // 가격 정렬 로딩 상태 추가
 	error: string | null; // 에러 메시지
 	currentPage: number; // 현재 페이지 상태
 	sortOption: 'asc' | 'desc' | ''; // 가격 정렬 옵션 (초기값은 "")

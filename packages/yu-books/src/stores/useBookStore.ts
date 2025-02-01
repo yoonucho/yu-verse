@@ -13,6 +13,7 @@ const useBookStore = create(
 			documents: [],
 			meta: null,
 			isLoading: false,
+			isSorting: false,
 			error: null,
 			currentPage: 1, // 현재 페이지 상태
 			sortOption: '', // 기본값은 빈 문자열 (정렬 옵션 없음)
@@ -20,7 +21,7 @@ const useBookStore = create(
 			// 검색어 설정 ( Header에서 직접 사용)
 			setQuery: (query: string) => set({ query }),
 			// 검색어 입력값 설정
-			setSearchInput: (input: string) => set({searchInput: input}),
+			setSearchInput: (input: string) => set({ searchInput: input }),
 			setSelectedKeyword: (keyword: string) => set({ selectedKeyword: keyword }),
 			// 페이지 변경 핸들러
 			setCurrentPage: (page: number) => set({ currentPage: page }),
@@ -35,16 +36,13 @@ const useBookStore = create(
 				const { query, selectedKeyword, currentPage, sortOption } = get();
 				const searchQuery = query || selectedKeyword; // 검색어가 없으면 선택된 카테고리를 검색어로 사용
 
-				// 검색어가 1글자만 입력되었을 때 검색 실행하지 않음
-				// if (searchQuery.length === 1) {
-				// 	alert('검색어를 2글자 이상 입력해주세요.');
-				// 	return;
-				// }
-
 				if (!searchQuery) return;
 
+				// 정렬 버튼을 눌렀을 때만 isSorting
+				const isSortingRequest = Boolean(sortOption);
+
 				try {
-					set({ isLoading: true, error: null });
+					set({ isLoading: !isSortingRequest, isSorting: isSortingRequest, error: null });
 					const validSortOption = sortOption === '' ? undefined : (sortOption as 'asc' | 'desc' | undefined);
 					const data = await fetchBooksAction(searchQuery, currentPage, 10, validSortOption);
 
@@ -61,7 +59,7 @@ const useBookStore = create(
 					}
 					console.error(error);
 				} finally {
-					set({ isLoading: false });
+					set({ isLoading: false, isSorting: false });
 				}
 			},
 
