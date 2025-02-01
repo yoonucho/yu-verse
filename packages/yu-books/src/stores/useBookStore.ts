@@ -8,6 +8,7 @@ const useBookStore = create(
 	persist<BookStore>(
 		(set, get) => ({
 			query: '', // 검색어,
+			searchInput: '', // 실시간 입력값
 			selectedKeyword: '', // 선택된 카테고리 키워드
 			documents: [],
 			meta: null,
@@ -18,11 +19,13 @@ const useBookStore = create(
 
 			// 검색어 설정 ( Header에서 직접 사용)
 			setQuery: (query: string) => set({ query }),
+			// 검색어 입력값 설정
+			setSearchInput: (input: string) => set({searchInput: input}),
 			setSelectedKeyword: (keyword: string) => set({ selectedKeyword: keyword }),
 			// 페이지 변경 핸들러
 			setCurrentPage: (page: number) => set({ currentPage: page }),
 			// 정렬 옵션 설정
-			setSortOption: (option: 'asc' | 'desc' | "") => {
+			setSortOption: (option: 'asc' | 'desc' | '') => {
 				set({ sortOption: option });
 				get().fetchBooks(); // 정렬 변경 시 데이터를 다시 불러옴
 			},
@@ -31,6 +34,12 @@ const useBookStore = create(
 			fetchBooks: async () => {
 				const { query, selectedKeyword, currentPage, sortOption } = get();
 				const searchQuery = query || selectedKeyword; // 검색어가 없으면 선택된 카테고리를 검색어로 사용
+
+				// 검색어가 1글자만 입력되었을 때 검색 실행하지 않음
+				// if (searchQuery.length === 1) {
+				// 	alert('검색어를 2글자 이상 입력해주세요.');
+				// 	return;
+				// }
 
 				if (!searchQuery) return;
 
@@ -58,7 +67,7 @@ const useBookStore = create(
 
 			// 초기화 버튼을 눌렀을 때 `sessionStorage`에서도 삭제되도록 설정
 			resetSearch: () => {
-				set({ query: '', selectedKeyword: '', documents: [], meta: null, currentPage: 1, sortOption: '' });
+				set({ query: '', searchInput: '', selectedKeyword: '', documents: [], meta: null, currentPage: 1, sortOption: '' });
 
 				// sessionStorage에서 데이터 삭제 (완전 초기화)
 				if (typeof window !== 'undefined') {
@@ -73,8 +82,6 @@ const useBookStore = create(
 					if (typeof window === 'undefined') return null;
 					const item = sessionStorage.getItem(name);
 					return item ? JSON.parse(item) : null; // JSON 파싱
-
-					// 새로고침할 때 query 와 selectedKeyword 초기화
 				},
 				setItem: (name: string, value) => {
 					if (typeof window !== 'undefined') {
@@ -91,7 +98,6 @@ const useBookStore = create(
 		}
 	)
 );
-
 
 // 새로고침 시 sessionStorage에서 데이터가 남아 있으면 자동으로 resetSearch() 실행
 if (typeof window !== 'undefined' && sessionStorage.getItem('book-store')) {

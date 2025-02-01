@@ -2,6 +2,7 @@ import React from 'react';
 
 import useFilterStore from '@/stores/useFilterStore';
 import useBookStore from '@/stores/useBookStore';
+import { FilterButtonProps } from '@/types/BookInfo';
 
 import styles from './filterButtonBox.module.css';
 
@@ -11,14 +12,14 @@ const priceSortOptions: { label: string; value: 'asc' | 'desc' }[] = [
 	{ label: '가격 내림차순', value: 'desc' },
 ];
 
-const FilterButtonBox: React.FC = () => {
-	const { query, fetchBooks, resetSearch, setQuery, selectedKeyword, sortOption, setSelectedKeyword, setCurrentPage, setSortOption } = useBookStore(); // useBookStore 사용
+const FilterButtonBox: React.FC<FilterButtonProps> = ({ onReset }) => {
+	const { query, fetchBooks, setQuery, selectedKeyword, sortOption, setSelectedKeyword, setCurrentPage, setSortOption } = useBookStore(); // useBookStore 사용
 	const { clearFilters, filters, setFilter, applyFilters } = useFilterStore();
 
 	/* 초기화 버튼 클릭 시 */
 	const handleClear = async () => {
 		clearFilters();
-		resetSearch();
+		onReset();
 		setCurrentPage(1);
 		await fetchBooks();
 	};
@@ -37,11 +38,6 @@ const FilterButtonBox: React.FC = () => {
 		setCurrentPage(1); // 페이지 초기화
 
 		await fetchBooks();
-	};
-
-	/* 옵션 선택 여부 확인 */
-	const isOptionSelected = (value: string) => {
-		return filters.priceSortOrder === value;
 	};
 
 	/* 카테고리 키워드 클릭 */
