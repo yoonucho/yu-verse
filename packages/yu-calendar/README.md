@@ -26,6 +26,7 @@
 * [IOS 인풋창 클릭 시 날짜선택기 확대 이슈](https://www.notion.so/tomorrowcho/IOS-c3df81c14f334102b97f71e3d49468f9)
 * [window is not defined 오류 해결 과정](https://www.notion.so/tomorrowcho/window-is-not-defined-225266cad69a4a96bb6c49d5737fa0c1)
 * [React DatePicker에 커스텀 헤더 추가하여 연도 선택하기 기능 추가하기](https://www.notion.so/tomorrowcho/React-DatePicker-adb7b1a18bad4543889226b826651125)
+* [공휴일 데이터 중복 호출 문제를 최적화하며 단일 책임 원칙 지키기](https://www.notion.so/tomorrowcho/17c1c66258d480219d44ff4ec95d026f)
 
 
 ## 배포
