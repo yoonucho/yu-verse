@@ -19,7 +19,7 @@ import styles from './bookList.module.css';
 
 const BookList: React.FC = () => {
 	useResetBookStoreOnReload(); // 페이지 새로고침 시 검색어 초기화
-	const { query, isLoading, documents, fetchBooks, setCurrentPage } = useBookStore();
+	const { query, isSorting, isLoading, documents, fetchBooks, setCurrentPage } = useBookStore();
 
 	const headerText = 'YU 책 찾기';
 
@@ -29,7 +29,6 @@ const BookList: React.FC = () => {
 			fetchBooks();
 		}
 	}, [query, fetchBooks]);
-
 
 	/* 페이지 변경 핸들러 */
 	const handlePageChange = (page: number) => {
@@ -56,8 +55,12 @@ const BookList: React.FC = () => {
 			<Header headerText={headerText} />
 			<div className="inner">
 				<Suspense fallback={<Loading />}>
-					{/* 로딩 중일 때 로딩 아이콘 표시 */}
-					{isLoading && <Loading />}
+					{/* 가격 정렬시 로딩 아이콘 표시 */}
+					{isSorting && (
+						<div className={styles.loadingContainer}>
+							<Loading />
+						</div>
+					)}
 					{/* 검색어 입력후 데이터가 없을 때 메시지 표시 */}
 					{query && documents.length === 0 && !isLoading ? (
 						<div className={styles.noData}>
