@@ -3,7 +3,7 @@ import { BookResponse } from "@/types/BookInfo";
 import { BaseURL, KAKAOAPIKEY } from "@/app/constants";
 
 // 도서 검색 리스트;
-const fetchBooks = async (keyword: string, page: number, size: number): Promise<BookResponse> => {
+const fetchBooks = async (keyword: string, page: number, size: number, sortOption?: "asc" | "desc"): Promise<BookResponse> => {
 	try {
 		const response = await fetch(`${BaseURL}?query=${keyword}&page=${page}&size=${size}`, {
 			headers: {

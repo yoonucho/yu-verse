@@ -1,21 +1,16 @@
-import { formatISO, format, getYear, parseISO } from "date-fns";
-import { ko } from "date-fns/locale";
-import { API_URL } from "../constants";
-import { HoliDayDates } from "@/types.d";
+import { formatISO, format, getYear, parseISO } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import { API_URL } from '../constants';
+import { Holiday, HolidayDates } from '@/types.d';
 
 export const formatDate = (date: string) => {
-	return formatISO(new Date(date), { representation: "date" });
+	return formatISO(new Date(date), { representation: 'date' });
 };
 
-type Holiday = {
-	date?: string;
-	localName?: string;
-};
-
-const getFetchHolidays = async (year: number = getYear(new Date())): Promise<HoliDayDates[]> => {
+const getFetchHolidays = async (year: number = getYear(new Date())): Promise<HolidayDates[]> => {
 	const response = await fetch(`${API_URL}/${year}/KR`);
 	if (!response.ok) {
-		throw new Error("응답 실패");
+		throw new Error('응답 실패');
 	}
 	// await new Promise(resolve => setTimeout(resolve, 100000));
 	const data: Holiday[] = await response.json();
@@ -25,7 +20,7 @@ const getFetchHolidays = async (year: number = getYear(new Date())): Promise<Hol
 		title: holiday.localName,
 		start: formatDate(holiday.date),
 		resourceId: `${holiday.date}-${index + 1}`,
-		dayOfWeek: format(parseISO(holiday.date), "EEEE", { locale: ko }),
+		dayOfWeek: format(parseISO(holiday.date), 'EEEE', { locale: ko }),
 	}));
 };
 

@@ -1,8 +1,9 @@
-import { create } from "zustand";
+import { create } from 'zustand';
+import { HolidayDates } from '@/types.d';
 
 type HolidayState = {
-	holidays: string[];
-	setHolidays: (holidays: any[]) => void;
+	holidays: HolidayDates[];
+	setHolidays: (holidays: HolidayDates[]) => void;
 };
 
 const useHolidayStore = create<HolidayState>(set => ({

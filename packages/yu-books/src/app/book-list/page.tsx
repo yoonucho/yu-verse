@@ -1,107 +1,89 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, Suspense } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import React, { useEffect, Suspense } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
-import { BookListInfo, FormattedBookListInfo } from "@/types/BookInfo";
-import { formatDate, formatPriceWithComma, calculateDiscountRate } from "@/utils";
+import { BookListInfo, FormattedBookListInfo } from '@/types/BookInfo';
+import { formatDate, formatPriceWithComma } from '@/utils';
 
-import useBookStore from "@/stores/useBookStore";
-import usePaginationStore from "@/stores/usePaginationStore";
+import useResetBookStoreOnReload from '@/hooks/useResetBookStoreOnReload';
+import useBookStore from '@/stores/useBookStore';
 
-import BookListItem from "@/components/item/BookListItem";
-import Header from "@/components/header/Header";
-import Loading from "@/components/icons/LoadingIcon";
-import Pagination from "@/components/pagination/Pagination";
+import BookListItem from '@/components/item/BookListItem';
+import Header from '@/components/header/Header';
+import Loading from '@/components/icons/LoadingIcon';
+import Pagination from '@/components/pagination/Pagination';
 
-import styles from "./bookList.module.css";
+import styles from './bookList.module.css';
 
 const BookList: React.FC = () => {
-	const { query, fetchBooks, documents, meta, selectedKeyword } = useBookStore();
-	const { currentPage, setTotalPage } = usePaginationStore();
-	const [isSearchTriggered, setIsSearchTriggered] = useState(false);
+	useResetBookStoreOnReload(); // 페이지 새로고침 시 검색어 초기화
+	const { query, isLoading, documents, currentPage, fetchBooks, setCurrentPage } = useBookStore();
 
-	const headerText = "YU 책 찾기";
+	const headerText = 'YU 책 찾기';
 
 	/* 페이지 로드 시 및 선택한 키워드가 변경될 때마다 fetchBooks 호출 */
 	useEffect(() => {
-		if (query || selectedKeyword) {
-			// console.log("fetchBooks 호출", "query :", query, "selectedKeyword :", selectedKeyword);
+		if (query) {
 			fetchBooks();
-			setIsSearchTriggered(true);
 		}
-	}, [query, selectedKeyword, fetchBooks]);
+	}, [query, fetchBooks]);
 
-	/* 페이지 변경 시 fetchBooks 호출 */
-	useEffect(() => {
-		fetchBooks();
-	}, [currentPage, fetchBooks]);
-
-	/* 메타 정보 변경 시 전체 페이지 수 업데이트 */
-	useEffect(() => {
-		if (meta) {
-			const totalPage = Math.ceil(meta.pageable_count / 10); // 한 페이지당 10개 항목 기준
-			setTotalPage(totalPage);
-		}
-	}, [meta, setTotalPage, fetchBooks, documents]);
+	/* 페이지 변경 핸들러 */
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page);
+	};
 
 	const formatBooks = (books: BookListInfo[]): FormattedBookListInfo[] => {
-		
-
 		return books.map(book => {
-			// const discountPercent = ((book.price - book.sale_price) / book.price) * 100;
-			// const { discountPrice, disCountText } = calculateDiscountRate(book.price, discountPercent);
-
 			return {
 				...book,
-				formattedPrice: formatPriceWithComma(book.price),
+				formattedPrice: formatPriceWithComma(book.price), // 가격 포맷 적용
 				// disCountText,
-				discountPrice: formatPriceWithComma(book.sale_price),
-				formattedDate: formatDate(book.datetime),
+				discountPrice: formatPriceWithComma(book.sale_price), // 할인 가격 포맷 적용
+				formattedDate: formatDate(book.datetime), // 날짜 포맷 적용
 			};
 		});
 	};
 
 	const formattedBooks = formatBooks(documents);
 
-	const handlePageChange = (page: number) => {
-		usePaginationStore.getState().setCurrentPage(page);
-	};
-
 	return (
 		<main className="container">
-			{/* 도서 전체 리스트 */}
+			{/* 헤더 (검색 입력 & 필터 버튼 포함) */}
 			<Header headerText={headerText} />
 			<div className="inner">
 				<Suspense fallback={<Loading />}>
-					{!isSearchTriggered || (query.length === 0 && !selectedKeyword) ? (
+					{/* 검색어 입력후 데이터가 없을 때 메시지 표시 */}
+					{query && documents.length === 0 && !isLoading ? (
 						<div className={styles.noData}>
-							<Image src="/assets/images/message-icon.svg" alt="message" width={300} height={400} />
-							<p>책을 검색해주세요.</p>
+							<Image src="/assets/images/message-icon.svg" alt="no data" width={300} height={400} />
+							<p>검색 결과가 없습니다. 다시 검색해주세요.</p>
 						</div>
 					) : (
 						<>
-							{formattedBooks.length == 0 && query.length < 2 ? (
-								<div className={styles.noData}>
-									<Image src="/assets/images/message-icon.svg" alt="message" width={400} height={400} />
-									<p>
-										선택하신 조건에 맞는 책이 없습니다. <br />
-										준비된 다른 책을 확인해 보세요!
-									</p>
-								</div>
+							{documents.length > 0 ? (
+								<>
+									{/* 검색 결과 리스트 */}
+									<ul className={styles.bookList} aria-label="검색 결과 리스트">
+										{formattedBooks.map(book => (
+											<li key={book.isbn}>
+												<Link href={book.url} title={`${book.title} 상세페이지 이동`} target="_blank">
+													<BookListItem book={book} />
+												</Link>
+											</li>
+										))}
+									</ul>
+									{/* 페이지네이션 */}
+									<Pagination onPageChange={handlePageChange} />
+								</>
 							) : (
-								<ul className={styles.bookList}>
-									{formattedBooks.map(book => (
-										<li key={book.isbn}>
-											<Link href={book.url} title={`${book.title} 상세페이지 이동`} target="_blank">
-												<BookListItem book={book} />
-											</Link>
-										</li>
-									))}
-								</ul>
+								<div className={styles.noData}>
+									<Image src="/assets/images/message-icon.svg" alt="message" width={300} height={400} />
+									<p>책을 검색해주세요.</p>
+								</div>
 							)}
-							<Pagination onPageChange={handlePageChange} />
 						</>
 					)}
 				</Suspense>

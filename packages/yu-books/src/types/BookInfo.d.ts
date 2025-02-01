@@ -28,31 +28,30 @@ export type MetaInfo = {
 };
 
 export type BookResponse = {
-	documents: BookListInfo[];
-	meta: MetaInfo;
+	documents: BookListInfo[]; // 도서 리스트
+	meta: MetaInfo; // 메타 정보
 };
 
 export type BookStore = {
 	query: string; // 검색어
-	inputValue: string;
-	debouncedQuery: string;
-	selectedKeyword: string; // 선택된 키워드
+	selectedKeyword: string; // 선택된 카테고리 키워드
 	documents: BookListInfo[]; // 도서 리스트
 	meta: MetaInfo | null; // 메타 정보
-	sortOption: string | null;
-	filterType: string | null;
+	isLoading: boolean; // 로딩 상태
+	error: string | null; // 에러 메시지
+	currentPage: number; // 현재 페이지 상태
+	sortOption: 'asc' | 'desc' | ''; // 가격 정렬 옵션 (초기값은 "")
+
 	setQuery: (query: string) => void; // 검색어 설정 함수
-	setInputValue: (value: string) => void;
-	setSelectedKeyword: (keyword: string) => void; // 선택된 키워드 설정 함수
-	setDocuments: (documents: BookListInfo[]) => void; // 도서 리스트 설정 함수
-	setMeta: (meta: MetaInfo) => void; // 메타 정보 설정 함수
-	setSortOption: (sortOption: string) => void;
-	fetchBooks: () => void; // 도서 리스트 불러오는 함수
+	setSelectedKeyword: (keyword: string) => void; // 선택된 카테고리 설정 함수
+	setCurrentPage: (page: number) => void; // 페이지 변경 핸들러
+	setSortOption: (option: 'asc' | 'desc'| "") => void; // 정렬 옵션 설정
+	fetchBooks: () => Promise<void>; // 도서 검색 함수
 	resetSearch: () => void; // 검색어 초기화 함수
 };
 
 export type KeywordBookResponse = BookResponse & {
-	keyword?: string;
+	meta: MetaInfo;
 };
 
 // 포맷팅된 도서 정보 타입 정의
@@ -78,23 +77,23 @@ export type SearchInputProps = {
 export type FilterState = {
 	filters: {
 		relatedKeywords: string[];
-		priceSortOrder?: "asc" | "desc";
+		priceSortOrder?: 'asc' | 'desc' | undefined;
 		bookTypeTags: string[];
 		title: string;
 		author: string;
 		publisher: string;
 		isbn: string;
-		[key: string]: string | string[] | undefined;
+		// [key: string]: string | string[] | undefined;
 	};
 	appliedFilters: {
 		relatedKeywords: string[];
-		priceSortOrder?: "asc" | "desc";
+		priceSortOrder?: 'asc' | 'desc';
 		bookTypeTags: string[];
 		title: string;
 		author: string;
 		publisher: string;
 		isbn: string;
-		[key: string]: string | string[] | undefined;
+		// [key: string]: string | string[] | undefined;
 	};
 	isFiltered: boolean;
 	filterType: string | null;
@@ -102,12 +101,12 @@ export type FilterState = {
 };
 
 export type FilterStore = {
-	filters: FilterState["filters"]; // 현재 설정된 필터
-	appliedFilters: FilterState["appliedFilters"]; // 적용된 필터
-	filterType: "relatedKeywords" | "priceSortOrder" | null; // 필터 타입
+	filters: FilterState['filters']; // 현재 설정된 필터
+	appliedFilters: FilterState['appliedFilters']; // 적용된 필터
+	filterType: 'relatedKeywords' | 'priceSortOrder' | null; // 필터 타입
 	isFiltered?: boolean; // 필터 적용 여부
 	selectedOptions: string[]; // 선택된 옵션
-	setFilter: (type: keyof FilterState["filters"], value: string | "asc" | "desc" | string[] | undefined) => void; // 필터 설정 함수
+	setFilter: (type: keyof FilterState['filters'], value: string | 'asc' | 'desc' | string[] | undefined) => void; // 필터 설정 함수
 	clearFilters: () => void; // 필터 초기화 함수
 	applyFilters: () => void; // 필터 적용 함수
 	toggleOption: (option: string) => void; // 옵션 토글 함수
