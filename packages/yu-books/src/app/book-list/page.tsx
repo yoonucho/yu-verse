@@ -19,16 +19,17 @@ import styles from './bookList.module.css';
 
 const BookList: React.FC = () => {
 	useResetBookStoreOnReload(); // 페이지 새로고침 시 검색어 초기화
-	const { query, isLoading, documents, currentPage, fetchBooks, setCurrentPage } = useBookStore();
+	const { query, isLoading, documents, fetchBooks, setCurrentPage } = useBookStore();
 
 	const headerText = 'YU 책 찾기';
 
 	/* 페이지 로드 시 및 선택한 키워드가 변경될 때마다 fetchBooks 호출 */
 	useEffect(() => {
-		if (query) {
+		if (query.length >= 2) {
 			fetchBooks();
 		}
 	}, [query, fetchBooks]);
+
 
 	/* 페이지 변경 핸들러 */
 	const handlePageChange = (page: number) => {
@@ -55,6 +56,8 @@ const BookList: React.FC = () => {
 			<Header headerText={headerText} />
 			<div className="inner">
 				<Suspense fallback={<Loading />}>
+					{/* 로딩 중일 때 로딩 아이콘 표시 */}
+					{isLoading && <Loading />}
 					{/* 검색어 입력후 데이터가 없을 때 메시지 표시 */}
 					{query && documents.length === 0 && !isLoading ? (
 						<div className={styles.noData}>
