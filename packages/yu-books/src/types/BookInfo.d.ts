@@ -48,6 +48,7 @@ export type BookStore = {
 	setSearchInput: (input: string) => void,
 	setSelectedKeyword: (keyword: string) => void; // 선택된 카테고리 설정 함수
 	setCurrentPage: (page: number) => void; // 페이지 변경 핸들러
+	setDocuments: (documents) => void;
 	setSortOption: (option: 'asc' | 'desc' | '') => void; // 정렬 옵션 설정
 	fetchBooks: () => Promise<void>; // 도서 검색 함수
 	resetSearch: () => void; // 검색어 초기화 함수
