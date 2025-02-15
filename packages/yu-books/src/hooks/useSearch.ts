@@ -23,8 +23,8 @@ const useSearch = () => {
 
         if (inputValue.length >= 2) {
           setQuery(inputValue);
-          setSelectedKeyword(""); //  기존 카테고리 선택 초기화
-          setSortOption(""); //  정렬 옵션 초기화
+          setSelectedKeyword(""); // 🔹 기존 카테고리 선택 초기화
+          setSortOption(""); // 🔹 정렬 옵션 초기화
         }
       }, 1000),
     [setQuery, setSelectedKeyword, setSortOption]
@@ -34,8 +34,8 @@ const useSearch = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchInput(value);
-    setSelectedKeyword(""); //  검색어 입력 시 카테고리 선택 초기화
-    setSortOption(""); //  정렬 옵션 초기화
+    setSelectedKeyword(""); // 🔹 검색어 입력 시 카테고리 선택 초기화
+    setSortOption(""); // 🔹 정렬 옵션 초기화
     debouncedSearch(value); // `debounce`된 검색 실행
   };
 
@@ -49,15 +49,15 @@ const useSearch = () => {
 
   // 검색 초기화 (초기화 버튼 클릭 시 호출됨)
   const handleResetSearch = () => {
-    resetSearch(); //  Zustand의 검색 상태 초기화
+    resetSearch(); // 🔹 Zustand의 검색 상태 초기화
   };
 
   // 카테고리 선택 시 검색어와 정렬 옵션만 초기화
   const handleKeywordClick = (keyword: string) => {
-    setSelectedKeyword(keyword); //  선택된 키워드 설정
-    setSearchInput(""); //  검색어 초기화
-    setQuery(""); //  검색어 초기화
-    setSortOption(""); //  정렬 옵션 초기화
+    setSelectedKeyword(keyword); // 🔹 선택된 키워드 설정
+    setSearchInput(""); // 🔹 검색어 초기화
+    setQuery(""); // 🔹 검색어 초기화
+    setSortOption(""); // 🔹 정렬 옵션 초기화
   };
 
   return {

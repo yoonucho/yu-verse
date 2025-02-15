@@ -75,6 +75,7 @@ const useBookStore = create(
 
       // 초기화 버튼을 눌렀을 때 `sessionStorage`에서도 삭제되도록 설정
       resetSearch: () => {
+        console.log("resetSearch 호출됨"); // 로그 추가
         set({
           query: "",
           searchInput: "",
@@ -87,7 +88,8 @@ const useBookStore = create(
 
         // sessionStorage에서 데이터 삭제 (완전 초기화)
         if (typeof window !== "undefined") {
-          sessionStorage.removeItem("book-store");
+          console.log("sessionStorage에서 book-store 삭제"); // 로그 추가
+          sessionStorage.removeItem("book-store"); // 특정 항목 삭제
         }
       },
       // isSorting 상태 업데이트 함수 추가
@@ -118,5 +120,11 @@ const useBookStore = create(
     }
   )
 );
+
+// 새로고침 시 sessionStorage에서 데이터가 남아 있으면 자동으로 resetSearch() 실행
+if (typeof window !== "undefined" && sessionStorage.getItem("book-store")) {
+  sessionStorage.removeItem("book-store"); // 세션 스토리지에서 직접 삭제
+  useBookStore.getState().resetSearch(); // 검색어 리셋
+}
 
 export default useBookStore;
