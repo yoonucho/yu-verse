@@ -12,7 +12,10 @@ const priceSortOptions: { label: string; value: "asc" | "desc" }[] = [
   { label: "가격 내림차순", value: "desc" },
 ];
 
-const FilterButtonBox: React.FC<FilterButtonProps> = ({ onReset }) => {
+const FilterButtonBox: React.FC<FilterButtonProps> = ({
+  onReset,
+  onKeywordClick,
+}) => {
   const {
     query,
     fetchBooks,
@@ -31,7 +34,7 @@ const FilterButtonBox: React.FC<FilterButtonProps> = ({ onReset }) => {
     if (sortOption) {
       fetchBooks();
     }
-  }, [sortOption]);
+  }, [sortOption, fetchBooks]);
 
   /* 초기화 버튼 클릭 시 */
   const handleClear = async () => {
@@ -79,6 +82,7 @@ const FilterButtonBox: React.FC<FilterButtonProps> = ({ onReset }) => {
 
     await new Promise((resolve) => setTimeout(resolve, 0));
     await fetchBooks(); // 최신 상태를 반영하여 책 검색
+    onKeywordClick(keyword); //  검색어 초기화
   };
 
   return (

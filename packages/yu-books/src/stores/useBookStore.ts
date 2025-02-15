@@ -117,9 +117,4 @@ const useBookStore = create(
   )
 );
 
-// 새로고침 시 sessionStorage에서 데이터가 남아 있으면 자동으로 resetSearch() 실행
-if (typeof window !== "undefined" && sessionStorage.getItem("book-store")) {
-  useBookStore.getState().resetSearch();
-}
-
 export default useBookStore;
