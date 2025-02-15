@@ -27,6 +27,8 @@ const FilterButtonBox: React.FC<FilterButtonProps> = ({
     setSortOption,
     documents,
     setDocuments, // 추가: 클라이언트 정렬을 위해 문서 상태 변경
+    isSorting,
+    setIsSorting,
   } = useBookStore(); // useBookStore 사용
   const { clearFilters, filters, setFilter, applyFilters } = useFilterStore();
 
@@ -60,6 +62,7 @@ const FilterButtonBox: React.FC<FilterButtonProps> = ({
     setCurrentPage(1); // 페이지 초기화
 
     // **fetchBooks 호출하여 전체 데이터 가져오기**
+    setIsSorting(true); // 정렬 시작
     await fetchBooks();
 
     // **정렬 로직 실행**
@@ -71,6 +74,7 @@ const FilterButtonBox: React.FC<FilterButtonProps> = ({
       );
       setDocuments(sortedDocuments); // 클라이언트에서 정렬된 데이터 반영
     }
+    setIsSorting(false); // 정렬 완료
   };
 
   /* 카테고리 키워드 클릭 */

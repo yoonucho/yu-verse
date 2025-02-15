@@ -90,6 +90,8 @@ const useBookStore = create(
           sessionStorage.removeItem("book-store");
         }
       },
+      // isSorting 상태 업데이트 함수 추가
+      setIsSorting: (isSorting: boolean) => set({ isSorting }),
     }),
     {
       name: "book-store", // 저장될 키 이름

@@ -57,53 +57,57 @@ const BookList: React.FC = () => {
       <div className="inner">
         <Suspense fallback={<Loading />}>
           {/* 가격 정렬시 로딩 아이콘 표시 */}
-          {isSorting && (
+          {isSorting ? (
             <div className={styles.loadingContainer}>
               <Loading />
-            </div>
-          )}
-          {/* 검색어 입력후 데이터가 없을 때 메시지 표시 */}
-          {query && documents.length === 0 && !isLoading ? (
-            <div className={styles.noData}>
-              <Image
-                src="/assets/images/message-icon.svg"
-                alt="no data"
-                width={300}
-                height={400}
-              />
-              <p>검색 결과가 없습니다. 다시 검색해주세요.</p>
+              <p className={styles.loadingText}>잠시만 기다리세요! ...</p>
             </div>
           ) : (
             <>
-              {documents.length > 0 ? (
-                <>
-                  {/* 검색 결과 리스트 */}
-                  <ul className={styles.bookList} aria-label="검색 결과 리스트">
-                    {formattedBooks.map((book) => (
-                      <li key={book.isbn}>
-                        <Link
-                          href={book.url}
-                          title={`${book.title} 상세페이지 이동`}
-                          target="_blank"
-                        >
-                          <BookListItem book={book} />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                  {/* 페이지네이션 */}
-                  <Pagination onPageChange={handlePageChange} />
-                </>
-              ) : (
+              {/* 검색어 입력후 데이터가 없을 때 메시지 표시 */}
+              {query && documents.length === 0 && !isLoading ? (
                 <div className={styles.noData}>
                   <Image
                     src="/assets/images/message-icon.svg"
-                    alt="message"
+                    alt="no data"
                     width={300}
                     height={400}
                   />
-                  <p>책을 검색해주세요.</p>
+                  <p>검색 결과가 없습니다. 다시 검색해주세요.</p>
                 </div>
+              ) : (
+                <>
+                  {documents.length > 0 ? (
+                    <>
+                      {/* 검색 결과 리스트 */}
+                      <ul className={styles.bookList} aria-label="검색 결과 리스트">
+                        {formattedBooks.map((book) => (
+                          <li key={book.isbn}>
+                            <Link
+                              href={book.url}
+                              title={`${book.title} 상세페이지 이동`}
+                              target="_blank"
+                            >
+                              <BookListItem book={book} />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                      {/* 페이지네이션 */}
+                      <Pagination onPageChange={handlePageChange} />
+                    </>
+                  ) : (
+                    <div className={styles.noData}>
+                      <Image
+                        src="/assets/images/message-icon.svg"
+                        alt="message"
+                        width={300}
+                        height={400}
+                      />
+                      <p>책을 검색해주세요.</p>
+                    </div>
+                  )}
+                </>
               )}
             </>
           )}
