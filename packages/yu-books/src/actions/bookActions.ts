@@ -24,14 +24,12 @@ export async function fetchBooksAction(
   try {
     // 캐시 데이터 확인
     if (bookCache.has(cacheKey)) {
-      console.log("📢 [CACHE] 사용:", cacheKey);
       const cachedData = bookCache.get(cacheKey);
 
       // **정렬을 위한 전체 데이터를 캐싱했을 경우 페이지 슬라이싱 적용**
       if (fetchAll) {
         const start = (page - 1) * size;
         const end = start + size;
-        console.log("📢 [CACHE] 전체 데이터 슬라이싱:", start, end);
         return {
           documents: cachedData!.documents.slice(start, end),
           meta: cachedData!.meta,
@@ -51,10 +49,6 @@ export async function fetchBooksAction(
         const data = await fetchBooks(searchQuery, pageCount, 50);
         allBooks = allBooks.concat(data.documents);
         totalCount = data.meta.pageable_count;
-        console.log(
-          `📢 [FETCH] 페이지 ${pageCount} 데이터 가져옴:`,
-          data.documents.length
-        );
         if (allBooks.length >= totalCount || data.meta.is_end) {
           break;
         }
@@ -82,7 +76,6 @@ export async function fetchBooksAction(
       // **페이지 데이터 슬라이싱 후 반환**
       const start = (page - 1) * size;
       const end = start + size;
-      console.log("📢 [FETCH] 전체 데이터 슬라이싱:", start, end);
       return {
         documents: allBooks.slice(start, end),
         meta: {
