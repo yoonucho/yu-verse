@@ -64,6 +64,8 @@ Next.js와 TypeScript를 사용하여 개발된 책 검색 서비스입니다.
 - **주요 기능**: 책 검색
 - **개발 환경**: Node.js(>=18.18.0), Next.js 14, TypeScript
 - **배포**: [YU 책 찾기](https://yu-books.vercel.app/book-list)
+- **배포**: [YU 책 찾기](https://yu-books.vercel.app/book-list)
+- **Trouble Shooting**: [노션 링크](https://www.notion.so/tomorrowcho/YU-ff10f1843b5541ca998235269a9879ad)
 
 프로젝트의 자세한 내용은 [YU책찾기 README](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-books#readme)에서 확인하실 수 있습니다.
 

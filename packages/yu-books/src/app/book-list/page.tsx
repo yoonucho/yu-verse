@@ -6,9 +6,8 @@ import Image from "next/image";
 
 import { BookListInfo, FormattedBookListInfo } from "@/types/BookInfo";
 import { formatDate, formatPriceWithComma } from "@/utils";
-
-import useResetBookStoreOnReload from "@/hooks/useResetBookStoreOnReload";
 import useBookStore from "@/stores/useBookStore";
+import useSearch from "@/hooks/useSearch";
 
 import BookListItem from "@/components/item/BookListItem";
 import Header from "@/components/header/Header";
@@ -18,9 +17,13 @@ import Pagination from "@/components/pagination/Pagination";
 import styles from "./page.module.css";
 
 const BookList: React.FC = () => {
-  useResetBookStoreOnReload(); // 페이지 새로고침 시 검색어 초기화
-  const { query, isSorting, isLoading, documents, fetchBooks, setCurrentPage } =
+  const { query, isSorting, isLoading, fetchBooks, setCurrentPage } =
     useBookStore();
+  const { documents, isSearchTriggered } = useBookStore((state) => ({
+    documents: state.documents,
+    isSearchTriggered: state.isSearchTriggered,
+    isLoading: state.isLoading,
+  }));
 
   const headerText = "YU 책 찾기";
 
@@ -56,8 +59,8 @@ const BookList: React.FC = () => {
       <Header headerText={headerText} />
       <div className="inner">
         <Suspense fallback={<Loading />}>
-          {/* 가격 정렬시 로딩 아이콘 표시 */}
-          {isSorting ? (
+          {/* 가격 정렬시 || 로딩 중 로딩 아이콘 표시 */}
+          {isSorting || isLoading ? (
             <div className={styles.loadingContainer}>
               <Loading />
               <p className={styles.loadingText}>잠시만 기다리세요! ...</p>
@@ -80,7 +83,10 @@ const BookList: React.FC = () => {
                   {documents.length > 0 ? (
                     <>
                       {/* 검색 결과 리스트 */}
-                      <ul className={styles.bookList} aria-label="검색 결과 리스트">
+                      <ul
+                        className={styles.bookList}
+                        aria-label="검색 결과 리스트"
+                      >
                         {formattedBooks.map((book) => (
                           <li key={book.isbn}>
                             <Link

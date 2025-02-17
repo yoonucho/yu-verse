@@ -40,6 +40,7 @@ export type BookStore = {
   meta: MetaInfo | null; // 메타 정보
   isLoading: boolean; // 로딩 상태
   isSorting: boolean; // 가격 정렬 로딩 상태 추가
+  isSearchTriggered: boolean | null;
   error: string | null; // 에러 메시지
   currentPage: number; // 현재 페이지 상태
   sortOption: "asc" | "desc" | ""; // 가격 정렬 옵션 (초기값은 "")
@@ -53,6 +54,7 @@ export type BookStore = {
   fetchBooks: () => Promise<void>; // 도서 검색 함수
   resetSearch: () => void; // 검색어 초기화 함수
   setIsSorting: (isSorting: boolean) => void; // isSorting 상태 업데이트 함수
+  setIsSearchTriggered: (isSearchTriggered: boolean | null) => void;
 };
 
 export type KeywordBookResponse = BookResponse & {
