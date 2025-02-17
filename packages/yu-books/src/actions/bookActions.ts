@@ -39,20 +39,27 @@ export async function fetchBooksAction(
       return cachedData;
     }
 
-    let allBooks: BookListInfo[] = [];
-    let totalCount = 0;
-
     // **정렬이 필요한 경우 전체 데이터 가져오기**
     if (fetchAll) {
-      let pageCount = 1;
-      while (true) {
-        const data = await fetchBooks(searchQuery, pageCount, 50);
-        allBooks = allBooks.concat(data.documents);
-        totalCount = data.meta.pageable_count;
-        if (allBooks.length >= totalCount || data.meta.is_end) {
-          break;
+      // 첫 페이지를 먼저 호출하여 전체 데이터 수를 확인
+      const firstData = await fetchBooks(searchQuery, 1, 50);
+      let allBooks: BookListInfo[] = firstData.documents;
+      const totalCount = firstData.meta.pageable_count;
+      const totalPages = Math.ceil(totalCount / 50);
+
+      // 전체 페이지가 1페이지보다 많다면, 2페이지부터 마지막 페이지까지 병렬로 API 호출을 진행합니다
+      if (totalPages > 1) {
+        // 2페이지부터 전체 페이지까지 병렬로 호출
+        const promises = [];
+        // for 루프를 통해 각 페이지의 fetchBooks 호출을 배열(promises)에 저장합니다.
+        for (let page = 2; page <= totalPages; page++) {
+          promises.push(fetchBooks(searchQuery, page, 50));
         }
-        pageCount++;
+        // Promise.all을 사용하여 모든 호출이 완료될 때까지 기다립니다.
+        const results = await Promise.all(promises);
+        results.forEach((result) => {
+          allBooks = allBooks.concat(result.documents);
+        });
       }
 
       // **정렬되지 않은 전체 데이터 캐싱**
@@ -64,6 +71,7 @@ export async function fetchBooksAction(
         );
       }
 
+      // 전체 데이터를 캐시에 저장
       bookCache.set(cacheKey, {
         documents: allBooks,
         meta: {
