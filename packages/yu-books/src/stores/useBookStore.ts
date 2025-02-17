@@ -17,9 +17,24 @@ const useBookStore = create(
       error: null,
       currentPage: 1, // 현재 페이지 상태
       sortOption: "", // 기본값은 빈 문자열 (정렬 옵션 없음)
+      isSearchTriggered: null, // 검색 트리거 플래그 추가
 
       // 검색어 설정 ( Header에서 직접 사용)
-      setQuery: (query: string) => set({ query }),
+      setQuery: (query: string) => {
+        set({ query });
+
+        // 검색어 입력 시 트리거 활성화
+        if (query) {
+          set({ isSearchTriggered: true });
+        } else {
+          // 검색어 삭제 시 데이터 초기화 + 트리거 비활성화
+          set({
+            documents: [],
+            meta: null,
+            isSearchTriggered: false,
+          });
+        }
+      },
       // 검색어 입력값 설정
       setSearchInput: (input: string) => set({ searchInput: input }),
       setSelectedKeyword: (keyword: string) =>
@@ -33,8 +48,16 @@ const useBookStore = create(
       fetchBooks: async () => {
         const { query, selectedKeyword, currentPage, sortOption } = get();
         const searchQuery = query || selectedKeyword; // 검색어가 없으면 선택된 카테고리를 검색어로 사용
-
-        if (!searchQuery) return;
+        // 검색어가 없으면 즉시 documents 초기화 후 종료
+        if (!searchQuery) {
+          set({
+            documents: [],
+            meta: null,
+            isSearchTriggered: false,
+            isLoading: false,
+          });
+          return;
+        }
 
         try {
           set({ isLoading: true, error: null });
@@ -54,7 +77,20 @@ const useBookStore = create(
           }
 
           // **상태 업데이트**
-          set({ documents: data.documents, meta: data.meta });
+          if (data?.documents?.length) {
+            set({
+              documents: data.documents,
+              meta: data.meta,
+              isLoading: false,
+            });
+          } else {
+            set({
+              documents: [],
+              meta: null,
+              isSearchTriggered: true,
+              isLoading: false,
+            });
+          }
         } catch (error) {
           if (error instanceof Error) {
             set({ error: error.message });
@@ -66,6 +102,9 @@ const useBookStore = create(
           set({ isLoading: false });
         }
       },
+
+      setIsSearchTriggered: (triggered) =>
+        set({ isSearchTriggered: triggered }),
 
       setSortOption: (option: "" | "asc" | "desc") => {
         set({ sortOption: option });
