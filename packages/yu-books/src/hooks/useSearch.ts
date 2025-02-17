@@ -73,7 +73,6 @@ const useSearch = () => {
   // 검색어가 완전히 지워지면 검색어와 정렬 옵션 초기화
   useEffect(() => {
     if (searchInput.trim() === "") {
-      console.log("초기화?");
       setQuery("");
       setSortOption("");
       setIsSearchTriggered(false);
