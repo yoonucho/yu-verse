@@ -23,7 +23,7 @@ const BookList: React.FC = () => {
 
   /* 페이지 로드 시 및 선택한 키워드가 변경될 때마다 fetchBooks 호출 */
   useEffect(() => {
-    console.log(`[📢 useEffect 실행됨] query: ${query}`);
+    // console.log(`[📢 useEffect 실행됨] query: ${query}`);
     if (query.length >= 2) {
       fetchBooks();
     }
