@@ -7,7 +7,6 @@ import Image from "next/image";
 import { BookListInfo, FormattedBookListInfo } from "@/types/BookInfo";
 import { formatDate, formatPriceWithComma } from "@/utils";
 import useBookStore from "@/stores/useBookStore";
-import useSearch from "@/hooks/useSearch";
 
 import BookListItem from "@/components/item/BookListItem";
 import Header from "@/components/header/Header";
@@ -17,18 +16,14 @@ import Pagination from "@/components/pagination/Pagination";
 import styles from "./page.module.css";
 
 const BookList: React.FC = () => {
-  const { query, isSorting, isLoading, fetchBooks, setCurrentPage } =
+  const { query, isSorting, isLoading, documents, fetchBooks, setCurrentPage } =
     useBookStore();
-  const { documents, isSearchTriggered } = useBookStore((state) => ({
-    documents: state.documents,
-    isSearchTriggered: state.isSearchTriggered,
-    isLoading: state.isLoading,
-  }));
 
   const headerText = "YU 책 찾기";
 
   /* 페이지 로드 시 및 선택한 키워드가 변경될 때마다 fetchBooks 호출 */
   useEffect(() => {
+    console.log(`[📢 useEffect 실행됨] query: ${query}`);
     if (query.length >= 2) {
       fetchBooks();
     }

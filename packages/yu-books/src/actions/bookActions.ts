@@ -43,6 +43,7 @@ export async function fetchBooksAction(
     if (fetchAll) {
       // 첫 페이지를 먼저 호출하여 전체 데이터 수를 확인
       const firstData = await fetchBooks(searchQuery, 1, 50);
+      // console.log("firstData", firstData);
       let allBooks: BookListInfo[] = firstData.documents;
       const totalCount = firstData.meta.pageable_count;
       const totalPages = Math.ceil(totalCount / 50);
@@ -84,6 +85,7 @@ export async function fetchBooksAction(
       // **페이지 데이터 슬라이싱 후 반환**
       const start = (page - 1) * size;
       const end = start + size;
+      // console.log(`✅ [API 요청 완료] 검색어: ${searchQuery}, 페이지: ${page}`);
       return {
         documents: allBooks.slice(start, end),
         meta: {
@@ -92,13 +94,13 @@ export async function fetchBooksAction(
           is_end: end >= totalCount,
         },
       };
+    } else {
+      // **한 페이지만 가져오는 경우**
+      const data = await fetchBooks(searchQuery, page, size);
+      bookCache.set(cacheKey, data);
+      // console.log(`✅ [API 요청 완료] 검색어: ${searchQuery}, 페이지: ${page}`);
+      return data;
     }
-
-    // **한 페이지만 가져오는 경우**
-    const data = await fetchBooks(searchQuery, page, size);
-    bookCache.set(cacheKey, data);
-
-    return data;
   } catch (error) {
     console.error("❌ 도서 데이터를 불러오는데 실패했습니다.", error);
     return { error: "도서 데이터를 불러오는데 실패했습니다." };
