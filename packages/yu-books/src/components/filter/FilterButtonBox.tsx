@@ -83,9 +83,6 @@ const FilterButtonBox: React.FC<FilterButtonProps> = ({
     setQuery(""); // 검색어 초기화
     setSortOption(""); // 정렬 초기화
     setCurrentPage(1); // 페이지 초기화
-
-    await new Promise((resolve) => setTimeout(resolve, 0));
-    await fetchBooks(); // 최신 상태를 반영하여 책 검색
     onKeywordClick(keyword); //  검색어 초기화
   };
 

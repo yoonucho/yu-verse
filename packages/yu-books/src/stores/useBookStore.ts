@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { BookStore } from "@/types/BookInfo";
-import { fetchBooksAction } from "@/actions/bookActions";
+import { getBooks } from "@/services/bookService";
 
 const useBookStore = create(
   persist<BookStore>(
@@ -22,7 +22,6 @@ const useBookStore = create(
       // 검색어 설정 ( Header에서 직접 사용)
       setQuery: (query: string) => {
         set({ query });
-
         // 검색어 입력 시 트리거 활성화
         if (query) {
           set({ isSearchTriggered: true });
@@ -43,7 +42,18 @@ const useBookStore = create(
       setCurrentPage: (page: number) => set({ currentPage: page }),
       // 클라이언트 정렬을 위한 데이터 업데이트 함수 추가
       setDocuments: (documents) => set({ documents }),
-      // 정렬 옵션 설정 (클라이언트에서 정렬 수행)
+      setIsSearchTriggered: (triggered) =>
+        set({ isSearchTriggered: triggered }),
+
+      setSortOption: (option: "" | "asc" | "desc") => {
+        // console.log(`[⚡ 정렬 옵션 변경] ${option}`);
+        set({ sortOption: option });
+        get().fetchBooks();
+      },
+
+      // isSorting 상태 업데이트 함수 추가
+      setIsSorting: (isSorting: boolean) => set({ isSorting }),
+
       // 서버 액션을 사용하여 책 검색 실행
       fetchBooks: async () => {
         const { query, selectedKeyword, currentPage, sortOption } = get();
@@ -62,35 +72,28 @@ const useBookStore = create(
         try {
           set({ isLoading: true, error: null });
           // 정렬이 필요한 경우 전체 데이터 요청, 아닌 경우 한 페이지 데이터만 요청
+          // console.log("fetchData");
           const fetchAll = !!sortOption;
-          const data = await fetchBooksAction(
+          const data = await getBooks(
             searchQuery,
             currentPage,
             10,
             fetchAll,
             sortOption
           );
+          // console.log("data", data);
 
-          if (!data || typeof data !== "object" || !("documents" in data)) {
-            console.error("❌ 데이터가 존재하지 않음:", data);
+          if (!data) {
+            set({ documents: [], meta: null, error: "데이터 없음" });
             return;
           }
 
           // **상태 업데이트**
-          if (data?.documents?.length) {
-            set({
-              documents: data.documents,
-              meta: data.meta,
-              isLoading: false,
-            });
-          } else {
-            set({
-              documents: [],
-              meta: null,
-              isSearchTriggered: true,
-              isLoading: false,
-            });
-          }
+          set({
+            documents: data.documents,
+            meta: data.meta,
+            error: null,
+          });
         } catch (error) {
           if (error instanceof Error) {
             set({ error: error.message });
@@ -101,15 +104,6 @@ const useBookStore = create(
         } finally {
           set({ isLoading: false });
         }
-      },
-
-      setIsSearchTriggered: (triggered) =>
-        set({ isSearchTriggered: triggered }),
-
-      setSortOption: (option: "" | "asc" | "desc") => {
-        set({ sortOption: option });
-        // **fetchBooks 호출하여 전체 데이터 가져오기 및 정렬 수행**
-        get().fetchBooks();
       },
 
       // 초기화 버튼을 눌렀을 때 `sessionStorage`에서도 삭제되도록 설정
@@ -129,8 +123,6 @@ const useBookStore = create(
           sessionStorage.removeItem("book-store"); // 특정 항목 삭제
         }
       },
-      // isSorting 상태 업데이트 함수 추가
-      setIsSorting: (isSorting: boolean) => set({ isSorting }),
     }),
     {
       name: "book-store", // 저장될 키 이름

@@ -52,6 +52,9 @@ const useSearch = () => {
     const newTimer = setTimeout(() => {
       if (value.length > 0 && value.length < 2) {
         alert("검색어를 2글자 이상 입력해주세요.");
+        resetSearch(); // 상태 즉시 초기화
+        setIsSearchTriggered(false); // 트리거 해제
+        debouncedSearch.cancel();
       }
     }, 1000);
     setAlertTimer(newTimer);
@@ -65,7 +68,7 @@ const useSearch = () => {
       setIsTyping(false);
       return;
     }
-    
+
     setSelectedKeyword(""); // 검색어 입력 시 카테고리 선택 초기화
     setSortOption(""); // 정렬 옵션 초기화
   };
