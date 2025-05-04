@@ -1,4 +1,6 @@
 // src/app/api/keep-alive/route.ts
+export const dynamic = "force-dynamic";
+
 import { keepAliveToSupabase } from "@/actions/supabaseEventsActions";
 
 export async function GET() {
