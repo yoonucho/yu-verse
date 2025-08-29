@@ -131,7 +131,8 @@ export type FilterButtonProps = {
 
 // 페이지 네이션 데이터
 export type PaginationProps = {
-  onPageChange: (page: number) => void;
+  totalItems: number;
+  itemsPerPage?: number;
 };
 
 // 페이지네이션 상태 타입 정의
