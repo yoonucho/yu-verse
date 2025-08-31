@@ -4,6 +4,7 @@ import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import styles from "./filterButtonBox.module.css";
+import { shouldAllowSort } from "@/utils/search";
 
 const relatedKeywords = ["소설", "경제경영", "자기계발", "과학", "역사"];
 const priceSortOptions: { label: string; value: "asc" | "desc" }[] = [
@@ -24,14 +25,15 @@ export default function FilterButtonBox({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const selectedKeyword = searchParams.get("query");
+  const inputQuery = searchParams.get("query") || "";
+  const selectedKeyword = searchParams.get("keyword");
   const sortOption = searchParams.get("sort");
 
   const handleSortClick = (value: "asc" | "desc") => {
     const params = new URLSearchParams(searchParams.toString());
 
-    // 검색어가 없는 경우 정렬을 막습니다.
-    if (!selectedKeyword) {
+    // 검색 조건이 전혀 없으면 정렬을 막습니다. (입력어 또는 카테고리 중 하나 필요)
+    if (!shouldAllowSort(inputQuery, selectedKeyword)) {
       alert("검색어를 먼저 입력하거나 카테고리를 선택해주세요.");
       return;
     }

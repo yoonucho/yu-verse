@@ -2,6 +2,7 @@
 
 import fetchBooks from "@/app/api/fetchBooks";
 import { BookListInfo } from "@/types/BookInfo";
+import { matchesCategoryKeyword } from "@/utils/search";
 
 const bookCache = new Map<string, { documents: BookListInfo[]; meta: any }>();
 
@@ -10,13 +11,14 @@ export async function fetchBooksAction(
   page: number = 1,
   size: number = 10,
   fetchAll: boolean = false,
-  sortOption: "" | "asc" | "desc" = ""
+  sortOption: "" | "asc" | "desc" = "",
+  filterKeyword: string = ""
 ) {
   if (!searchQuery) {
     return { documents: [], meta: null };
   }
 
-  const cacheKey = `${searchQuery}-${sortOption}`;
+  const cacheKey = `${searchQuery}-${sortOption}-${filterKeyword}`;
 
   try {
     if (fetchAll && bookCache.has(cacheKey)) {
@@ -35,8 +37,17 @@ export async function fetchBooksAction(
         return bookCache.get(pageCacheKey)!;
       }
       const data = await fetchBooks(searchQuery, page, size);
-      bookCache.set(pageCacheKey, data);
-      return data;
+      // 단건 페이지 페칭 시에도 필터 키워드가 있으면 해당 페이지 결과를 필터링
+      if (filterKeyword) {
+        const filteredDocs = data.documents.filter(doc => matchesCategoryKeyword(doc as any, filterKeyword));
+        return {
+          documents: filteredDocs,
+          meta: { ...data.meta, pageable_count: filteredDocs.length, total_count: filteredDocs.length },
+        };
+      } else {
+        bookCache.set(pageCacheKey, data);
+        return data;
+      }
     }
 
     const firstData = await fetchBooks(searchQuery, 1, 50);
@@ -63,6 +74,10 @@ export async function fetchBooksAction(
           console.error(`청크 처리 중 오류 발생 (시작 페이지: ${chunk[0]}):`, error);
         }
       }
+    }
+
+    if (filterKeyword) {
+      allBooks = allBooks.filter(doc => matchesCategoryKeyword(doc as any, filterKeyword));
     }
 
     if (sortOption) {

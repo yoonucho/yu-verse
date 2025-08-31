@@ -19,6 +19,7 @@ export type BookListInfo = {
   title: string;
   translators: string[];
   url: string;
+  category?: string; // Kakao API에 존재할 수 있는 카테고리 문자열 (예: "국내도서>소설")
 };
 
 export type MetaInfo = {

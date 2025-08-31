@@ -47,9 +47,17 @@ export default function useSearch() {
   };
 
   const handleKeywordClick = (keyword: string) => {
-    setSearchInput(keyword);
-    const params = new URLSearchParams();
-    params.set("query", keyword);
+    const params = new URLSearchParams(searchParams.toString());
+    const current = params.get("keyword");
+    const next = current === keyword ? null : keyword;
+
+    if (next) params.set("keyword", next);
+    else params.delete("keyword");
+
+    // 검색 조건 변경 시 페이지 초기화
+    params.delete("page");
+
+    // 입력창 값은 유지 (searchInput는 변경하지 않음)
     router.push(`${pathname}?${params.toString()}`);
   };
 

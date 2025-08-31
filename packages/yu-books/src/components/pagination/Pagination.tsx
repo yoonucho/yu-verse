@@ -13,7 +13,8 @@ export default function Pagination({ totalItems, itemsPerPage = 10 }: Pagination
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 
-  if (!totalItems || totalItems <= itemsPerPage) return null;
+  // Render pagination even for a single page; hide only when no items
+  if (!totalItems) return null;
 
   const totalPage = Math.ceil(totalItems / itemsPerPage);
   const pageBlock = 10;
