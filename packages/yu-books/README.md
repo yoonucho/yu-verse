@@ -21,7 +21,7 @@ https://gist.github.com/user-attachments/assets/14294ac0-26ac-4919-ab4c-c991b0b7
 
 
 ## 배포
-https://yu-books.vercel.app/book-list
+https://yu-books.vercel.app
 
 
 ## 요구사항 명세서
