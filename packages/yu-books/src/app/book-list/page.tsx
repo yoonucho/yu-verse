@@ -29,9 +29,23 @@ const formatBooks = (books: BookListInfo[]): FormattedBookListInfo[] => {
 };
 
 // 데이터를 가져와서 BookList와 Pagination을 렌더링하는 별도의 컴포넌트
-async function BookData({ query, page, sort }: { query: string; page: number; sort: "" | "asc" | "desc" }) {
-  const { documents, meta } = await fetchBooksAction(query, page, 10, !!sort, sort);
-  
+async function BookData({
+  query,
+  page,
+  sort,
+}: {
+  query: string;
+  page: number;
+  sort: "" | "asc" | "desc";
+}) {
+  const result = await fetchBooksAction(query, page, 10, !!sort, sort);
+
+  if ("error" in result) {
+    return <div>Error: {result.error}</div>;
+  }
+
+  const { documents, meta } = result;
+
   // meta가 null이거나 pageable_count가 0인 경우 결과 없음 표시
   if (!meta || meta.pageable_count === 0) {
     return (
@@ -57,7 +71,9 @@ async function BookData({ query, page, sort }: { query: string; page: number; so
   );
 }
 
-export default async function BookListPage({ searchParams }: BookListPageProps) {
+export default async function BookListPage({
+  searchParams,
+}: BookListPageProps) {
   const query = searchParams?.query || "";
   const page = Number(searchParams?.page || "1");
   const sort = (searchParams?.sort || "") as "" | "asc" | "desc";
@@ -69,7 +85,15 @@ export default async function BookListPage({ searchParams }: BookListPageProps) 
       <Header headerText={headerText} />
       <div className="inner">
         {query ? (
-          <Suspense key={query + page + sort} fallback={<div className={styles.loadingContainer}><Loading /><p className={styles.loadingText}>잠시만 기다리세요! ...</p></div>}>
+          <Suspense
+            key={query + page + sort}
+            fallback={
+              <div className={styles.loadingContainer}>
+                <Loading />
+                <p className={styles.loadingText}>잠시만 기다리세요! ...</p>
+              </div>
+            }
+          >
             <BookData query={query} page={page} sort={sort} />
           </Suspense>
         ) : (

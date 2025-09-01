@@ -7,11 +7,15 @@ type BookStore = {
   // 예시: 즐겨찾기 기능 상태
   // favoriteISBNs: number[];
   // addFavorite: (isbn: number) => void;
+  resetSearch: () => void;
 };
 
 const useBookStore = create<BookStore>((set) => ({
   // favoriteISBNs: [],
   // addFavorite: (isbn) => set((state) => ({ favoriteISBNs: [...state.favoriteISBNs, isbn] })),
+  resetSearch: () => {
+    // 검색 상태 리셋 로직 (필요 시 구현)
+  },
 }));
 
 export default useBookStore;
