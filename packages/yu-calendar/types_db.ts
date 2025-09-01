@@ -5,30 +5,30 @@ export type Database = {
 		Tables: {
 			yu_calendar: {
 				Row: {
-					end?: Date;
+					end?: string | null;
 					extendedProps?: {
 						description: string;
 					};
 					id: string;
-					start: Date;
+					start: string;
 					title: string;
 				};
 				Insert: {
-					end?: Date;
+					end?: string | null;
 					extendedProps?: {
 						description: string;
 					};
 					id?: string;
-					start?: Date;
+					start?: string;
 					title: string;
 				};
 				Update: {
-					end?: Date;
+					end?: string | null;
 					extendedProps?: {
 						description: string;
 					};
 					id?: string;
-					start?: Date;
+					start?: string;
 					title?: string;
 				};
 				Relationships: [];
