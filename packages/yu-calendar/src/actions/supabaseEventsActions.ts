@@ -2,14 +2,14 @@
 
 import createServerSupabaseClient from "@/lib/supabaseServer";
 import { endOfDay, format, startOfDay } from "date-fns";
-import { Database } from "../../types_db";
+import { Database, TablesInsert, TablesUpdate } from "../../types_db";
 
 export type YuCalendarRow = Database["public"]["Tables"]["yu_calendar"]["Row"];
-export type YuCalendarRowInsert = Database["public"]["Tables"]["yu_calendar"]["Insert"];
-export type YuCalendarRowUpdate = Database["public"]["Tables"]["yu_calendar"]["Update"];
+export type YuCalendarRowInsert = TablesInsert<"yu_calendar">;
+export type YuCalendarRowUpdate = TablesUpdate<"yu_calendar">;
 
 export const fetchEventsFromSupabase = async (): Promise<YuCalendarRow[]> => {
-  const supabase = await createServerSupabaseClient();
+  const supabase = createServerSupabaseClient();
   const { data, error } = await supabase.from("yu_calendar").select("*");
   console.log("fetch", data);
   if (error) {
@@ -21,8 +21,8 @@ export const fetchEventsFromSupabase = async (): Promise<YuCalendarRow[]> => {
 };
 
 export const addEventToSupabase = async (event: YuCalendarRowInsert): Promise<void> => {
-  const supabase = await createServerSupabaseClient();
-  const { data, error } = await supabase.from("yu_calendar").insert([event]);
+  const supabase = createServerSupabaseClient();
+  const { data, error } = await (supabase as any).from("yu_calendar").insert([event]);
   console.log("add", event);
   if (error) {
     console.error("error", error);
@@ -32,9 +32,9 @@ export const addEventToSupabase = async (event: YuCalendarRowInsert): Promise<vo
 };
 
 export const updateEventToSupabase = async (event: YuCalendarRowUpdate): Promise<void> => {
-  const supabase = await createServerSupabaseClient();
+  const supabase = createServerSupabaseClient();
 
-  const { data, error } = await supabase
+  const { data, error } = await (supabase as any)
     .from("yu_calendar")
     .update({
       ...event,
