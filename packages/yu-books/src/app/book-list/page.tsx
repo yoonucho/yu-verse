@@ -1,121 +1,89 @@
-"use client";
-
-import React, { useEffect, Suspense } from "react";
-import Link from "next/link";
+import { Suspense } from "react";
 import Image from "next/image";
 
+import { fetchBooksAction } from "@/actions/bookActions";
 import { BookListInfo, FormattedBookListInfo } from "@/types/BookInfo";
 import { formatDate, formatPriceWithComma } from "@/utils";
-import useBookStore from "@/stores/useBookStore";
 
-import BookListItem from "@/components/item/BookListItem";
 import Header from "@/components/header/Header";
-import Loading from "@/components/icons/LoadingIcon";
+import BookList from "@/components/list/BookList";
 import Pagination from "@/components/pagination/Pagination";
-
+import Loading from "@/components/icons/LoadingIcon";
 import styles from "./page.module.css";
 
-const BookList: React.FC = () => {
-  const { query, isSorting, isLoading, documents, fetchBooks, setCurrentPage } =
-    useBookStore();
-
-  const headerText = "YU 책 찾기";
-
-  /* 페이지 로드 시 및 선택한 키워드가 변경될 때마다 fetchBooks 호출 */
-  useEffect(() => {
-    // console.log(`[📢 useEffect 실행됨] query: ${query}`);
-    if (query.length >= 2) {
-      fetchBooks();
-    }
-  }, [query, fetchBooks]);
-
-  /* 페이지 변경 핸들러 */
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+type BookListPageProps = {
+  searchParams?: {
+    query?: string;
+    page?: string;
+    sort?: string;
   };
+};
 
-  const formatBooks = (books: BookListInfo[]): FormattedBookListInfo[] => {
-    return books.map((book) => {
-      return {
-        ...book,
-        formattedPrice: formatPriceWithComma(book.price), // 가격 포맷 적용
-        // disCountText,
-        discountPrice: formatPriceWithComma(book.sale_price), // 할인 가격 포맷 적용
-        formattedDate: formatDate(book.datetime), // 날짜 포맷 적용
-      };
-    });
-  };
+const formatBooks = (books: BookListInfo[]): FormattedBookListInfo[] => {
+  return books.map((book) => ({
+    ...book,
+    formattedPrice: formatPriceWithComma(book.price),
+    discountPrice: formatPriceWithComma(book.sale_price),
+    formattedDate: formatDate(book.datetime),
+  }));
+};
+
+// 데이터를 가져와서 BookList와 Pagination을 렌더링하는 별도의 컴포넌트
+async function BookData({ query, page, sort }: { query: string; page: number; sort: "" | "asc" | "desc" }) {
+  const { documents, meta } = await fetchBooksAction(query, page, 10, !!sort, sort);
+  
+  // meta가 null이거나 pageable_count가 0인 경우 결과 없음 표시
+  if (!meta || meta.pageable_count === 0) {
+    return (
+      <div className={styles.noData}>
+        <Image
+          src="/assets/images/message-icon.svg"
+          alt="no data"
+          width={300}
+          height={400}
+        />
+        <p>검색 결과가 없습니다. 다시 검색해주세요.</p>
+      </div>
+    );
+  }
 
   const formattedBooks = formatBooks(documents);
 
   return (
+    <>
+      <BookList books={formattedBooks} />
+      <Pagination totalItems={meta.pageable_count} />
+    </>
+  );
+}
+
+export default async function BookListPage({ searchParams }: BookListPageProps) {
+  const query = searchParams?.query || "";
+  const page = Number(searchParams?.page || "1");
+  const sort = (searchParams?.sort || "") as "" | "asc" | "desc";
+
+  const headerText = "YU 책 찾기";
+
+  return (
     <main className="container">
-      {/* 헤더 (검색 입력 & 필터 버튼 포함) */}
       <Header headerText={headerText} />
       <div className="inner">
-        <Suspense fallback={<Loading />}>
-          {/* 가격 정렬시 || 로딩 중 로딩 아이콘 표시 */}
-          {isSorting || isLoading ? (
-            <div className={styles.loadingContainer}>
-              <Loading />
-              <p className={styles.loadingText}>잠시만 기다리세요! ...</p>
-            </div>
-          ) : (
-            <>
-              {/* 검색어 입력후 데이터가 없을 때 메시지 표시 */}
-              {query && documents.length === 0 && !isLoading ? (
-                <div className={styles.noData}>
-                  <Image
-                    src="/assets/images/message-icon.svg"
-                    alt="no data"
-                    width={300}
-                    height={400}
-                  />
-                  <p>검색 결과가 없습니다. 다시 검색해주세요.</p>
-                </div>
-              ) : (
-                <>
-                  {documents.length > 0 ? (
-                    <>
-                      {/* 검색 결과 리스트 */}
-                      <ul
-                        className={styles.bookList}
-                        aria-label="검색 결과 리스트"
-                      >
-                        {formattedBooks.map((book) => (
-                          <li key={book.isbn}>
-                            <Link
-                              href={book.url}
-                              title={`${book.title} 상세페이지 이동`}
-                              target="_blank"
-                            >
-                              <BookListItem book={book} />
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                      {/* 페이지네이션 */}
-                      <Pagination onPageChange={handlePageChange} />
-                    </>
-                  ) : (
-                    <div className={styles.noData}>
-                      <Image
-                        src="/assets/images/message-icon.svg"
-                        alt="message"
-                        width={300}
-                        height={400}
-                      />
-                      <p>책을 검색해주세요.</p>
-                    </div>
-                  )}
-                </>
-              )}
-            </>
-          )}
-        </Suspense>
+        {query ? (
+          <Suspense key={query + page + sort} fallback={<div className={styles.loadingContainer}><Loading /><p className={styles.loadingText}>잠시만 기다리세요! ...</p></div>}>
+            <BookData query={query} page={page} sort={sort} />
+          </Suspense>
+        ) : (
+          <div className={styles.noData}>
+            <Image
+              src="/assets/images/message-icon.svg"
+              alt="message"
+              width={300}
+              height={400}
+            />
+            <p>책을 검색해주세요.</p>
+          </div>
+        )}
       </div>
     </main>
   );
-};
-
-export default BookList;
+}

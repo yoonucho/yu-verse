@@ -1,3 +1,5 @@
+'use client';
+
 import useSearch from "@/hooks/useSearch"; // 검색 훅
 
 import FilterButtonBox from "../filter/FilterButtonBox";

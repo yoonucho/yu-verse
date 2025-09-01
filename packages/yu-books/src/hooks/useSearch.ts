@@ -1,98 +1,64 @@
 import { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import debounce from "lodash/debounce";
-import useBookStore from "@/stores/useBookStore";
 
-const useSearch = () => {
-  const {
-    searchInput,
-    setSearchInput,
-    setQuery,
-    setSelectedKeyword,
-    setIsSearchTriggered,
-    setSortOption,
-    resetSearch,
-  } = useBookStore();
+export default function useSearch() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentQuery = searchParams.get("query") || "";
 
-  const [alertTimer, setAlertTimer] = useState<NodeJS.Timeout | null>(null); // 디바운스 중인지 추적
-  const [isTyping, setIsTyping] = useState(false); // 입력중 여부 플래그
+  // The local state for the input field, synchronized with the URL query param
+  const [searchInput, setSearchInput] = useState(currentQuery);
 
-  // 1초 후 실행될 검색 함수 (검색어 검증 포함)
+  // Update local state if the URL changes (e.g., browser back/forward)
+  useEffect(() => {
+    setSearchInput(currentQuery);
+  }, [currentQuery]);
+
   const debouncedSearch = useMemo(
     () =>
-      debounce((inputValue: string) => {
-        if (inputValue.length >= 2) {
-          setQuery(inputValue);
-          setSelectedKeyword(""); // 기존 카테고리 선택 초기화
-          setSortOption(""); // 정렬 옵션 초기화
-          setIsSearchTriggered(true);
+      debounce((value: string) => {
+        const params = new URLSearchParams(searchParams.toString());
+        if (value.length >= 2) {
+          params.set("query", value);
+          params.delete("page"); // Reset to first page on new search
+          router.push(`${pathname}?${params.toString()}`);
+        } else if (value.length === 0) {
+            // If the search is cleared, remove the query param
+            params.delete("query");
+            params.delete("page");
+            params.delete("sort");
+            router.push(`${pathname}?${params.toString()}`);
         }
-        setIsTyping(false); // 입력 완료 시 입력 중 상태 해제
-      }, 1000),
-    [setQuery, setSelectedKeyword, setSortOption, setIsSearchTriggered]
+      }, 500), // 500ms debounce delay
+    [searchParams, pathname, router]
   );
 
-  // 입력 값 변경 핸들러 (Zustand의 setSearchInput 사용)
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // 입력된 값 저장
     setSearchInput(value);
-    setIsTyping(true); // 입력 시작 시 기존 데이터 유지
-
-    // 기존 타이머가 있으면 초기화
-    if (alertTimer) {
-      clearTimeout(alertTimer);
-    }
-
-    // 검색어를 2글자 이상 입력하면 디바운스 시작
-    if (value.length >= 2) {
-      debouncedSearch(value);
-    }
-
-    // 1초 후에도 2글자 미만이면 alert 표시
-    const newTimer = setTimeout(() => {
-      if (value.length > 0 && value.length < 2) {
-        alert("검색어를 2글자 이상 입력해주세요.");
-        resetSearch(); // 상태 즉시 초기화
-        setIsSearchTriggered(false); // 트리거 해제
-        debouncedSearch.cancel();
-      }
-    }, 1000);
-    setAlertTimer(newTimer);
-
-    // 검색어가 비어있으면 즉시 초기화
-    if (value.trim() === "") {
-      resetSearch(); // 상태 즉시 초기화
-      setIsSearchTriggered(false); // 트리거 해제
-      debouncedSearch.cancel();
-      clearTimeout(newTimer);
-      setIsTyping(false);
-      return;
-    }
-
-    setSelectedKeyword(""); // 검색어 입력 시 카테고리 선택 초기화
-    setSortOption(""); // 정렬 옵션 초기화
+    debouncedSearch(value);
   };
 
-  // 검색어가 완전히 지워지면 검색어와 정렬 옵션 초기화
-  useEffect(() => {
-    if (searchInput.trim() === "") {
-      setQuery("");
-      setSortOption("");
-      setIsSearchTriggered(false);
-    }
-  }, [searchInput, setQuery, setSortOption, setIsSearchTriggered]);
-
-  // 검색 초기화 (초기화 버튼 클릭 시 호출됨)
   const handleResetSearch = () => {
-    resetSearch(); // Zustand의 검색 상태 초기화
+    setSearchInput("");
+    router.push(pathname); // Navigate to the page without any search params
   };
 
-  // 카테고리 선택 시 검색어와 정렬 옵션만 초기화
   const handleKeywordClick = (keyword: string) => {
-    setSelectedKeyword(keyword); // 선택된 키워드 설정
-    setSearchInput(""); // 검색어 초기화
-    setQuery(""); // 검색어 초기화
-    setSortOption(""); // 정렬 옵션 초기화
+    const params = new URLSearchParams(searchParams.toString());
+    const current = params.get("keyword");
+    const next = current === keyword ? null : keyword;
+
+    if (next) params.set("keyword", next);
+    else params.delete("keyword");
+
+    // 검색 조건 변경 시 페이지 초기화
+    params.delete("page");
+
+    // 입력창 값은 유지 (searchInput는 변경하지 않음)
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return {
@@ -101,6 +67,4 @@ const useSearch = () => {
     handleResetSearch,
     handleKeywordClick,
   };
-};
-
-export default useSearch;
+}
