@@ -10,7 +10,9 @@
 		"test": "jest --config ./jest.config.ts --runInBand",
 		"test:watch": "jest --config ./jest.config.ts --watch",
 		"test:ci": "jest --config ./jest.config.ts --ci",
-		"test:coverage": "jest --config ./jest.config.ts --coverage"
+		"test:coverage": "jest --config ./jest.config.ts --coverage",
+		"perf:dev": "node ./scripts/run-perf.js --baseURL=http://127.0.0.1:3000",
+		"perf:compare": "node ./scripts/compare-perf.js"
 	},
 	"dependencies": {
 		"@types/lodash": "^4.17.6",
