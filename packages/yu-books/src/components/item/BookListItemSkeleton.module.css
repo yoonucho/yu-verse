@@ -1,0 +1,54 @@
+.skeletonItem {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.skeletonImage {
+  width: 100px;
+  height: 130px;
+  border-radius: 4px;
+}
+
+.skeletonContent {
+  flex: 1;
+  margin-right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.skeletonText {
+  border-radius: 4px;
+  height: 1em;
+}
+
+.skeletonTitle {
+  width: 80%;
+  height: 1.5em;
+}
+
+.skeletonLine {
+  width: 60%;
+}
+
+.skeletonPrice {
+  width: 40%;
+  margin-top: 1rem;
+}
+
+.shimmer {
+  animation: shimmer 1.5s infinite linear;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
