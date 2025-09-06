@@ -7,8 +7,8 @@ import { formatDate, formatPriceWithComma } from "@/utils";
 
 import Header from "@/components/header/Header";
 import BookList from "@/components/list/BookList";
+import BookListSkeleton from "@/components/list/BookListSkeleton";
 import Pagination from "@/components/pagination/Pagination";
-import Loading from "@/components/icons/LoadingIcon";
 import styles from "./page.module.css";
 
 type BookListPageProps = {
@@ -87,12 +87,7 @@ export default async function BookListPage({
         {query ? (
           <Suspense
             key={query + page + sort}
-            fallback={
-              <div className={styles.loadingContainer}>
-                <Loading />
-                <p className={styles.loadingText}>잠시만 기다리세요! ...</p>
-              </div>
-            }
+            fallback={<BookListSkeleton />}
           >
             <BookData query={query} page={page} sort={sort} />
           </Suspense>
