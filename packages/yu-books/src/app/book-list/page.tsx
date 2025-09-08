@@ -1,95 +1,44 @@
 import { Suspense } from "react";
 import Image from "next/image";
 
-import { fetchBooksAction } from "@/actions/bookActions";
-import { BookListInfo, FormattedBookListInfo } from "@/types/BookInfo";
-import { formatDate, formatPriceWithComma } from "@/utils";
-
 import Header from "@/components/header/Header";
-import BookList from "@/components/list/BookList";
 import BookListSkeleton from "@/components/list/BookListSkeleton";
-import Pagination from "@/components/pagination/Pagination";
-import styles from "./page.module.css";
+import SearchResults from "@/components/list/SearchResults";
+import styles from "@/app/page.module.css";
+import { buildEffectiveQuery } from "@/utils/search";
 
-type BookListPageProps = {
-  searchParams?: {
-    query?: string;
-    page?: string;
-    sort?: string;
-  };
-};
-
-const formatBooks = (books: BookListInfo[]): FormattedBookListInfo[] => {
-  return books.map((book) => ({
-    ...book,
-    formattedPrice: formatPriceWithComma(book.price),
-    discountPrice: formatPriceWithComma(book.sale_price),
-    formattedDate: formatDate(book.datetime),
-  }));
-};
-
-// 데이터를 가져와서 BookList와 Pagination을 렌더링하는 별도의 컴포넌트
-async function BookData({
-  query,
-  page,
-  sort,
-}: {
-  query: string;
-  page: number;
-  sort: "" | "asc" | "desc";
-}) {
-  const result = await fetchBooksAction(query, page, 10, !!sort, sort);
-
-  if ("error" in result) {
-    return <div>Error: {result.error}</div>;
-  }
-
-  const { documents, meta } = result;
-
-  // meta가 null이거나 pageable_count가 0인 경우 결과 없음 표시
-  if (!meta || meta.pageable_count === 0) {
-    return (
-      <div className={styles.noData}>
-        <Image
-          src="/assets/images/message-icon.svg"
-          alt="no data"
-          width={300}
-          height={400}
-        />
-        <p>검색 결과가 없습니다. 다시 검색해주세요.</p>
-      </div>
-    );
-  }
-
-  const formattedBooks = formatBooks(documents);
-
-  return (
-    <>
-      <BookList books={formattedBooks} />
-      <Pagination totalItems={meta.pageable_count} />
-    </>
-  );
-}
-
-export default async function BookListPage({
+// This is now a Server Component
+export default function BookListPage({
   searchParams,
-}: BookListPageProps) {
-  const query = searchParams?.query || "";
-  const page = Number(searchParams?.page || "1");
-  const sort = (searchParams?.sort || "") as "" | "asc" | "desc";
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const query = (searchParams?.query as string) || "";
+  const keyword = (searchParams?.keyword as string) || "";
+  const page = Number((searchParams?.page as string) || "1");
+  const sort = ((searchParams?.sort as string) || "") as "" | "asc" | "desc";
+
+  const effectiveQuery = buildEffectiveQuery(query, keyword);
+  const apiQuery = query || keyword;
 
   const headerText = "YU 책 찾기";
 
   return (
     <main className="container">
+      {/* Header is now directly part of the page */}
       <Header headerText={headerText} />
       <div className="inner">
-        {query ? (
+        {query || keyword ? (
           <Suspense
-            key={query + page + sort}
+            key={effectiveQuery + page + sort}
             fallback={<BookListSkeleton />}
           >
-            <BookData query={query} page={page} sort={sort} />
+            <SearchResults
+              query={apiQuery}
+              page={page}
+              sort={sort}
+              filterKeyword={keyword}
+            />
           </Suspense>
         ) : (
           <div className={styles.noData}>
