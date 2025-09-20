@@ -26,86 +26,60 @@ pnpm을 사용한 이유는 대규모 프로젝트에서 패키지 설치 속도
 yu-verse
 📦yu-verse
  ┣ 📂packages
- ┃ ┣ 📂yu-books  # YU 도서 검색 서비스
- ┃ ┗ 📂yu-calendar # YU 캘린더 서비스
- ┣ 📜.gitignore
- ┣ 📜package.json # 모노레포 전체의 의존성 및 스크립트 정의
- ┣ 📜pnpm-lock.yaml
- ┣ 📜pnpm-workspace.yaml # pnpm 워크스페이스 설정
- ┣ 📜README.md
- ┣ 📜tsconfig.json
- ┗ 📜turbo.json # Turborepo 파이프라인 설정
+ ┃ ┣ 📂yu-books  # YU 도서 검색 서비스 프로젝트의 코드와 설정 파일을 포함하는 디렉토리
+ ┃ ┗ 📂yu-calendar # YU 캘린더 프로젝트의 코드와 설정 파일을 포함하는 디렉토리
+ ┣ 📜.gitignore # Git에 포함하지 않을 파일과 디렉토리를 지정하는 파일
+ ┣ 📜package.json # 모노레포의 루트에서 사용하는 npm 패키지와 스크립트를 정의한 파일
+ ┣ 📜pnpm-lock.yaml  # pnpm 패키지 매니저가 생성하는 잠금 파일로, 의존성의 정확한 버전을 고정
+ ┣ 📜pnpm-workspace.yaml # pnpm을 위한 워크스페이스 설정 파일, 모노레포의 패키지 관리를 정의
+ ┣ 📜README.md # 프로젝트의 설명, 사용 방법, 기여 방법 등을 담은 파일
+ ┣ 📜tsconfig.json # TypeScript 컴파일러 옵션을 정의하는 파일
+ ┗ 📜turbo.json # Turborepo 설정 파일로, 빌드 파이프라인과 캐싱을 관리
+
 ```
 
 ## 프로젝트 목록
 
-### 1. [YU캘린더](./packages/yu-calendar/README.md)
+### 1. [YU캘린더](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-calendar)
 Next.js와 TypeScript로 개발된 일정 관리 웹앱입니다.
 
 - **주요 기능**: 공휴일 검색, 메인 캘린더 이벤트 팝업 기능
-- **개발 환경**: Node.js(>=18.18.0), Next.js 14, TypeScript, Supabase V2.0
-- **배포**: [YU캘린더](https://yu-calendar.vercel.app/)
+- **개발 환경**: Node.js(>=18.18.0), Next.js 14, TypeScript, Supabase V2.0.
+- **배포**: [YU캘린더](https://yu-calendar.vercel.app/).
+- **Trouble Shooting**: [노션 링크](https://www.notion.so/tomorrowcho/YU-e3d060001cd84f919f1adafc90e20166?pvs=4#96db7517f88e4ff8abe7d73ca387a4f3)
 
-### 2. [YU책찾기](./packages/yu-books/README.md)
+프로젝트의 자세한 내용은 [YU캘린더 README](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-calendar#readme)에서 확인하실 수 있습니다.
+
+### 2. [YU책찾기](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-books)
 Next.js와 TypeScript를 사용하여 개발된 책 검색 서비스입니다.
 
-- **주요 기능**: 책 검색, 가격순 정렬
+- **주요 기능**: 책 검색
 - **개발 환경**: Node.js(>=18.18.0), Next.js 14, TypeScript
 - **배포**: [YU 책 찾기](https://yu-books.vercel.app/)
+- **Trouble Shooting**: [노션 링크](https://www.notion.so/tomorrowcho/YU-ff10f1843b5541ca998235269a9879ad)
+
+프로젝트의 자세한 내용은 [YU책찾기 README](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-books#readme)에서 확인하실 수 있습니다.
 
 ## 공통 기술 스택
-- **Framework**: Next.js 14, React
-- **Language**: TypeScript
-- **State Management**: Zustand
-- **Testing**: Jest, Playwright
-- **Build Tool**: Turborepo
-- **Package Manager**: pnpm
+- **프론트엔드**: Next.js 14, TypeScript
+- **배포**: Vercel
+- **기타**: Zustand
+
 
 ## 시작하기
 
-1.  **저장소 클론**
-    ```bash
-    git clone https://github.com/yoonucho/yu-verse.git
-    cd yu-verse
-    ```
-2.  **Node.js 설치**
-    `>=18.18.0` 버전의 Node.js를 설치합니다.
-
-3.  **의존성 설치**
-    ```bash
-    pnpm install
-    ```
-
-## 주요 명령어
-
-### 개발 서버 실행
-각 패키지를 개별적으로 실행할 수 있습니다.
+1.  저장소 클론
 
 ```bash
-# yu-books 개발 서버 실행
+git clone https://github.com/yoonucho/yu-verse.git
+```
+2.  node.js 설치(>=18.18.0)
+3.  모듈 설치 & 실행
+
+```bash
+pnpm install
+# yu-books 실행
 pnpm --filter yu-books run dev
-
-# yu-calendar 개발 서버 실행
+# yu-calendar 실행
 pnpm --filter yu-calendar run dev
-```
-
-### 전체 빌드
-모든 패키지를 한 번에 빌드합니다.
-
-```bash
-pnpm build
-```
-
-### 테스트
-단위 테스트와 E2E 테스트를 실행할 수 있습니다.
-
-```bash
-# 모든 단위 테스트(Jest) 실행
-pnpm test
-
-# yu-books E2E(Playwright) 테스트 실행
-pnpm test:e2e:books
-
-# yu-calendar E2E(Playwright) 테스트 실행
-pnpm test:e2e:calendar
 ```
