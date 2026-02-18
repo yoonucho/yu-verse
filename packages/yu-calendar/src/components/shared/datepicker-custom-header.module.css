@@ -1,0 +1,75 @@
+/**
+ * DatePickerCustomHeader 컴포넌트 스타일
+ * react-datepicker 커스텀 헤더 및 오늘 버튼 스타일을 정의
+ */
+
+.customHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  font-size: 1.5rem;
+  color: var(--primary-font-color);
+}
+
+.dateInfo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.customHeader select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  outline: none;
+  color: inherit;
+  cursor: pointer;
+  padding-right: 12px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent;
+  background-size: 12px 12px;
+  border: none;
+}
+
+.customHeader span {
+  font-weight: inherit;
+}
+
+.customHeader select option {
+  font-size: 20px;
+}
+
+.customHeader button {
+  padding: 5px;
+  font-size: 1.5rem;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.customHeader button:not(:disabled) > svg {
+  color: var(--primary-color);
+}
+
+.customHeader button:hover {
+  background-color: var(--sub-light-color);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.selectYear {
+  border: 0;
+  background-color: transparent;
+}

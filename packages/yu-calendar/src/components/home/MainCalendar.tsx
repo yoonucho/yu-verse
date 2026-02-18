@@ -73,6 +73,9 @@ const MainCalendar: React.FC = () => {
 
 	// 이벤트 클릭시 팝업 x, y 좌표 설정
 	const eventClick = (info: EventClickArg) => {
+		info.jsEvent?.preventDefault?.();
+		info.jsEvent?.stopPropagation?.();
+		setIsEditing(false);
 		setSelectedEvent(info.event);
 		// console.log("info", info.event);
 		const position = calculatePosition(info.el, info.view.calendar.el);
