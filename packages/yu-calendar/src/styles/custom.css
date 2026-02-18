@@ -9,7 +9,7 @@
 
 .fc-toolbar-title {
   min-width: 150px;
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
   color: var(--primary-font-color);
   word-break: keep-all;
 }
@@ -114,8 +114,19 @@
 
 /* datepicker custom */
 
+/** month-container(왼쪽)와 time-container(오른쪽)를 하나의 박스처럼 가로 정렬 */
 .react-datepicker {
+  display: flex !important;
   border: 0 !important;
+}
+
+/** children(footer)을 왼쪽 캘린더 내부 하단에 절대 위치로 고정 */
+.react-datepicker__children-container {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 308px !important;
+  padding-left: 10px !important;
 }
 
 .react-datepicker__input-container {
@@ -148,7 +159,27 @@
 .react-datepicker__month-container {
   width: 308px;
   font-size: 1.4rem;
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.21);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.21); /* 글로벌 스타일 복구 */
+}
+
+/** EventForm 내부 캘린더에서만 스타일링 */
+.event-form-calendar .react-datepicker__month-container {
+  padding-bottom: 50px;
+  box-shadow: none !important;
+}
+
+/** 캘린더 월/년 헤더 및 시간 헤더 폰트 사이즈 */
+.react-datepicker__current-month,
+.react-datepicker-year-header {
+  font-size: 1.5rem !important;
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item {
+  font-size: 1.2rem;
 }
 
 .react-datepicker__month {
@@ -228,6 +259,121 @@
 
 .react-datepicker__day--outside-month {
   color: var(--primary-gray2) !important;
+}
+
+/** 시간 선택 리스트 헤더 스타일 */
+.react-datepicker__time-container {
+  border-left: 1px solid var(--sub-light-color) !important;
+  width: 90px !important;
+}
+
+.react-datepicker-time__header {
+  color: var(--primary-font-color) !important;
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  /* 캘린더 헤더(Year/Month + DayNames)와 높이 맞춤 */
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  border-bottom: 1px solid var(--sub-light-color) !important;
+  background-color: #f0f0f0; /* 캘린더 헤더 배경색과 통일 */
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box {
+  width: 100% !important;
+}
+
+.react-datepicker__time-list {
+  padding: 10px 0 !important;
+  /* 커스텀 스크롤바 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+.react-datepicker__time-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.react-datepicker__time-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.react-datepicker__time-list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+/** 시간 아이템 공통 스타일 */
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item {
+  height: auto !important;
+  padding: 8px 0 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+/** '시(Hour)' 단위 (홀수 번째 아이템: 00:00, 01:00...) */
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item:nth-child(odd) {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333; /* Dark Gray */
+}
+
+/** '30분' 단위 (짝수 번째 아이템: 00:30, 01:30...) */
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item:nth-child(even) {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #999; /* Light Gray */
+}
+
+/** hover 및 선택 상태 - !important로 우선순위 확보 */
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item:hover {
+  background-color: var(--hover-color) !important;
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--selected {
+  background-color: var(--primary-color) !important;
+  color: var(--primary-white) !important;
+  font-weight: 600 !important;
+}
+
+/** EventForm datepicker 팝업 z-index 보장 */
+.react-datepicker-popper {
+  z-index: 9999 !important;
+}
+
+/** EventForm datepicker 팝업 그림자, 테두리, 위치 */
+.react-datepicker-popper .react-datepicker {
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--sub-light-color);
 }
 
 @media (max-width: 768px) {

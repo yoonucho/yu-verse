@@ -44,34 +44,46 @@ const EventPopupControl: React.FC = () => {
 
 	// 팝업창의 외부를 클릭하면 팝업창 닫기
 	const handleClickOutside = useCallback(
-		(event: MouseEvent) => {
-			// popupRef.current가 유효하고 클릭한 이벤트 타겟이 팝업 내부에 포함되지 않은 경우 팝업 닫기
-			if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-				handleClosePopup();
-			}
-		},
-		[handleClosePopup]
-	);
+			(event: MouseEvent) => {
+				// 편집 중에는 유효성 메시지 확인을 위해 외부 클릭 자동 닫기를 막는다.
+				if (isEditing) {
+					return;
+				}
+				const target = event.target as HTMLElement | null;
+				if (target?.closest(".fc-event")) {
+					return;
+				}
+				// popupRef.current가 유효하고 클릭한 이벤트 타겟이 팝업 내부에 포함되지 않은 경우 팝업 닫기
+				if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+					handleClosePopup();
+				}
+			},
+			[handleClosePopup, isEditing]
+		);
 
 	useEffect(() => {
-		if (isPopupOpen) {
-			document.addEventListener("mousedown", handleClickOutside);
-		} else {
-			document.removeEventListener("mousedown", handleClickOutside);
-		}
+			if (isPopupOpen) {
+				document.addEventListener("click", handleClickOutside);
+			} else {
+				document.removeEventListener("click", handleClickOutside);
+			}
 
 		return () => {
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	}, [isPopupOpen, handleClickOutside]);
+				document.removeEventListener("click", handleClickOutside);
+			};
+		}, [isPopupOpen, handleClickOutside]);
 
 	return (
 		<>
-			{isPopupOpen && (
-				<div ref={popupRef}>
-					<EventPopup event={selectedEvent} onSave={handleSave} onDelete={handleDelete} closePopup={handleClosePopup} position={popupPosition} />
-				</div>
-			)}
+				{isPopupOpen && (
+					<div
+						ref={popupRef}
+						onMouseDown={(e) => e.stopPropagation()}
+						onClick={(e) => e.stopPropagation()}
+					>
+						<EventPopup event={selectedEvent} onSave={handleSave} onDelete={handleDelete} closePopup={handleClosePopup} position={popupPosition} />
+					</div>
+				)}
 		</>
 	);
 };

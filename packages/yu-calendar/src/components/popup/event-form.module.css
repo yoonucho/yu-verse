@@ -1,25 +1,115 @@
-.form {
-}
+/**
+ * 이벤트 폼 컴포넌트 스타일
+ * react-datepicker 입력 필드를 기존 input 스타일과 통일
+ */
 
 .form label {
-	display: block;
-	margin: 10px 0;
+  display: block;
+  margin: 10px 0;
+}
+
+.titleInput {
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.dateInputWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  border-bottom: 2px solid var(--primary-color);
 }
 
 .form input,
 .form textarea {
-	font-family: inherit;
-	width: 100%;
-	border: 0;
-	border-bottom: 2px solid var(--primary-color);
-	border-radius: 0;
-	-webkit-border-radius: 0;
-	-moz-border-radius: 0;
-	-ms-border-radius: 0;
-	-o-border-radius: 0;
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
 }
 
 .form textarea {
-	min-height: 100px;
-	background-color: var(--sub-light-color);
+  min-height: 100px;
+  border-bottom: 2px solid var(--primary-color);
+  background-color: var(--sub-light-color);
+  resize: none;
+}
+
+/** react-datepicker 입력 필드를 기존 input 스타일과 동일하게 맞춤 */
+.datepickerWrapper {
+  width: 100%;
+}
+
+.datepickerInput {
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--primary-font-color);
+  cursor: text;
+}
+
+.datepickerInput:focus {
+  outline: none;
+}
+
+.calendarIconBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendarIconBtn:hover {
+  color: var(--primary-color);
+}
+
+/** react-datepicker children을 이용한 커스텀 푸터 영역 */
+.datepickerFooter {
+  padding: 8px 8px;
+  background-color: transparent;
+  text-align: left;
+}
+
+/** 오늘 버튼 스타일 */
+.todayBtn {
+  display: inline-block;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary-white);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.todayBtn:hover {
+  background-color: var(--hover-color);
+}
+
+.errorMessage {
+  margin: 10px 0;
+  padding: 8px 0;
+  border-bottom: 2px solid var(--error-color);
+  color: var(--error-color);
+  font-size: 1.1rem;
+  text-align: center;
 }
