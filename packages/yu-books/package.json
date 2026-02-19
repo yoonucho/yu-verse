@@ -1,34 +1,30 @@
 {
-	"name": "yu-books",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"test": "jest --config ./jest.config.ts --runInBand",
-		"test:watch": "jest --config ./jest.config.ts --watch",
-		"test:ci": "jest --config ./jest.config.ts --ci",
-		"test:coverage": "jest --config ./jest.config.ts --coverage",
-		"perf:dev": "node scripts/run-perf.js",
-		"perf:compare": "node scripts/compare-perf.js"
-	},
-	"dependencies": {
-		"@types/lodash": "^4.17.6",
-		"lodash": "^4.17.21"
-	},
-	"devDependencies": {
-        "@testing-library/jest-dom": "^6.4.2",
-        "@testing-library/react": "^15.0.2",
-        "@types/jest": "^29.5.12",
-        "@types/node": "^20",
-        "@types/react": "^18",
-        "@types/react-dom": "^18",
-        "eslint": "^8",
-        "eslint-config-next": "14.2.1",
-        "jest": "^29.7.0",
-        "jest-environment-jsdom": "^29.7.0",
-        "typescript": "^5"
-    }
+  "name": "yu-books",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest --config ./jest.config.ts --runInBand",
+    "test:watch": "jest --config ./jest.config.ts --watch",
+    "test:ci": "jest --config ./jest.config.ts --ci",
+    "test:coverage": "jest --config ./jest.config.ts --coverage",
+    "perf:dev": "node scripts/run-perf.js",
+    "perf:compare": "node scripts/compare-perf.js"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@types/lodash": "^4.17.6",
+    "lodash": "^4.17.21",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "jest-environment-jsdom": "^29.7.0"
+  }
 }

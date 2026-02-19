@@ -1,25 +1,34 @@
 {
-	"name": "yu-calendar",
-	"version": "1.0",
-	"type": "module",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"test": "jest --passWithNoTests",
-		"test:watch": "jest --watch"
-	},
-	"dependencies": {
-		"@fullcalendar/core": "^6.1.14",
-		"@fullcalendar/daygrid": "^6.1.14",
-		"@fullcalendar/interaction": "^6.1.14",
-		"@fullcalendar/react": "^6.1.14",
-		"@fullcalendar/timegrid": "^6.1.14",
-		"@supabase/ssr": "^0.5.1",
-		"@supabase/supabase-js": "^2.45.4",
-		"@types/react-datepicker": "^6.2.0",
-		"react-datepicker": "^6.9.0"
-	}
+  "name": "yu-calendar",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@fullcalendar/core": "^6.1.14",
+    "@fullcalendar/daygrid": "^6.1.14",
+    "@fullcalendar/interaction": "^6.1.14",
+    "@fullcalendar/react": "^6.1.14",
+    "@fullcalendar/timegrid": "^6.1.14",
+    "@supabase/ssr": "^0.5.1",
+    "@supabase/supabase-js": "^2.45.4",
+    "@types/react-datepicker": "^6.2.0",
+    "date-fns": "^3.6.0",
+    "date-fns-tz": "^3.2.0",
+    "react-datepicker": "^6.9.0",
+    "uuid": "^10.0.0",
+    "zustand": "^4.5.2"
+  }
 }
