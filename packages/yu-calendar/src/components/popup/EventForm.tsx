@@ -62,10 +62,13 @@ const EventForm: React.FC<EventFormProps> = ({ event, onSave, onDelete }) => {
       title,
       start,
       end: end ?? null,
-      extendedProps: { description: description || "" },
+      extendedProps: {
+        ...(event?.extendedProps || {}),
+        description: description || "",
+      },
     };
 
-    onSave(JSON.parse(JSON.stringify(updatedEvent))); // 순환 참조를 제거
+    onSave(updatedEvent as EventApi);
   };
 
   return (
