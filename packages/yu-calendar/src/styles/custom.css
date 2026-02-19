@@ -96,7 +96,7 @@
 }
 
 /** 이벤트 제목 요소에 말줄임표 적용 */
-.fc-daygrid-event .fc-event-title {
+.fc-event-title {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -374,6 +374,47 @@
   position: relative;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--sub-light-color);
+}
+
+/* 주간 이벤트 */
+.fc .fc-timegrid-event {
+  background-color: var(--sub-light-color) !important;
+  color: var(--primary-color);
+  border-color: var(--sub-light-color) !important;
+}
+
+.fc .fc-timegrid-event .fc-event-main,
+.fc .fc-timegrid-event .fc-event-title {
+  color: inherit;
+}
+
+/* 시간 표시 있는 이벤트 */
+.fc .fc-timegrid-event .fc-event-main:has(.fc-event-time) {
+  padding: 2px 5px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+}
+
+.fc
+  .fc-timegrid-event
+  .fc-event-main-frame:has(.fc-event-time)
+  .fc-event-title {
+  color: var(--primary-white);
+  min-height: 1.2em;
+  line-height: 1.2;
+}
+
+.fc .fc-timegrid-event .fc-event-time {
+  color: var(--primary-white);
+  background-color: inherit;
+}
+
+/* 시간 없는 일단위(올데이) 이벤트는 연한 배경으로 표시 */
+.fc .fc-timegrid-allday .fc-h-event,
+.fc .fc-timegrid-allday .fc-daygrid-event {
+  background-color: var(--sub-light-color) !important;
+  border-color: var(--sub-light-color) !important;
+  color: var(--primary-color) !important;
 }
 
 @media (max-width: 768px) {
