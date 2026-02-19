@@ -19,6 +19,13 @@ const normalizeExtendedProps = (raw: unknown) => {
   };
 };
 
+const getDefaultTimedEnd = (start?: string): Date | null => {
+  if (!start) return null;
+  const startDate = new Date(start);
+  if (Number.isNaN(startDate.getTime())) return null;
+  return new Date(startDate.getTime() + 30 * 60 * 1000);
+};
+
 // Serialize UI event to DB insert payload (ISO dates)
 export const toInsertPayload = (
   event: EventApi | ExtendedEventApi,
@@ -64,10 +71,11 @@ export const fromRowToEvent = (
   row: YuCalendarRow,
 ): Partial<ExtendedEventApi> => {
   const extendedProps = normalizeExtendedProps((row as any)?.extendedProps);
+  const fallbackEnd = row.end ? null : getDefaultTimedEnd(row.start);
   return {
     ...row,
     start: row.start ? new Date(row.start) : undefined,
-    end: row.end ? new Date(row.end) : null,
+    end: row.end ? new Date(row.end) : fallbackEnd,
     extendedProps: extendedProps as any,
   } as any;
 };

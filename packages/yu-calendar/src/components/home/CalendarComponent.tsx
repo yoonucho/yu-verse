@@ -52,9 +52,11 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({ events, eventClic
 	return (
 		<div className={styles.container}>
 			<div className="calendar-container">
-				<FullCalendar
-					plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
-					headerToolbar={{
+					<FullCalendar
+						plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
+						defaultTimedEventDuration={"00:30:00"}
+						forceEventDuration={true}
+						headerToolbar={{
 						left: "prev,next today",
 						center: "title",
 						right: "searchButton dayGridMonth,timeGridWeek",
