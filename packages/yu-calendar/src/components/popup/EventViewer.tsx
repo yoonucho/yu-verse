@@ -23,6 +23,11 @@ type NewsItem = {
   url: string;
 };
 
+type Briefing = {
+  summary: string;
+  items: NewsItem[];
+};
+
 /** URL 패턴을 감지하여 텍스트를 React 노드 배열로 변환하는 함수 */
 const renderTextWithLinks = (text: string) => {
   const urlPattern = /(https?:\/\/[^\s]+)/g;
@@ -104,6 +109,51 @@ const parseDescription = (
   return { summary, items };
 };
 
+const toBriefing = (value: unknown): Briefing | null => {
+  let candidate: any = value;
+
+  if (typeof candidate === "string") {
+    try {
+      candidate = JSON.parse(candidate);
+    } catch {
+      return null;
+    }
+  }
+
+  if (!candidate || typeof candidate !== "object") {
+    return null;
+  }
+
+  const rawItems = Array.isArray(candidate.items) ? candidate.items : [];
+  const items: NewsItem[] = rawItems
+    .map((item: any) => ({
+      category: typeof item?.category === "string" ? item.category : "",
+      headline: typeof item?.headline === "string" ? item.headline : "",
+      url: typeof item?.url === "string" ? item.url : "",
+    }))
+    .filter(
+      (item) =>
+        item.category &&
+        item.headline &&
+        item.url &&
+        item.headline !== "오늘 기사 없음",
+    );
+
+  const summary =
+    typeof candidate.summary === "string" ? candidate.summary : "";
+
+  if (!summary && items.length === 0) {
+    return null;
+  }
+
+  return { summary, items };
+};
+
+/** 이벤트 객체에서 briefing 데이터를 추출한다 (정규화된 객체 전제) */
+const pickBriefing = (event: any): Briefing | null => {
+  return toBriefing(event?.extendedProps?.briefing);
+};
+
 const EventViewer: React.FC<EventViewerProps> = ({
   event,
   onEdit,
@@ -122,8 +172,15 @@ const EventViewer: React.FC<EventViewerProps> = ({
     }
   };
 
-  const description: string = event.extendedProps?.description || "";
-  const { summary, items } = parseDescription(description);
+  const rawDescription: string =
+    event.extendedProps?.description ||
+    event?._def?.extendedProps?.description ||
+    "";
+  /** placeholder 텍스트가 description으로 저장된 경우 빈 값으로 취급한다 */
+  const description =
+    rawDescription.trim() === "사용자 메모(선택)" ? "" : rawDescription;
+  const briefing = pickBriefing(event);
+  const parsed = briefing ? briefing : parseDescription(description);
 
   return (
     <div className={styles.viewer}>
@@ -156,14 +213,16 @@ const EventViewer: React.FC<EventViewerProps> = ({
           </>
         )}
       </p>
-      {description && (
+      {(briefing || description) && (
         <div className={styles.descriptionWrapper}>
-          {summary && (
-            <p className={styles.summary}>{renderTextWithLinks(summary)}</p>
+          {parsed.summary && (
+            <p className={styles.summary}>
+              {renderTextWithLinks(parsed.summary)}
+            </p>
           )}
-          {items.length > 0 && (
+          {parsed.items.length > 0 && (
             <ul className={styles.descriptionList}>
-              {items.map((item, index) => (
+              {parsed.items.map((item, index) => (
                 <li key={index} className={styles.descriptionItem}>
                   <span className={styles.category}>{item.category}</span>
                   <a
@@ -178,6 +237,9 @@ const EventViewer: React.FC<EventViewerProps> = ({
                 </li>
               ))}
             </ul>
+          )}
+          {briefing && description.trim() && (
+            <p className={styles.summary}>{renderTextWithLinks(description)}</p>
           )}
         </div>
       )}

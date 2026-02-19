@@ -68,12 +68,16 @@ const useEventStore = create<EventState>((set) => ({
     const data = await fetchEventsFromSupabase();
     set((state) => {
       const newEvents = data.map((event) => fromRowToEvent(event));
-      const existingEventIds = new Set(state.events.map((event) => event.id));
-      const uniqueEvents = [
-        ...state.events,
-        ...newEvents.filter((event) => !existingEventIds.has(event.id)),
-      ];
-      return { events: uniqueEvents };
+      const mergedById = new Map<string, any>();
+
+      for (const event of state.events) {
+        if (event?.id) mergedById.set(event.id, event);
+      }
+      for (const event of newEvents) {
+        if (event?.id) mergedById.set(event.id, event);
+      }
+
+      return { events: Array.from(mergedById.values()) };
     });
     setIsLoading(false);
   },
