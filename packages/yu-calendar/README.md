@@ -1,6 +1,6 @@
 # 사이드프로젝트 - YU캘린더
 
-![preview](https://github.com/yoonucho/yu-calendar/assets/2981954/0d656087-024f-4bc2-8723-d537e376976f)
+[![preview](https://github.com/yoonucho/yu-calendar/assets/2981954/0d656087-024f-4bc2-8723-d537e376976f)](https://github.com/user-attachments/assets/75e5e7e1-9d32-455a-8f19-776c4b3ab094)
 
 ## 주요 기능
 
@@ -25,14 +25,6 @@
 - **Zustand 전역 상태 관리**: `useEventStore`, `useHolidayStore`, `usePopupStore` 등 도메인과 UI 역할별로 스토어를 나누어 이벤트, 공휴일, 팝업 상태를 관리
 - **Supabase Server Actions & Type Safety**: Next.js 14의 Server Actions(`supabaseEventsActions.ts`)를 활용하여 데이터베이스와의 통신(CRUD)을 서버 사이드에서 처리. UI 상태(`EventApi`)와 DB 상태(`YuCalendarRowInsert/Update`) 간 타입 매핑 및 데이터 직렬화/역직렬화 적용
 
-## 코드/성능 통합 관리 (Docs)
-
-프로젝트 내 `docs/` 폴더를 통해 아키텍처 의사결정 및 성능 최적화 과정을 문서화하여 관리하고 있습니다.
-
-- **성능 분석 보고서**: React 컴포넌트 렌더링 최적화(`useEffect` 의존성 관리, `useCallback`, `useMemo` 활용 등) 및 Layout Shift 방지 연혁 기록
-- **CRUD 구조 및 테스트 가이드**: Zustand 상태 관리와 Supabase 간의 네트워크 의존성을 분리하기 위한 유닛/통합 테스트 전략 명세서
-- **타입 매핑 전략**: FullCalendar와 Supabase 간의 인터페이스 불일치를 해소하기 위한 타입 시스템 연동 기록
-
 ## API 및 외부 연동
 
 - [Nager.Date API (공휴일 데이터)](https://date.nager.at/Api)
@@ -51,9 +43,7 @@
 
 현재 기능 및 아키텍처 수준을 기반으로 다음과 같은 확장 및 고도화를 계획하고 있습니다.
 
-- **테스트 커버리지 확보**: 유닛 테스트(Jest)를 우선 정비하고, 주요 사용자 플로우 검증을 위한 E2E 도구 도입 검토 (관련 문서: `docs/crud-testing-guide.md`)
-- **타입 안정성 고도화**: Supabase 클라이언트의 제네릭 타입을 정밀화하여 강제 형변환(Type Casting)을 최소화하고, 프론트엔드와 데이터베이스 간의 타입 일치율 향상 (관련 문서: `docs/supabase-typing-strategy.md`)
-- **UX 및 성능 추가 개선**: 브라우저 렌더링 최적화를 지속적으로 진행하고, 오프라인 지원이나 PWA(Progressive Web App) 기능 도입 검토
+- **오픈형 아이돌 스케줄러로 확장**: 팬들이 아이돌 활동 일정, 방송·공연·발매·기념일 정보를 함께 확인하고 관리할 수 있는 공개형 스케줄러 경험을 구체화
 
 ## 배포
 
