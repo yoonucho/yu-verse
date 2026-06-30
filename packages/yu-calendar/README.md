@@ -1,4 +1,4 @@
-# 사이드프로젝트 - YU캘린더
+# 사이드프로젝트 - YU 캘린더
 
 [![preview](https://github.com/yoonucho/yu-calendar/assets/2981954/0d656087-024f-4bc2-8723-d537e376976f)](https://github.com/user-attachments/assets/75e5e7e1-9d32-455a-8f19-776c4b3ab094)
 
