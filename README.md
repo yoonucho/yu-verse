@@ -1,6 +1,6 @@
 # YU Verse
 
-YU-Verse는 여러 프로젝트를 하나의 저장소에서 관리하는 모노레포입니다. [Turborepo](https://turborepo.org/)와 [pnpm](https://pnpm.io/)을 사용해 빌드와 의존성 관리를 일관되게 운영합니다.
+YU-Verse는 개인 프로젝트들을 한곳에서 관리하기 위해 구성한 모노레포입니다. 현재는 YU캘린더와 YU책찾기 프로젝트를 포함하고 있습니다.
 
 ## 주요 특징
 
@@ -36,8 +36,8 @@ YU-Verse는 여러 프로젝트를 하나의 저장소에서 관리하는 모노
 yu-verse
 📦yu-verse
  ┣ 📂packages
- ┃ ┣ 📂yu-books  # YU 도서 검색 서비스 프로젝트의 코드와 설정 파일을 포함하는 디렉토리
- ┃ ┗ 📂yu-calendar # YU 캘린더 프로젝트의 코드와 설정 파일을 포함하는 디렉토리
+ ┃ ┣ 📂yu-books  # YU책찾기 프로젝트의 코드와 설정 파일을 포함하는 디렉토리
+ ┃ ┗ 📂yu-calendar # YU캘린더 프로젝트의 코드와 설정 파일을 포함하는 디렉토리
  ┣ 📜.gitignore # Git에 포함하지 않을 파일과 디렉토리를 지정하는 파일
  ┣ 📜package.json # 모노레포의 루트에서 사용하는 npm 패키지와 스크립트를 정의한 파일
  ┣ 📜pnpm-lock.yaml  # pnpm 패키지 매니저가 생성하는 잠금 파일로, 의존성의 정확한 버전을 고정
@@ -50,18 +50,18 @@ yu-verse
 
 ## 프로젝트 목록
 
-### 1. [YU캘린더](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-calendar)
+### 1. [YU 캘린더](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-calendar)
 
 Next.js와 TypeScript로 만든 일정 관리 웹앱입니다.
 
 - **주요 기능**: 공휴일 검색, 메인 캘린더 이벤트 팝업 기능
 - **개발 환경**: Node.js(>=18.18.0), Next.js 14, TypeScript, Supabase V2.0.
-- **배포**: [YU캘린더](https://yu-calendar.vercel.app/)
+- **배포**: [YU 캘린더](https://yu-calendar.vercel.app)
 - **Trouble Shooting**: [노션 링크](https://www.notion.so/tomorrowcho/YU-e3d060001cd84f919f1adafc90e20166?pvs=4#96db7517f88e4ff8abe7d73ca387a4f3)
 
-프로젝트의 자세한 내용은 [YU캘린더 README](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-calendar#readme)에서 확인할 수 있습니다.
+프로젝트의 자세한 내용은 [YU 캘린더 README](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-calendar#readme)에서 확인할 수 있습니다.
 
-### 2. [YU책찾기](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-books)
+### 2. [YU 책 찾기](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-books)
 
 Next.js와 TypeScript로 만든 책 검색 서비스입니다.
 
@@ -70,7 +70,7 @@ Next.js와 TypeScript로 만든 책 검색 서비스입니다.
 - **배포**: [YU 책 찾기](https://yu-books.vercel.app)
 - **Trouble Shooting**: [노션 링크](https://www.notion.so/tomorrowcho/YU-ff10f1843b5541ca998235269a9879ad)
 
-프로젝트의 자세한 내용은 [YU책찾기 README](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-books#readme)에서 확인할 수 있습니다.
+프로젝트의 자세한 내용은 [YU 책 찾기 README](https://github.com/yoonucho/yu-verse/tree/main/packages/yu-books#readme)에서 확인할 수 있습니다.
 
 ## 공통 기술 스택
 
