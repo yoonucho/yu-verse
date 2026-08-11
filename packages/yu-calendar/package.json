@@ -24,7 +24,6 @@
     "@fullcalendar/timegrid": "^6.1.14",
     "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.45.4",
-    "@types/react-datepicker": "^6.2.0",
     "date-fns": "^3.6.0",
     "date-fns-tz": "^3.2.0",
     "react-datepicker": "^6.9.0",
